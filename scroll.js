@@ -1,24 +1,17 @@
-// ===============================
-// SCROLL REVEAL ANIMATION
-// ===============================
+const elements = document.querySelectorAll("section");
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  },
-  {
-    threshold: 0.15
-  }
-);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+});
 
-// Elements to animate on scroll
-document.querySelectorAll(
-  "section, .menu-category, .gallery-item"
-).forEach(el => {
-  el.classList.add("hidden");
+elements.forEach(el => {
+  el.style.opacity = 0;
+  el.style.transform = "translateY(40px)";
+  el.style.transition = "0.6s ease";
   observer.observe(el);
 });
