@@ -10,11 +10,13 @@
 
 :root {
   --primary: #ff6b35;
-  --dark: #1e1e1e;
+  --primary-dark: #e85a24;
+  --dark: #1f1f1f;
   --text: #333;
-  --light-bg: #f9f9f9;
-  --white: #fff;
+  --light-bg: #fff7f2;
+  --white: #ffffff;
 }
+
 
 body {
   background: var(--white);
@@ -84,7 +86,6 @@ body {
 ================================ */
 .hero {
   background: var(--light-bg);
-  padding: 80px 0;
 }
 
 .hero-content {
@@ -298,7 +299,7 @@ body {
 /* HOME PAGE GALLERY */
 .home-gallery {
   padding: 80px 0;
-  background: var(--light-bg);
+  background: #fff;
 }
 
 .home-gallery-grid {
@@ -325,7 +326,9 @@ body {
   text-align: center;
   margin-top: 40px;
 }
-
+.menu {
+  background: var(--light-bg);
+}
 /* Responsive */
 @media (max-width: 900px) {
   .home-gallery-grid {
