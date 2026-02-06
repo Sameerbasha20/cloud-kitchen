@@ -1,43 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>CloudKitchen | Home</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="nav container">
-  <a href="https://sameerbasha20.github.io/cloud-kitchen/" class="logo">
-    CloudKitchen
-  </a>
-
+  <a href="https://sameerbasha20.github.io/cloud-kitchen/" class="logo">CloudKitchen</a>
   <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="menu.html">Menu</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-
-  <a href="login.html" class="btn">Login</a>
-  <a href="menu.html" class="btn btn-primary">Order Now</a>
 </nav>
 
+<!-- HERO -->
 <header class="hero">
   <div class="container hero-content">
     <div class="hero-text">
       <h1>Fresh Food.<br>Fast Delivery.</h1>
-      <p>Homely, healthy meals delivered hot to your door.</p>
-      <a href="menu.html" class="btn btn-primary">View Menu</a>
+      <p>Healthy, homely meals delivered hot to your door.</p>
+      <a href="menu.html" class="btn btn-primary">View Full Menu</a>
     </div>
-
     <div class="hero-image">
-      <div class="image-placeholder">Food Image</div>
+      <img src="images/menu/veg/rice.jpg" alt="Food">
     </div>
   </div>
 </header>
 
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="container about-wrapper">
+    <div class="about-image">
+      <img src="images/menu/veg/sambar.jpg" alt="Kitchen">
+    </div>
+    <div class="about-content">
+      <h2>About Us</h2>
+      <p>
+        CloudKitchen serves fresh, hygienic and affordable home-style meals.
+        We focus on quality ingredients, balanced nutrition and authentic taste.
+      </p>
+      <a href="about.html" class="btn btn-secondary">Read More</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU PREVIEW -->
+<section id="menu" class="menu">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Menu</h2>
+      <p>Popular Veg South Indian Dishes</p>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="images/menu/veg/rice.jpg" alt="Rice">
+        <h4>Steamed White Rice</h4>
+        <span class="price">₹60</span>
+      </div>
+
+      <div class="menu-card">
+        <img src="images/menu/veg/sambar.jpg" alt="Sambar">
+        <h4>Sambar</h4>
+        <span class="price">₹40</span>
+      </div>
+
+      <div class="menu-card">
+        <img src="images/menu/veg/dal.jpg" alt="Dal">
+        <h4>Dal Curry</h4>
+        <span class="price">₹50</span>
+      </div>
+
+      <div class="menu-card">
+        <img src="images/menu/veg/paneer-curry.jpg" alt="Paneer">
+        <h4>Paneer Curry</h4>
+        <span class="price">₹90</span>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="menu.html" class="btn btn-primary">View Full Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY PREVIEW -->
+<section id="gallery" class="gallery">
+  <div class="container">
+    <div class="section-header">
+      <h2>Gallery</h2>
+      <p>Our delicious food & kitchen</p>
+    </div>
+
+    <div class="gallery-grid">
+      <img src="images/menu/veg/sambar.jpg" alt="">
+      <img src="images/menu/veg/dal.jpg" alt="">
+      <img src="images/menu/veg/curd.jpg" alt="">
+      <img src="images/menu/veg/gutti-vankaya.jpg" alt="">
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="gallery.html" class="btn btn-secondary">View Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2>Contact Us</h2>
+      <p>We’d love to hear from you</p>
+    </div>
+
+    <div class="contact-info">
+      <p>📞 <strong>Phone:</strong> +91 98765 43210</p>
+      <p>📧 <strong>Email:</strong> cloudkitchen@email.com</p>
+      <p>📍 <strong>Location:</strong> Hyderabad, India</p>
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+      <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="footer">
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
