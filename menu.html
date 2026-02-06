@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu | CloudKitchen</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="nav container">
-  <a href="https://sameerbasha20.github.io/cloud-kitchen/" class="logo">CloudKitchen</a>
+  <a href="https://sameerbasha20.github.io/cloud-kitchen/" class="logo">
+    CloudKitchen
+  </a>
+
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a class="active" href="menu.html">Menu</a></li>
@@ -17,65 +22,67 @@
   </ul>
 </nav>
 
+<!-- MENU SECTION -->
 <section class="menu">
   <div class="container">
+
     <div class="section-header">
       <h2>Our Menu</h2>
       <p>Healthy, homely & balanced meals</p>
     </div>
 
+    <!-- VEG MENU -->
     <div class="menu-category">
-  <h3>Veg South Indian Meals</h3>
+      <h3>Veg South Indian Meals</h3>
 
-  <div class="menu-grid">
-    <div class="menu-card">
-      <img src="images/veg/rice.jpg" alt="Steamed Rice">
-      <h4>Steamed White Rice</h4>
-      <p class="desc">Freshly cooked premium rice</p>
-      <span class="price">₹60</span>
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <img src="images/veg/rice.jpg" alt="Steamed White Rice" loading="lazy">
+          <h4>Steamed White Rice</h4>
+          <p class="desc">Freshly cooked premium rice</p>
+          <span class="price">₹60</span>
+        </div>
+
+        <div class="menu-card">
+          <img src="images/veg/sambar.webp" alt="Sambar" loading="lazy">
+          <h4>Sambar</h4>
+          <p class="desc">Traditional South Indian lentil stew</p>
+          <span class="price">₹40</span>
+        </div>
+
+        <div class="menu-card">
+          <img src="images/veg/dal.webp" alt="Dal Curry" loading="lazy">
+          <h4>Dal Curry</h4>
+          <p class="desc">Slow-cooked dal with mild spices</p>
+          <span class="price">₹50</span>
+        </div>
+
+        <div class="menu-card">
+          <img src="images/veg/curd.jpg" alt="Curd" loading="lazy">
+          <h4>Curd</h4>
+          <p class="desc">Fresh homemade curd</p>
+          <span class="price">₹40</span>
+        </div>
+
+        <div class="menu-card">
+          <img src="images/veg/gutti-vankaya.jpg" alt="Gutti Vankaya" loading="lazy">
+          <h4>Gutti Vankaya</h4>
+          <p class="desc">Stuffed brinjal curry</p>
+          <span class="price">₹90</span>
+        </div>
+
+        <div class="menu-card">
+          <img src="images/veg/paneer-curry.jpg" alt="Paneer Curry" loading="lazy">
+          <h4>Paneer Curry</h4>
+          <p class="desc">Soft paneer in rich gravy</p>
+          <span class="price">₹90</span>
+        </div>
+
+      </div>
     </div>
 
-    <div class="menu-card">
-      <img src="images/veg/sambar.jpg" alt="Sambar">
-      <h4>Sambar</h4>
-      <p class="desc">Traditional South Indian lentil stew</p>
-      <span class="price">₹40</span>
-    </div>
-
-    <div class="menu-card">
-      <img src="images/veg/dal.webp" alt="Dal Curry">
-      <h4>Dal Curry</h4>
-      <p class="desc">Slow-cooked dal with mild spices</p>
-      <span class="price">₹50</span>
-    </div>
-
-    <div class="menu-card">
-      <img src="images/veg/curd.jpg" alt="Curd">
-      <h4>Curd</h4>
-      <p class="desc">Fresh homemade curd</p>
-      <span class="price">₹40</span>
-    </div>
-
-    <div class="menu-card">
-      <img src="images/veg/gutti-vankaya.jpg" alt="Gutti Vankaya">
-      <h4>Gutti Vankaya</h4>
-      <p class="desc">Stuffed brinjal curry</p>
-      <span class="price">₹90</span>
-    </div>
-
-    <div class="menu-card">
-      <img src="images/veg/panner-curry.jpg" alt="Paneer Curry">
-      <h4>Paneer Curry</h4>
-      <p class="desc">Soft paneer in rich gravy</p>
-      <span class="price">₹90</span>
-    </div>
-  </div>
-</div>
-
-</div>
-
-    </div>
-
+    <!-- NON-VEG MENU (BASIC – can convert to cards later) -->
     <div class="menu-category">
       <h3>Non-Veg Meals</h3>
       <ul>
@@ -83,9 +90,11 @@
         <li>Mutton Meal <span>₹240</span></li>
       </ul>
     </div>
+
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
