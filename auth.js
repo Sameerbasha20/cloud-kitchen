@@ -10,7 +10,6 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 🔥 PASTE YOUR firebaseConfig HERE
 const firebaseConfig = {
   apiKey: "AIzaSyD_d-3XHe5Mzv-cgMKYvXQoWnSaXwPp-gU",
   authDomain: "cloud-kitchen-40ed2.firebaseapp.com",
@@ -61,12 +60,31 @@ window.logout = function () {
 };
 
 // ===============================
-// AUTH GUARD (PROTECT PAGES)
+// GLOBAL AUTH HANDLER (AUTO GUARD)
 // ===============================
-window.checkAuth = function () {
-  onAuthStateChanged(auth, user => {
-    if (!user) {
-      window.location.href = "login.html";
-    }
-  });
-};
+onAuthStateChanged(auth, user => {
+  const path = window.location.pathname;
+
+  
+  if (!user && path.includes("index.html")) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  
+  if (user && (path.includes("login.html") || path.includes("signup.html"))) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  const loginBtn = document.querySelector('a[href="login.html"]');
+  const logoutBtn = document.querySelector('button[onclick="logout()"]');
+
+  if (user) {
+    loginBtn && (loginBtn.style.display = "none");
+    logoutBtn && (logoutBtn.style.display = "inline-block");
+  } else {
+    loginBtn && (loginBtn.style.display = "inline-block");
+    logoutBtn && (logoutBtn.style.display = "none");
+  }
+});
