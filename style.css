@@ -76,9 +76,9 @@ body {
   display: inline-block;
 }
 
-.btn-primary {
-  background: var(--primary);
-  color: var(--white);
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
 }
 
 /* ===============================
