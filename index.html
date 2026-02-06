@@ -3,57 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cloud Kitchen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <title>CloudKitchen | Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- =========================
-     HEADER / HERO
-========================= -->
+<nav class="nav container">
+  <a href="https://sameerbasha20.github.io/cloud-kitchen/" class="logo">
+    CloudKitchen
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <a href="login.html" class="btn">Login</a>
+  <a href="menu.html" class="btn btn-primary">Order Now</a>
+</nav>
+
 <header class="hero">
-  <div class="container hero-wrapper">
-
-    <!-- Navigation -->
-    <nav class="nav">
-      <div class="logo">CloudKitchen</div>
-
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <a href="login.html" class="btn">Login</a>
-<button onclick="logout()" class="btn btn-primary">Logout</button>
-
-      <a href="#menu" class="btn btn-primary">Order Now</a>
-    </nav>
-
-    <!-- Hero Content -->
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>Fresh Food.<br>Fast Delivery.</h1>
-        <p>
-          Premium cloud kitchen delivering delicious meals
-          straight to your door.
-        </p>
-        <a href="#menu" class="btn btn-primary">View Menu</a>
-      </div>
-
-      <div class="hero-image">
-        <div class="image-placeholder">Food Image</div>
-      </div>
+  <div class="container hero-content">
+    <div class="hero-text">
+      <h1>Fresh Food.<br>Fast Delivery.</h1>
+      <p>Homely, healthy meals delivered hot to your door.</p>
+      <a href="menu.html" class="btn btn-primary">View Menu</a>
     </div>
 
+    <div class="hero-image">
+      <div class="image-placeholder">Food Image</div>
+    </div>
   </div>
 </header>
 
-  <!-- About -->
-  <!-- =========================
-     ABOUT SECTION
-========================= -->
+
 <section id="about" class="about">
   <div class="container about-wrapper">
 
@@ -76,10 +61,7 @@
   </div>
 </section>
 
-  <!-- Menu -->
-  <!-- =========================
-     MENU SECTION
-========================= -->
+
 <section id="menu" class="menu">
   <div class="container">
 
@@ -168,10 +150,7 @@
 </section>
 
 
-  <!-- Gallery -->
-  <!-- =========================
-     GALLERY SECTION
-========================= -->
+
 <section id="gallery" class="gallery">
   <div class="container">
 
@@ -194,10 +173,7 @@
   </div>
 </section>
 
-  <!-- Contact -->
-  <!-- =========================
-     CONTACT SECTION
-========================= -->
+
 <section id="contact" class="contact">
   <div class="container">
 
@@ -225,5 +201,12 @@
 
   <script type="module" src="auth.js"></script>
   <script src="scroll.js"></script>
+=======
+<footer class="footer">
+  <p>© 2026 CloudKitchen. All rights reserved.</p>
+</footer>
+
+<script type="module" src="auth.js"></script>
+<script src="scroll.js"></script>
 </body>
 </html>

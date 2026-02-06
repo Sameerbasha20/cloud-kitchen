@@ -437,3 +437,21 @@ section {
     font-size: 36px;
   }
 }
+
+.nav-links a.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+.contact-info p {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.contact-info a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
