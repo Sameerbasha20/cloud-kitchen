@@ -2,42 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>About | CloudKitchen</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | CloudKitchen</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="nav container">
-  <a href="https://sameerbasha20.github.io/cloud-kitchen/" class="logo">CloudKitchen</a>
-  <ul class="nav-links">
-    <li><a class="active" href="about.html">About</a></li>
-    <li><a href="menu.html">Menu</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+<header id="site-header">
+  <div class="container nav">
+    <a href="index.html" class="logo">CloudKitchen</a>
 
-<section class="about">
-  <div class="container about-wrapper">
-    <div class="about-content">
-      <h2>About Our Cloud Kitchen</h2>
-      <p>
-        We are a modern cloud kitchen delivering hygienic,
-        affordable and homely meals using fresh ingredients.
-      </p>
-      <p>
-        No dine-in. No compromises. Just good food.
-      </p>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+</header>
+
+<section class="menu">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Our Menu</h2>
+      <p>Healthy, homely & balanced meals</p>
     </div>
 
-    <div class="about-image">
-      <div class="image-placeholder">Kitchen Image</div>
+    <h3>Veg South Indian Meals</h3>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="images/menu/veg/rice.jpg">
+        <h4>Steamed White Rice</h4>
+        <span class="price">₹60</span>
+      </div>
+
+      <div class="menu-card">
+        <img src="images/menu/veg/sambar.jpg">
+        <h4>Sambar</h4>
+        <span class="price">₹40</span>
+      </div>
+
+      <div class="menu-card">
+        <img src="images/menu/veg/dal.jpg">
+        <h4>Dal Curry</h4>
+        <span class="price">₹50</span>
+      </div>
     </div>
+
+    <h3 style="margin-top:60px;">Non-Veg Meals</h3>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="images/menu/non-veg/chicken-biryani.jpg">
+        <h4>Chicken Biryani</h4>
+        <span class="price">₹280</span>
+      </div>
+
+      <div class="menu-card">
+        <img src="images/menu/non-veg/mutton-biryani.jpg">
+        <h4>Mutton Biryani</h4>
+        <span class="price">₹350</span>
+      </div>
+
+      <div class="menu-card">
+        <img src="images/menu/non-veg/chicken-curry.jpg">
+        <h4>Chicken Curry</h4>
+        <span class="price">₹180</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <footer class="footer">
-  <p>© 2026 CloudKitchen. All rights reserved.</p>
+  <p>© 2026 CloudKitchen</p>
 </footer>
 
 <script src="scroll.js"></script>

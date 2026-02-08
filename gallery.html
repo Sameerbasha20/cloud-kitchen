@@ -1,82 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | CloudKitchen</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="nav container">
-  <a href="https://sameerbasha20.github.io/cloud-kitchen/" class="logo">CloudKitchen</a>
-  <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="menu.html">Menu</a></li>
-    <li><a class="active" href="gallery.html">Gallery</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+<header id="site-header">
+  <div class="container nav">
+    <a href="index.html" class="logo">CloudKitchen</a>
 
-<section class="gallery">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+</header>
+
+<section class="home-gallery">
   <div class="container">
     <div class="section-header">
-      <h2>Food Gallery</h2>
-      <p>A glimpse of what we serve</p>
+      <h2>Gallery</h2>
+      <p>Our food & kitchen moments</p>
     </div>
-    <h3> Veg </h3>
 
-    <div class="gallery-grid">
-      <div class="gallery-item">
-  <img src="images/menu/veg/paneer-curry.jpg" alt="Paneer curry" loading="lazy">
-</div>
-
-<div class="gallery-item">
-  <img src="images/menu/veg/gutti-vankaya.jpg" alt="Gutti vankaya curry" loading="lazy">
-</div>
-
-<div class="gallery-item">
-  <img src="images/menu/veg/chana-masala.jpg" alt="Chana masala" loading="lazy">
-</div>
-
-<div class="gallery-item">
-  <img src="images/menu/veg/pickle.jpg" alt="Mango pickle" loading="lazy">
-</div>
-
-<div class="gallery-item">
-  <img src="images/menu/veg/sambar.jpg" alt="Mango pickle" loading="lazy">
-</div>
-
-<div class="gallery-item">
-  <img src="images/menu/veg/curd-rice.jpg" alt="Mango pickle" loading="lazy">
-</div>
-
-<b></b>
-<h3> Non-Veg </h3>
-
-<div class="gallery-item">
-  <img src="images/menu/non-veg/butter-naan.jpg" alt="Mango pickle" loading="lazy">
-</div>
-<div class="gallery-item">
-  <img src="images/menu/non-veg/chicken-biryani.jpg" alt="Mango pickle" loading="lazy">
-</div>
-<div class="gallery-item">
-  <img src="images/menu/non-veg/chicken-curry.jpg" alt="Mango pickle" loading="lazy">
-</div>
-<div class="gallery-item">
-  <img src="images/menu/non-veg/mutton-biryani.jpg" alt="Mango pickle" loading="lazy">
-</div>
-<div class="gallery-item">
-  <img src="images/menu/non-veg/boiled-egg.jpg" alt="Mango pickle" loading="lazy">
-</div>
-<div class="gallery-item">
-  <img src="images/menu/non-veg/bagara-rice.jpg" alt="Mango pickle" loading="lazy">
-</div>
+    <div class="home-gallery-grid">
+      <img src="images/menu/veg/rice.jpg">
+      <img src="images/menu/veg/sambar.jpg">
+      <img src="images/menu/veg/dal.jpg">
+      <img src="images/menu/veg/curd.jpg">
+      <img src="images/menu/non-veg/chicken-biryani.jpg">
+      <img src="images/menu/non-veg/chicken-curry.jpg">
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <p>© 2026 CloudKitchen. All rights reserved.</p>
+  <p>© 2026 CloudKitchen</p>
 </footer>
 
 <script src="scroll.js"></script>
