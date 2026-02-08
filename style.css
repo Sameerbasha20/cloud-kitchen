@@ -204,6 +204,11 @@ section {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.menu-cta {
+  text-align: center;
+  margin-top: 50px;
+}
+
 .menu-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-md);
