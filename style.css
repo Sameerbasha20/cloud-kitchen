@@ -342,14 +342,9 @@ section {
    CONTACT FORM STYLING
 ================================ */
 .contact-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-}
-
-.contact-form textarea {
-  grid-column: 1 / -1;
-  resize: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .contact-form input,
