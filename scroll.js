@@ -1,7 +1,8 @@
 /* ===============================
-   STICKY HEADER SHADOW
+   STICKY HEADER SHADOW ON SCROLL
 ================================ */
 const header = document.getElementById("site-header");
+
 if (header) {
   window.addEventListener("scroll", () => {
     header.classList.toggle("scrolled", window.scrollY > 20);
@@ -18,10 +19,17 @@ if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
   });
+
+  // Auto close menu when a link is clicked
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+    });
+  });
 }
 
 /* ===============================
-   SCROLL REVEAL (SECTIONS)
+   SCROLL REVEAL ANIMATION
 ================================ */
 const sections = document.querySelectorAll("section");
 
@@ -30,8 +38,8 @@ if (sections.length > 0) {
     entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = 1;
-          entry.target.style.transform = "translateY(0)";
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target); // animate once
         }
       });
     },
@@ -39,9 +47,7 @@ if (sections.length > 0) {
   );
 
   sections.forEach(section => {
-    section.style.opacity = 0;
-    section.style.transform = "translateY(40px)";
-    section.style.transition = "0.6s ease";
+    section.classList.add("hidden");
     observer.observe(section);
   });
 }
