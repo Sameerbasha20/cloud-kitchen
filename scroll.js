@@ -1,5 +1,5 @@
 /* ===============================
-   STICKY HEADER SHADOW ON SCROLL
+   STICKY HEADER SHADOW
 ================================ */
 const header = document.getElementById("site-header");
 
@@ -19,27 +19,20 @@ if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
   });
-
-  // Auto close menu when a link is clicked
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("active");
-    });
-  });
 }
 
 /* ===============================
-   SCROLL REVEAL ANIMATION
+   SCROLL REVEAL
 ================================ */
 const sections = document.querySelectorAll("section");
 
-if (sections.length > 0) {
+if (sections.length) {
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-          observer.unobserve(entry.target); // animate once
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
         }
       });
     },
@@ -47,7 +40,9 @@ if (sections.length > 0) {
   );
 
   sections.forEach(section => {
-    section.classList.add("hidden");
+    section.style.opacity = "0";
+    section.style.transform = "translateY(40px)";
+    section.style.transition = "0.6s ease";
     observer.observe(section);
   });
 }

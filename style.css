@@ -331,3 +331,10 @@ section {
     margin: auto;
   }
 }
+.nav-links a.active {
+  font-weight: 700;
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}
