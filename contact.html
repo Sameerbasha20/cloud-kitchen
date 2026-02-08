@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<!-- HEADER -->
 <header id="site-header">
   <div class="container nav">
     <a href="index.html" class="logo">CloudKitchen</a>
@@ -25,20 +26,61 @@
   </div>
 </header>
 
+<!-- CONTACT SECTION -->
 <section class="contact">
   <div class="container">
+
     <div class="section-header">
       <h2>Contact Us</h2>
-      <p>We’d love to hear from you</p>
+      <p>Have a question or want to place a bulk order? Send us a message.</p>
     </div>
 
+    <!-- CONTACT DETAILS -->
     <div class="contact-info">
-      <p>Email: cloudkitchen@email.com</p>
-      <p>Location: Hyderabad, India</p>
+      <p><strong>Email:</strong> cloudkitchen@email.com</p>
+      <p><strong>Location:</strong> Hyderabad, India</p>
     </div>
+
+    <!-- CONTACT FORM -->
+    <form class="contact-form" style="max-width:600px; margin:40px auto 0;">
+
+      <input 
+        type="text" 
+        name="name" 
+        placeholder="Your Full Name" 
+        required
+      >
+
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Your Email Address" 
+        required
+      >
+
+      <input 
+        type="tel" 
+        name="phone" 
+        placeholder="Your Phone Number"
+      >
+
+      <textarea 
+        name="message" 
+        rows="5" 
+        placeholder="Your Message"
+        required
+      ></textarea>
+
+      <div style="text-align:center; margin-top:20px;">
+        <button type="submit" class="btn-primary">Send Message</button>
+      </div>
+
+    </form>
+
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <p>© 2026 CloudKitchen</p>
 </footer>
