@@ -1,6 +1,6 @@
-/* =========================
+/* ===============================
    RESET & VARIABLES
-========================= */
+================================ */
 * {
   margin: 0;
   padding: 0;
@@ -8,24 +8,24 @@
 }
 
 :root {
-  --primary: #E76F51;     /* Deep Orange */
-  --secondary: #FFF3E6;   /* Cream */
-  --accent: #5C3A21;      /* Dark Brown */
+  --primary: #E76F51;
+  --secondary: #FFF3E6;
+  --accent: #5C3A21;
   --text: #333333;
   --muted: #666666;
   --white: #ffffff;
 
-  --radius-sm: 8px;
+  --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
 
   --shadow-sm: 0 6px 18px rgba(0,0,0,0.08);
-  --shadow-md: 0 14px 35px rgba(0,0,0,0.12);
+  --shadow-md: 0 14px 32px rgba(0,0,0,0.12);
 }
 
-/* =========================
+/* ===============================
    BASE
-========================= */
+================================ */
 body {
   font-family: 'Inter', sans-serif;
   background: var(--secondary);
@@ -39,9 +39,9 @@ body {
   margin: auto;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* ===============================
+   HEADER / NAVBAR
+================================ */
 #site-header {
   position: sticky;
   top: 0;
@@ -62,10 +62,10 @@ body {
 }
 
 .logo {
-  font-weight: 700;
   font-size: 22px;
-  text-decoration: none;
+  font-weight: 700;
   color: var(--accent);
+  text-decoration: none;
 }
 
 .nav-links {
@@ -79,22 +79,6 @@ body {
   text-decoration: none;
   color: var(--text);
   font-weight: 500;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
 }
 
 .menu-toggle {
@@ -103,12 +87,12 @@ body {
   cursor: pointer;
 }
 
-/* =========================
+/* ===============================
    HERO
-========================= */
+================================ */
 .hero {
-  padding: 110px 0 90px;
-  background: linear-gradient(180deg, var(--secondary), #ffffff);
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--secondary), #fff);
 }
 
 .hero-content {
@@ -119,16 +103,15 @@ body {
 }
 
 .hero-text h1 {
-  font-size: 58px;
-  line-height: 1.1;
-  margin-bottom: 20px;
+  font-size: 56px;
   color: var(--accent);
+  margin-bottom: 20px;
 }
 
 .hero-text p {
-  font-size: 19px;
-  margin-bottom: 36px;
+  font-size: 18px;
   color: var(--muted);
+  margin-bottom: 36px;
   max-width: 480px;
 }
 
@@ -138,42 +121,50 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-/* =========================
+/* ===============================
    BUTTONS
-========================= */
+================================ */
 .btn-primary {
   background: var(--primary);
   color: white;
   padding: 14px 34px;
   border-radius: 999px;
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
   display: inline-block;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(231,111,81,0.35);
+  box-shadow: 0 12px 28px rgba(231,111,81,0.4);
 }
 
-/* =========================
+/* ===============================
    SECTIONS
-========================= */
+================================ */
 section {
   padding: 90px 0;
 }
 
-.section-title {
+.section-header {
   text-align: center;
-  margin-bottom: 40px;
-  color: var(--accent);
-  font-size: 34px;
+  margin-bottom: 60px;
 }
 
-/* =========================
+.section-header h2 {
+  font-size: 34px;
+  color: var(--accent);
+}
+
+.section-header p {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* ===============================
    ABOUT
-========================= */
+================================ */
 .about-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -186,27 +177,31 @@ section {
   border-radius: var(--radius-lg);
 }
 
-/* =========================
-   MENU
-========================= */
+/* ===============================
+   MENU (FIXED & CLEAN)
+================================ */
 .menu {
   background: var(--secondary);
 }
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 28px;
 }
 
 .menu-card {
   background: var(--white);
-  padding: 18px;
+  padding: 16px;
   border-radius: var(--radius-lg);
-  text-align: center;
   box-shadow: var(--shadow-sm);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
 }
 
 .menu-card:hover {
@@ -216,7 +211,7 @@ section {
 
 .menu-card img {
   width: 100%;
-  height: 180px;
+  height: 160px;       /* 🔑 uniform height */
   object-fit: cover;
   border-radius: var(--radius-md);
   margin-bottom: 12px;
@@ -239,25 +234,12 @@ section {
   color: var(--primary);
 }
 
-/* Best Seller Badge */
-.badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: var(--primary);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-/* =========================
+/* ===============================
    GALLERY
-========================= */
+================================ */
 .home-gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 22px;
 }
 
@@ -267,27 +249,22 @@ section {
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease;
 }
 
-.home-gallery-grid img:hover {
-  transform: scale(1.04);
-}
-
-/* =========================
+/* ===============================
    FOOTER
-========================= */
+================================ */
 .footer {
   text-align: center;
   padding: 26px;
   background: var(--accent);
-  color: var(--white);
+  color: white;
   font-size: 14px;
 }
 
-/* =========================
+/* ===============================
    MOBILE
-========================= */
+================================ */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -318,26 +295,11 @@ section {
     text-align: center;
   }
 
-  .hero-text p {
-    margin: auto;
-  }
-
   .hero-text h1 {
     font-size: 40px;
   }
 
-  .menu-grid,
-  .home-gallery-grid {
-    grid-template-columns: 1fr;
+  .hero-text p {
+    margin: auto;
   }
-}
-.hidden {
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.show {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s ease, transform 0.6s ease;
 }
