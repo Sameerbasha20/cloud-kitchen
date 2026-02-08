@@ -377,3 +377,68 @@ section {
     grid-template-columns: 1fr;
   }
 }
+/* ===============================
+   AUTH AREA
+================================ */
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.auth-link {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* ACCOUNT DROPDOWN */
+.account {
+  position: relative;
+}
+
+.account-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.account-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: #fff;
+  color: #333;
+  min-width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  display: none;
+  overflow: hidden;
+}
+
+.account-menu p,
+.account-menu button {
+  padding: 12px 16px;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+}
+
+.account-menu button {
+  cursor: pointer;
+  color: #c62828;
+}
+
+.account-menu button:hover {
+  background: #f5f5f5;
+}

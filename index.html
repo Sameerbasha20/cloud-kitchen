@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CloudKitchen | Home</title>
 
+  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -26,6 +29,9 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
 
+    <!-- AUTH AREA (LOGIN / ACCOUNT) -->
+    <div class="auth-area" id="authArea"></div>
+
     <!-- MOBILE MENU -->
     <div class="menu-toggle" id="menuToggle">☰</div>
 
@@ -40,7 +46,10 @@
 
     <div class="hero-text">
       <h1>Fresh Food.<br>Fast Delivery.</h1>
-      <p>Healthy, homely meals prepared fresh and delivered hot to your doorstep.</p>
+      <p>
+        Healthy, homely meals prepared fresh and delivered hot
+        to your doorstep.
+      </p>
       <a href="menu.html" class="btn-primary">View Full Menu</a>
     </div>
 
@@ -52,7 +61,7 @@
 </section>
 
 <!-- ===============================
-     ABOUT
+     ABOUT SECTION
 ================================ -->
 <section class="about">
   <div class="container about-wrapper">
@@ -64,8 +73,9 @@
     <div>
       <h2>About Us</h2>
       <p>
-        CloudKitchen serves fresh, hygienic and affordable home-style meals.
-        We focus on quality ingredients, balanced nutrition and authentic taste.
+        CloudKitchen serves fresh, hygienic and affordable
+        home-style meals. We focus on quality ingredients,
+        balanced nutrition and authentic taste.
       </p>
       <a href="about.html" class="btn-primary">Read More</a>
     </div>
@@ -84,21 +94,21 @@
     <div class="menu-grid">
 
       <div class="menu-card">
-        <img src="images/menu/veg/rice.jpg" alt="Rice">
+        <img src="images/menu/veg/rice.jpg" alt="White Rice">
         <h4>White Rice</h4>
-        <span>₹60</span>
+        <span class="price">₹60</span>
       </div>
 
       <div class="menu-card">
         <img src="images/menu/veg/sambar.jpg" alt="Sambar">
         <h4>Sambar</h4>
-        <span>₹40</span>
+        <span class="price">₹40</span>
       </div>
 
       <div class="menu-card">
         <img src="images/menu/veg/dal.jpg" alt="Dal">
         <h4>Dal</h4>
-        <span>₹50</span>
+        <span class="price">₹50</span>
       </div>
 
     </div>
@@ -111,7 +121,7 @@
 </section>
 
 <!-- ===============================
-     GALLERY
+     GALLERY PREVIEW
 ================================ -->
 <section class="home-gallery">
   <div class="container">
@@ -119,19 +129,19 @@
     <h2 class="section-title">Gallery</h2>
 
     <div class="home-gallery-grid">
-      <img src="images/menu/veg/rice.jpg">
-      <img src="images/menu/veg/sambar.jpg">
-      <img src="images/menu/veg/dal.jpg">
-      <img src="images/menu/veg/curd.jpg">
-      <img src="images/menu/veg/paneer-curry.jpg">
-      <img src="images/menu/veg/gutti-vankaya.jpg">
+      <img src="images/menu/veg/rice.jpg" alt="Rice">
+      <img src="images/menu/veg/sambar.jpg" alt="Sambar">
+      <img src="images/menu/veg/dal.jpg" alt="Dal">
+      <img src="images/menu/veg/curd.jpg" alt="Curd">
+      <img src="images/menu/veg/paneer-curry.jpg" alt="Paneer">
+      <img src="images/menu/veg/gutti-vankaya.jpg" alt="Gutti Vankaya">
     </div>
 
   </div>
 </section>
 
 <!-- ===============================
-     CONTACT
+     CONTACT CTA
 ================================ -->
 <section class="contact">
   <div class="container">
@@ -142,8 +152,8 @@
     </div>
 
     <div class="contact-info">
-      <p>Email: cloudkitchen@email.com</p>
-      <p>Hyderabad, India</p>
+      <p><strong>Email:</strong> cloudkitchen@email.com</p>
+      <p><strong>Location:</strong> Hyderabad, India</p>
     </div>
 
     <div style="text-align:center; margin-top:30px;">
@@ -160,6 +170,8 @@
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
 
+<!-- JS -->
+<script type="module" src="auth.js"></script>
 <script src="scroll.js"></script>
 </body>
 </html>

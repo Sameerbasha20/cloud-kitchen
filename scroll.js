@@ -38,3 +38,45 @@ sections.forEach(section => {
   section.style.transition = "0.6s ease";
   observer.observe(section);
 });
+// ===============================
+// AUTH UI HANDLING (FIREBASE)
+// ===============================
+const authArea = document.getElementById("authArea");
+
+if (authArea && window.firebaseAuth) {
+  firebaseAuth.onAuthStateChanged(user => {
+    if (user) {
+      // LOGGED IN
+      authArea.innerHTML = `
+        <div class="account">
+          <div class="account-btn" id="accountBtn">
+            My Account ⌄
+          </div>
+          <div class="account-menu" id="accountMenu">
+            <p>${user.email}</p>
+            <button id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("accountBtn").onclick = () => {
+        document.getElementById("accountMenu").style.display =
+          document.getElementById("accountMenu").style.display === "block"
+            ? "none"
+            : "block";
+      };
+
+      document.getElementById("logoutBtn").onclick = () => {
+        firebaseAuth.signOut().then(() => {
+          window.location.href = "index.html";
+        });
+      };
+    } else {
+      // NOT LOGGED IN
+      authArea.innerHTML = `
+        <a href="login.html" class="auth-link">Login</a>
+        <a href="signup.html" class="auth-link">Sign Up</a>
+      `;
+    }
+  });
+}
