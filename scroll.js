@@ -1,20 +1,16 @@
-/* =========================================
-   STICKY NAVBAR SHADOW ON SCROLL
-========================================= */
+/* ===============================
+   STICKY HEADER SHADOW
+================================ */
 const header = document.getElementById("site-header");
+if (header) {
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 20);
+  });
+}
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 20) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-});
-
-
-/* =========================================
+/* ===============================
    MOBILE NAV TOGGLE
-========================================= */
+================================ */
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
@@ -22,36 +18,30 @@ if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
   });
-
-  // Close menu when a link is clicked
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("active");
-    });
-  });
 }
 
-
-/* =========================================
-   SCROLL REVEAL ANIMATION (SECTIONS)
-========================================= */
+/* ===============================
+   SCROLL REVEAL (SECTIONS)
+================================ */
 const sections = document.querySelectorAll("section");
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        observer.unobserve(entry.target); // animate once
-      }
-    });
-  },
-  {
-    threshold: 0.15
-  }
-);
+if (sections.length > 0) {
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
 
-sections.forEach(section => {
-  section.classList.add("hidden");
-  observer.observe(section);
-});
+  sections.forEach(section => {
+    section.style.opacity = 0;
+    section.style.transform = "translateY(40px)";
+    section.style.transition = "0.6s ease";
+    observer.observe(section);
+  });
+}

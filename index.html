@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CloudKitchen | Home</title>
 
-  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,29 +16,23 @@
     <a href="index.html" class="logo">CloudKitchen</a>
 
     <ul class="nav-links" id="navLinks">
-      <li><a class="active" href="#about">About</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
-    <!-- Mobile toggle -->
+    <!-- MOBILE HAMBURGER -->
     <div class="menu-toggle" id="menuToggle">☰</div>
   </div>
 </header>
-
 
 <!-- HERO -->
 <section class="hero">
   <div class="container hero-content">
     <div class="hero-text">
-      <h1>
-        Fresh Food.<br>
-        Fast Delivery.
-      </h1>
-      <p>
-        Healthy, homely meals prepared fresh and delivered hot to your doorstep.
-      </p>
+      <h1>Fresh Food.<br>Fast Delivery.</h1>
+      <p>Healthy, homely meals prepared fresh and delivered hot to your doorstep.</p>
       <a href="menu.html" class="btn btn-primary">View Full Menu</a>
     </div>
 
@@ -54,55 +45,41 @@
 <!-- ABOUT -->
 <section id="about" class="about">
   <div class="container about-wrapper">
-    <img src="images/menu/veg/sambar.jpg" alt="About CloudKitchen">
+    <img src="images/menu/veg/sambar.jpg" alt="About">
 
-    <div class="about-content">
+    <div>
       <h2>About Us</h2>
       <p>
         CloudKitchen serves fresh, hygienic, and affordable home-style meals.
-        We focus on quality ingredients, balanced nutrition, and authentic taste.
+        We focus on quality ingredients and authentic taste.
       </p>
-      <a href="about.html" class="btn btn-primary">Read More</a>
     </div>
   </div>
 </section>
 
-<!-- MENU PREVIEW -->
+<!-- MENU -->
 <section id="menu" class="menu">
   <div class="container">
-    <div class="section-header">
-      <h2>Our Menu</h2>
-      <p>Popular South Indian Veg Dishes</p>
-    </div>
+    <h2 class="section-title">Our Menu</h2>
 
     <div class="menu-grid">
       <div class="menu-card">
-        <img src="images/menu/veg/rice.jpg" alt="Rice">
-        <h4>Steamed White Rice</h4>
-        <span class="price">₹60</span>
+        <img src="images/menu/veg/rice.jpg">
+        <h4>White Rice</h4>
+        <span>₹60</span>
       </div>
 
       <div class="menu-card">
-        <img src="images/menu/veg/sambar.jpg" alt="Sambar">
+        <img src="images/menu/veg/sambar.jpg">
         <h4>Sambar</h4>
-        <span class="price">₹40</span>
+        <span>₹40</span>
       </div>
 
       <div class="menu-card">
-        <img src="images/menu/veg/dal.jpg" alt="Dal">
-        <h4>Dal Curry</h4>
-        <span class="price">₹50</span>
+        <img src="images/menu/veg/dal.jpg">
+        <h4>Dal</h4>
+        <span>₹50</span>
       </div>
-
-      <div class="menu-card">
-        <img src="images/menu/veg/paneer-curry.jpg" alt="Paneer">
-        <h4>Paneer Curry</h4>
-        <span class="price">₹90</span>
-      </div>
-    </div>
-
-    <div class="center-btn">
-      <a href="menu.html" class="btn btn-primary">View Full Menu</a>
     </div>
   </div>
 </section>
@@ -110,22 +87,15 @@
 <!-- GALLERY -->
 <section id="gallery" class="home-gallery">
   <div class="container">
-    <div class="section-header">
-      <h2>Gallery</h2>
-      <p>Our delicious food & kitchen</p>
-    </div>
+    <h2 class="section-title">Gallery</h2>
 
     <div class="home-gallery-grid">
       <img src="images/menu/veg/rice.jpg">
       <img src="images/menu/veg/sambar.jpg">
       <img src="images/menu/veg/dal.jpg">
       <img src="images/menu/veg/curd.jpg">
-      <img src="images/menu/veg/gutti-vankaya.jpg">
       <img src="images/menu/veg/paneer-curry.jpg">
-    </div>
-
-    <div class="center-btn">
-      <a href="gallery.html" class="btn btn-primary">View Full Gallery</a>
+      <img src="images/menu/veg/gutti-vankaya.jpg">
     </div>
   </div>
 </section>
@@ -133,26 +103,16 @@
 <!-- CONTACT -->
 <section id="contact" class="contact">
   <div class="container">
-    <div class="section-header">
-      <h2>Contact Us</h2>
-      <p>We’d love to hear from you</p>
-    </div>
-
-    <div class="contact-info">
-      <p><strong>Email:</strong> cloudkitchen@email.com</p>
-      <p><strong>Location:</strong> Hyderabad, India</p>
-    </div>
-
-    <div class="center-btn">
-      <a href="contact.html" class="btn btn-primary">Get in Touch</a>
-    </div>
+    <h2 class="section-title">Contact</h2>
+    <p>📍 Hyderabad, India</p>
+    <p>📧 cloudkitchen@email.com</p>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
-  <p>© 2026 CloudKitchen. All rights reserved.</p>
+  <p>© 2026 CloudKitchen</p>
 </footer>
 
+<script src="scroll.js"></script>
 </body>
 </html>
