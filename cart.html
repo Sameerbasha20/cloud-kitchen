@@ -49,9 +49,23 @@
   <p>© 2026 CloudKitchen</p>
 </footer>
 
-<!-- ================= SCRIPTS ================= -->
+<!-- ================= SCRIPT ================= -->
 <script type="module">
+  // CART HELPERS
   import { getCart, saveCart, updateCartCount } from "./cart.js";
+
+  // FIREBASE
+  import { app } from "./firebase.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
   const cartItemsEl = document.getElementById("cart-items");
   const totalEl = document.getElementById("cart-total");
@@ -85,21 +99,20 @@
           <h4>${item.name}</h4>
           <p>₹${item.price} × ${item.qty}</p>
           <div class="cart-actions">
-            <button class="qty-btn" data-action="dec">−</button>
-            <span>${item.qty}</span>
-            <button class="qty-btn" data-action="inc">+</button>
+            <button class="qty-btn inc">+</button>
+            <button class="qty-btn dec">−</button>
             <button class="remove-btn">Remove</button>
           </div>
         </div>
       `;
 
-      div.querySelector('[data-action="inc"]').onclick = () => {
+      div.querySelector(".inc").onclick = () => {
         item.qty++;
         saveCart(cart);
         renderCart();
       };
 
-      div.querySelector('[data-action="dec"]').onclick = () => {
+      div.querySelector(".dec").onclick = () => {
         item.qty--;
         if (item.qty <= 0) cart.splice(index, 1);
         saveCart(cart);
@@ -119,11 +132,42 @@
     updateCartCount();
   }
 
-  placeOrderBtn.onclick = () => {
-    alert("Order placed (next step: Firestore)");
-    localStorage.removeItem("cart");
-    cart = [];
-    renderCart();
+  placeOrderBtn.onclick = async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("Please login to place an order");
+      return;
+    }
+
+    if (cart.length === 0) {
+      alert("Cart is empty");
+      return;
+    }
+
+    const total = cart.reduce(
+      (sum, item) => sum + item.price * item.qty,
+      0
+    );
+
+    try {
+      await addDoc(collection(db, "orders"), {
+        userId: user.uid,
+        items: cart,
+        total: total,
+        status: "pending",
+        createdAt: serverTimestamp()
+      });
+
+      localStorage.removeItem("cart");
+      cart = [];
+      renderCart();
+
+      alert("Order placed successfully!");
+    } catch (error) {
+      console.error("Order error:", error);
+      alert("Failed to place order. Try again.");
+    }
   };
 
   renderCart();
