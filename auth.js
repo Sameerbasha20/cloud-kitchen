@@ -1,101 +1,87 @@
+// ===============================
+// Firebase Imports
+// ===============================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
 import {
   getFirestore,
   doc,
-  setDoc,
-  getDoc
+  getDoc,
+  setDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ===============================
-   FIREBASE CONFIG
-================================ */
+// ===============================
+// Firebase Config
+// ===============================
 const firebaseConfig = {
-  apiKey: "AIzaSyD_d-3XHe5Mzv-cgMKYvXQoWnSaXwPp-gU",
+  apiKey: "YOUR_API_KEY",
   authDomain: "cloud-kitchen-40ed2.firebaseapp.com",
   projectId: "cloud-kitchen-40ed2",
-  storageBucket: "cloud-kitchen-40ed2.appspot.com",
-  messagingSenderId: "132072129862",
-  appId: "1:132072129862:web:7fd86fed49f0fd0484d147"
+  storageBucket: "cloud-kitchen-40ed2.firebasestorage.app",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
 };
 
+// ===============================
+// Init Firebase
+// ===============================
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* ===============================
-   SIGNUP
-================================ */
-window.signup = async (email, password) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-
-    // 🔥 CREATE USER DOCUMENT
-    await setDoc(doc(db, "users", user.uid), {
-      email: user.email,
-      avatar: "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png",
-      createdAt: new Date()
-    });
-
-    location.href = "login.html";
-  } catch (err) {
-    alert(err.message);
-  }
-};
-
-/* ===============================
-   LOGIN
-================================ */
-window.login = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    location.href = "index.html";
-  } catch (err) {
-    alert(err.message);
-  }
-};
-
-/* ===============================
-   LOGOUT
-================================ */
-window.logout = async () => {
-  await signOut(auth);
-  location.href = "login.html";
-};
-
-/* ===============================
-   NAVBAR AUTH UI
-================================ */
+// ===============================
+// UI Elements
+// ===============================
 const authArea = document.getElementById("authArea");
 
-if (authArea) {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const snap = await getDoc(doc(db, "users", user.uid));
-      const data = snap.data();
+// ===============================
+// Auth State Listener
+// ===============================
+onAuthStateChanged(auth, async (user) => {
+  if (!authArea) return;
 
-      authArea.innerHTML = `
-        <div class="account">
-          <img src="${data.avatar}" class="avatar">
-          <div class="account-menu">
-            <p>${user.email}</p>
-            <button onclick="logout()">Logout</button>
-          </div>
-        </div>
-      `;
-    } else {
-      authArea.innerHTML = `
-        <a href="login.html" class="auth-link">Login</a>
-        <a href="signup.html" class="auth-link">Sign Up</a>
-      `;
+  // ===============================
+  // USER LOGGED IN
+  // ===============================
+  if (user) {
+    const userRef = doc(db, "users", user.uid);
+    const snap = await getDoc(userRef);
+
+    // 🔥 AUTO-CREATE USER DOCUMENT
+    if (!snap.exists()) {
+      await setDoc(userRef, {
+        email: user.email,
+        avatar:
+          "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png",
+        createdAt: new Date()
+      });
     }
-  });
-}
+
+    const userData = (await getDoc(userRef)).data();
+
+    authArea.innerHTML = `
+      <div class="user-menu">
+        <img src="${userData.avatar}" class="avatar" />
+        <button id="logoutBtn">Logout</button>
+      </div>
+    `;
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      location.reload();
+    });
+
+  // ===============================
+  // USER LOGGED OUT
+  // ===============================
+  } else {
+    authArea.innerHTML = `
+      <a href="login.html" class="btn-login">Login</a>
+      <a href="signup.html" class="btn-signup">Sign Up</a>
+    `;
+  }
+});
