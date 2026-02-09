@@ -22,8 +22,13 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
 
-    <!-- ✅ AUTH AREA (LOGIN / MY ACCOUNT) -->
+    <!-- AUTH AREA -->
     <div class="auth-area" id="authArea"></div>
+
+    <!-- CART -->
+    <a href="cart.html" class="cart-link">
+      🛒 Cart <span id="cart-count">0</span>
+    </a>
 
     <!-- MOBILE MENU -->
     <div class="menu-toggle" id="menuToggle">☰</div>
@@ -39,98 +44,116 @@
       <p>Healthy, homely & balanced meals</p>
     </div>
 
-    <!-- VEG MENU -->
+    <!-- ================= VEG MENU ================= -->
     <h3>Veg South Indian Meals</h3>
 
     <div class="menu-grid">
-      <div class="menu-card">
+
+      <div class="menu-card" data-id="rice" data-name="Steamed White Rice" data-price="60" data-image="images/menu/veg/rice.jpg">
         <img src="images/menu/veg/rice.jpg" alt="Steamed White Rice">
         <h4>Steamed White Rice</h4>
         <span class="price">₹60</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="sambar" data-name="Sambar" data-price="60" data-image="images/menu/veg/sambar.jpg">
         <img src="images/menu/veg/sambar.jpg" alt="Sambar">
         <h4>Sambar</h4>
         <span class="price">₹60</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="dal" data-name="Dal Curry" data-price="80" data-image="images/menu/veg/dal.jpg">
         <img src="images/menu/veg/dal.jpg" alt="Dal Curry">
         <h4>Dal Curry</h4>
         <span class="price">₹80</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="paneer-curry" data-name="Paneer Curry" data-price="180" data-image="images/menu/veg/paneer-curry.jpg">
         <img src="images/menu/veg/paneer-curry.jpg" alt="Paneer Curry">
         <h4>Paneer Curry</h4>
         <span class="price">₹180</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="chana-masala" data-name="Chana Masala Curry" data-price="160" data-image="images/menu/veg/chana-masala.jpg">
         <img src="images/menu/veg/chana-masala.jpg" alt="Chana Masala">
         <h4>Chana Masala Curry</h4>
         <span class="price">₹160</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="gutti-vankaya" data-name="Gutti Vankaya Curry" data-price="180" data-image="images/menu/veg/gutti-vankaya.jpg">
         <img src="images/menu/veg/gutti-vankaya.jpg" alt="Gutti Vankaya">
         <h4>Gutti Vankaya Curry</h4>
         <span class="price">₹180</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="curd-rice" data-name="Curd Rice" data-price="50" data-image="images/menu/veg/curd-rice.jpg">
         <img src="images/menu/veg/curd-rice.jpg" alt="Curd Rice">
         <h4>Curd Rice</h4>
         <span class="price">₹50</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
+
     </div>
 
-    <!-- NON-VEG MENU -->
+    <!-- ================= NON-VEG MENU ================= -->
     <h3 style="margin-top:60px;">Non-Veg Meals</h3>
 
     <div class="menu-grid">
-      <div class="menu-card">
+
+      <div class="menu-card" data-id="chicken-biryani" data-name="Chicken Biryani" data-price="280" data-image="images/menu/non-veg/chicken-biryani.jpg">
         <img src="images/menu/non-veg/chicken-biryani.jpg" alt="Chicken Biryani">
         <h4>Chicken Biryani</h4>
         <span class="price">₹280</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="mutton-biryani" data-name="Mutton Biryani" data-price="350" data-image="images/menu/non-veg/mutton-biryani.jpg">
         <img src="images/menu/non-veg/mutton-biryani.jpg" alt="Mutton Biryani">
         <h4>Mutton Biryani</h4>
         <span class="price">₹350</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="chicken-curry" data-name="Chicken Curry" data-price="180" data-image="images/menu/non-veg/chicken-curry.jpg">
         <img src="images/menu/non-veg/chicken-curry.jpg" alt="Chicken Curry">
         <h4>Chicken Curry</h4>
         <span class="price">₹180</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="boiled-egg" data-name="Boiled Egg" data-price="20" data-image="images/menu/non-veg/boiled-egg.jpg">
         <img src="images/menu/non-veg/boiled-egg.jpg" alt="Boiled Egg">
         <h4>Boiled Egg</h4>
         <span class="price">₹20</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="egg-fried-rice" data-name="Egg Fried Rice" data-price="150" data-image="images/menu/non-veg/egg-fried-rice.jpg">
         <img src="images/menu/non-veg/egg-fried-rice.jpg" alt="Egg Fried Rice">
         <h4>Egg Fried Rice</h4>
         <span class="price">₹150</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="butter-naan" data-name="Butter Naan" data-price="25" data-image="images/menu/non-veg/butter-naan.jpg">
         <img src="images/menu/non-veg/butter-naan.jpg" alt="Butter Naan">
         <h4>Butter Naan</h4>
         <span class="price">₹25</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card" data-id="basmati-rice" data-name="Basmati Rice" data-price="180" data-image="images/menu/non-veg/basmati-rice.jpg">
         <img src="images/menu/non-veg/basmati-rice.jpg" alt="Basmati Rice">
         <h4>Basmati Rice</h4>
         <span class="price">₹180</span>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
+
     </div>
 
   </div>
@@ -140,7 +163,11 @@
 <footer class="footer">
   <p>© 2026 CloudKitchen</p>
 </footer>
+
+<!-- ================= SCRIPTS ================= -->
 <script type="module" src="auth.js"></script>
 <script src="scroll.js"></script>
+<script type="module" src="menu.js"></script>
+
 </body>
 </html>
