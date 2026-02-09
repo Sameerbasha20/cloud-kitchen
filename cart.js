@@ -14,9 +14,10 @@ import { auth, db } from "./firebase.js";
 ======================= */
 
 // Get cart from localStorage
-function getCart() {
+export function getCart() {
   return JSON.parse(localStorage.getItem("cart")) || [];
 }
+
 
 // Save cart to localStorage
 function saveCart(cart) {
