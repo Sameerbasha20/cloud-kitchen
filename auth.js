@@ -56,7 +56,7 @@ if (signupForm) {
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
         avatar:
-          "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png",
+          "https://firebasestorage.googleapis.com/v0/b/cloud-kitchen-40ed2.appspot.com/o/avatars%2Fdefault.png?alt=media",
         createdAt: new Date()
       });
 
@@ -92,7 +92,8 @@ if (loginForm) {
         await setDoc(ref, {
           email: user.email,
           avatar:
-            "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png",
+              "https://firebasestorage.googleapis.com/v0/b/cloud-kitchen-40ed2.appspot.com/o/avatars%2Fdefault.png?alt=media",
+
           createdAt: new Date()
         });
       }
