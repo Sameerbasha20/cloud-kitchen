@@ -12,11 +12,11 @@
     <h2>Login</h2>
     <p>Welcome back! Please login.</p>
 
-    <form onsubmit="event.preventDefault(); login(email.value, password.value)">
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <button class="btn btn-primary" type="submit">Login</button>
-    </form>
+    <form id="loginForm">
+  <input type="email" id="loginEmail" required />
+  <input type="password" id="loginPassword" required />
+  <button type="submit">Login</button>
+</form>
 
     <p class="auth-link">
       Don’t have an account?

@@ -12,11 +12,14 @@
     <h2>Create Account</h2>
     <p>Join Cloud Kitchen today.</p>
 
-    <form onsubmit="event.preventDefault(); signup(email.value, password.value)">
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <button class="btn btn-primary" type="submit">Sign Up</button>
-    </form>
+    <form id="signupForm">
+  <input type="email" id="signupEmail" required />
+  <input type="password" id="signupPassword" required />
+  <button type="submit">Sign Up</button>
+</form>
+
+<script type="module" src="auth.js"></script>
+
 
     <p class="auth-link">
       Already have an account?

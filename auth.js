@@ -1,87 +1,143 @@
-// ===============================
-// Firebase Imports
-// ===============================
+/* ===============================
+   FIREBASE IMPORTS
+================================ */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
-  onAuthStateChanged,
-  signOut
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 import {
   getFirestore,
   doc,
-  getDoc,
-  setDoc
+  setDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// ===============================
-// Firebase Config
-// ===============================
+/* ===============================
+   FIREBASE CONFIG
+================================ */
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyD_d-3XHe5Mzv-cgMKYvXQoWnSaXwPp-gU",
   authDomain: "cloud-kitchen-40ed2.firebaseapp.com",
   projectId: "cloud-kitchen-40ed2",
   storageBucket: "cloud-kitchen-40ed2.firebasestorage.app",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
+  messagingSenderId: "132072129862",
+  appId: "1:132072129862:web:7fd86fed49f0fd0484d147"
 };
 
-// ===============================
-// Init Firebase
-// ===============================
+/* ===============================
+   INIT
+================================ */
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ===============================
-// UI Elements
-// ===============================
-const authArea = document.getElementById("authArea");
+/* ===============================
+   SIGNUP
+================================ */
+const signupForm = document.getElementById("signupForm");
 
-// ===============================
-// Auth State Listener
-// ===============================
-onAuthStateChanged(auth, async (user) => {
-  if (!authArea) return;
+if (signupForm) {
+  signupForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  // ===============================
-  // USER LOGGED IN
-  // ===============================
-  if (user) {
-    const userRef = doc(db, "users", user.uid);
-    const snap = await getDoc(userRef);
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
 
-    // 🔥 AUTO-CREATE USER DOCUMENT
-    if (!snap.exists()) {
-      await setDoc(userRef, {
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      const user = cred.user;
+
+      // 🔥 Create Firestore user automatically
+      await setDoc(doc(db, "users", user.uid), {
         email: user.email,
         avatar:
           "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png",
         createdAt: new Date()
       });
+
+      alert("Account created!");
+      window.location.href = "login.html";
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+}
+
+/* ===============================
+   LOGIN
+================================ */
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, password);
+      const user = cred.user;
+
+      // 🔁 Ensure Firestore doc exists
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+
+      if (!snap.exists()) {
+        await setDoc(ref, {
+          email: user.email,
+          avatar:
+            "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png",
+          createdAt: new Date()
+        });
+      }
+
+      window.location.href = "index.html";
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+}
+
+/* ===============================
+   LOGOUT
+================================ */
+window.logout = async () => {
+  await signOut(auth);
+  window.location.href = "login.html";
+};
+
+/* ===============================
+   NAVBAR AUTH STATE
+================================ */
+const authArea = document.getElementById("authArea");
+
+if (authArea) {
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      authArea.innerHTML = `
+        <a href="login.html" class="auth-link">Login</a>
+        <a href="signup.html" class="auth-link">Sign Up</a>
+      `;
+      return;
     }
 
-    const userData = (await getDoc(userRef)).data();
+    const snap = await getDoc(doc(db, "users", user.uid));
+    const data = snap.data();
 
     authArea.innerHTML = `
-      <div class="user-menu">
-        <img src="${userData.avatar}" class="avatar" />
-        <button id="logoutBtn">Logout</button>
+      <div class="account">
+        <img src="${data.avatar}" class="avatar" />
+        <div class="account-menu">
+          <p>${data.email}</p>
+          <button onclick="logout()">Logout</button>
+        </div>
       </div>
     `;
-
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      await signOut(auth);
-      location.reload();
-    });
-
-  // ===============================
-  // USER LOGGED OUT
-  // ===============================
-  } else {
-    authArea.innerHTML = `
-      <a href="login.html" class="btn-login">Login</a>
-      <a href="signup.html" class="btn-signup">Sign Up</a>
-    `;
-  }
-});
+  });
+}
