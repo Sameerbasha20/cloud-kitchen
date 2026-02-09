@@ -1,19 +1,11 @@
-/* ===============================
-   FIREBASE IMPORTS
-================================ */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import {
   getFirestore,
   doc,
   getDoc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
 import {
   getStorage,
   ref,
@@ -28,7 +20,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyD_d-3XHe5Mzv-cgMKYvXQoWnSaXwPp-gU",
   authDomain: "cloud-kitchen-40ed2.firebaseapp.com",
   projectId: "cloud-kitchen-40ed2",
-  storageBucket: "cloud-kitchen-40ed2.appspot.com",
+  storageBucket: "cloud-kitchen-40ed2.firebasestorage.app",
   messagingSenderId: "132072129862",
   appId: "1:132072129862:web:7fd86fed49f0fd0484d147"
 };
@@ -42,16 +34,16 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 /* ===============================
-   DOM ELEMENTS
+   ELEMENTS
 ================================ */
 const avatarPreview = document.getElementById("avatarPreview");
 const avatarInput = document.getElementById("profileAvatar");
-const profileName = document.getElementById("profileName");
-const profileEmail = document.getElementById("profileEmail");
+const nameInput = document.getElementById("profileName");
+const emailInput = document.getElementById("profileEmail");
 const saveBtn = document.getElementById("saveProfile");
 
 /* ===============================
-   AUTH CHECK + LOAD PROFILE
+   LOAD PROFILE
 ================================ */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -59,26 +51,14 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  profileEmail.value = user.email;
+  const snap = await getDoc(doc(db, "users", user.uid));
+  if (!snap.exists()) return;
 
-  const refDoc = doc(db, "users", user.uid);
-  const snap = await getDoc(refDoc);
+  const data = snap.data();
 
-  if (snap.exists()) {
-    const data = snap.data();
-    profileName.value = data.name || "";
-    avatarPreview.src = data.avatar;
-  }
-});
-
-/* ===============================
-   AVATAR PREVIEW
-================================ */
-avatarInput.addEventListener("change", () => {
-  const file = avatarInput.files[0];
-  if (!file) return;
-
-  avatarPreview.src = URL.createObjectURL(file);
+  avatarPreview.src = data.avatar;
+  nameInput.value = data.name || "";
+  emailInput.value = data.email;
 });
 
 /* ===============================
@@ -93,14 +73,17 @@ saveBtn.addEventListener("click", async () => {
   // Upload new avatar if selected
   if (avatarInput.files.length > 0) {
     const file = avatarInput.files[0];
-    const avatarRef = ref(storage, `avatars/${user.uid}`);
+    const avatarRef = ref(
+      storage,
+      `avatars/${user.uid}/avatar.png`
+    );
 
     await uploadBytes(avatarRef, file);
     avatarURL = await getDownloadURL(avatarRef);
   }
 
   await updateDoc(doc(db, "users", user.uid), {
-    name: profileName.value,
+    name: nameInput.value,
     avatar: avatarURL
   });
 
