@@ -1,5 +1,5 @@
 // menu.js
-import { addToCart, updateCartCount } from "./cart.js";
+import { addToCart } from "./cart.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
