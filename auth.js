@@ -26,41 +26,50 @@ const firebaseConfig = {
   appId: "1:132072129862:web:7fd86fed49f0fd0484d147"
 };
 
-/* ===============================
-   INIT
-================================ */
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 /* ===============================
-   AUTH FUNCTIONS
+   SIGNUP
 ================================ */
 window.signup = async (email, password) => {
   try {
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
 
-    // 🔥 CREATE USER DOCUMENT (THIS FIXES YOUR ERROR)
-    await setDoc(doc(db, "users", cred.user.uid), {
-      email: cred.user.email,
+    // 🔥 CREATE USER DOCUMENT
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
       avatar: "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png",
       createdAt: new Date()
     });
 
-    alert("Account created successfully!");
     location.href = "login.html";
-  } catch (e) {
-    alert(e.message);
+  } catch (err) {
+    alert(err.message);
   }
 };
 
-window.login = (email, password) =>
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => location.href = "index.html")
-    .catch(e => alert(e.message));
+/* ===============================
+   LOGIN
+================================ */
+window.login = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    location.href = "index.html";
+  } catch (err) {
+    alert(err.message);
+  }
+};
 
-window.logout = () =>
-  signOut(auth).then(() => location.href = "login.html");
+/* ===============================
+   LOGOUT
+================================ */
+window.logout = async () => {
+  await signOut(auth);
+  location.href = "login.html";
+};
 
 /* ===============================
    NAVBAR AUTH UI
@@ -69,26 +78,24 @@ const authArea = document.getElementById("authArea");
 
 if (authArea) {
   onAuthStateChanged(auth, async (user) => {
-    if (!user) {
+    if (user) {
+      const snap = await getDoc(doc(db, "users", user.uid));
+      const data = snap.data();
+
+      authArea.innerHTML = `
+        <div class="account">
+          <img src="${data.avatar}" class="avatar">
+          <div class="account-menu">
+            <p>${user.email}</p>
+            <button onclick="logout()">Logout</button>
+          </div>
+        </div>
+      `;
+    } else {
       authArea.innerHTML = `
         <a href="login.html" class="auth-link">Login</a>
         <a href="signup.html" class="auth-link">Sign Up</a>
       `;
-      return;
     }
-
-    // 🔥 SAFE READ (doc now exists)
-    const snap = await getDoc(doc(db, "users", user.uid));
-    const data = snap.exists() ? snap.data() : {};
-
-    const avatar = data.avatar ||
-      "https://cloud-kitchen-40ed2.firebasestorage.app/avatars/default.png";
-
-    authArea.innerHTML = `
-      <div class="account">
-        <img src="${avatar}" class="avatar" />
-        <button onclick="logout()" class="logout-btn">Logout</button>
-      </div>
-    `;
   });
 }
