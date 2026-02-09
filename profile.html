@@ -9,18 +9,12 @@
 </head>
 <body>
 
-<!-- ===============================
-     HEADER
-================================ -->
 <header id="site-header">
   <div class="container nav">
     <a href="index.html" class="logo">CloudKitchen</a>
   </div>
 </header>
 
-<!-- ===============================
-     PROFILE SECTION
-================================ -->
 <section class="profile">
   <div class="container">
 
@@ -28,37 +22,24 @@
 
     <div class="profile-card">
 
-      <!-- Avatar Preview -->
       <img
         id="avatarPreview"
         class="profile-avatar"
-        src="images/avatars/default.png"
+        src=""
         alt="Avatar"
       />
 
-      <!-- Avatar Upload -->
       <label class="file-label">
         Change Avatar
         <input type="file" id="profileAvatar" accept="image/*">
       </label>
 
-      <!-- Name -->
       <label>Name</label>
-      <input
-        type="text"
-        id="profileName"
-        placeholder="Your name"
-      />
+      <input type="text" id="profileName" placeholder="Your name">
 
-      <!-- Email -->
       <label>Email</label>
-      <input
-        type="email"
-        id="profileEmail"
-        disabled
-      />
+      <input type="email" id="profileEmail" disabled>
 
-      <!-- Save -->
       <button id="saveProfile" class="btn-primary">
         Save Changes
       </button>
@@ -68,11 +49,9 @@
   </div>
 </section>
 
-<!-- ===============================
-     SCRIPTS
-================================ -->
-<script type="module" src="profile.js"></script>
+<script type="module" src="firebase.js"></script>
 <script type="module" src="auth.js"></script>
+<script type="module" src="profile.js"></script>
 
 </body>
 </html>
