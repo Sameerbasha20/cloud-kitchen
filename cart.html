@@ -51,21 +51,17 @@
 
 <!-- ================= SCRIPT ================= -->
 <script type="module">
-  // CART HELPERS
+  // ---------------- CART HELPERS ----------------
   import { getCart, saveCart, updateCartCount } from "./cart.js";
 
-  // FIREBASE
-  import { app } from "./firebase.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  // ---------------- FIREBASE (FROM YOUR firebase.js) ----------------
+  import { auth, db } from "./firebase.js";
+
   import {
-    getFirestore,
     collection,
     addDoc,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-  const auth = getAuth(app);
-  const db = getFirestore(app);
 
   const cartItemsEl = document.getElementById("cart-items");
   const totalEl = document.getElementById("cart-total");
@@ -74,6 +70,7 @@
   let cart = getCart();
   updateCartCount();
 
+  // ---------------- RENDER CART ----------------
   function renderCart() {
     cartItemsEl.innerHTML = "";
     let total = 0;
@@ -132,6 +129,7 @@
     updateCartCount();
   }
 
+  // ---------------- PLACE ORDER ----------------
   placeOrderBtn.onclick = async () => {
     const user = auth.currentUser;
 
@@ -159,14 +157,15 @@
         createdAt: serverTimestamp()
       });
 
+      // Clear cart only after success
       localStorage.removeItem("cart");
       cart = [];
       renderCart();
 
       alert("Order placed successfully!");
     } catch (error) {
-      console.error("Order error:", error);
-      alert("Failed to place order. Try again.");
+      console.error("Firestore order error:", error);
+      alert("Failed to place order. Check console.");
     }
   };
 
