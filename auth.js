@@ -9,6 +9,7 @@ import {
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 import {
   getFirestore,
   doc,
@@ -36,9 +37,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* ===============================
-   CONSTANTS
-================================ */
 const DEFAULT_AVATAR =
   "https://firebasestorage.googleapis.com/v0/b/cloud-kitchen-40ed2.appspot.com/o/avatars%2Fdefault.png?alt=media";
 
@@ -51,12 +49,11 @@ if (signupForm) {
   signupForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById("signupEmail").value.trim();
-    const password = document.getElementById("signupPassword").value.trim();
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
 
     try {
-      const cred = await createUserWithEmailAndPassword(auth, email, password);
-      const user = cred.user;
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
@@ -80,19 +77,17 @@ if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
 
     try {
-      const cred = await signInWithEmailAndPassword(auth, email, password);
-      const user = cred.user;
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
 
-      const userRef = doc(db, "users", user.uid);
-      const snap = await getDoc(userRef);
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
 
-      // 🔁 Auto-create Firestore doc if missing
       if (!snap.exists()) {
-        await setDoc(userRef, {
+        await setDoc(ref, {
           email: user.email,
           avatar: DEFAULT_AVATAR,
           createdAt: serverTimestamp()
@@ -129,23 +124,17 @@ if (authArea) {
       return;
     }
 
-    try {
-      const snap = await getDoc(doc(db, "users", user.uid));
-      const data = snap.exists()
-        ? snap.data()
-        : { email: user.email, avatar: DEFAULT_AVATAR };
+    const snap = await getDoc(doc(db, "users", user.uid));
+    const data = snap.data();
 
-      authArea.innerHTML = `
-        <div class="account">
-          <img src="${data.avatar}" class="avatar" alt="User Avatar" />
-          <div class="account-menu">
-            <p>${data.email}</p>
-            <button onclick="logout()">Logout</button>
-          </div>
+    authArea.innerHTML = `
+      <div class="account">
+        <img src="${data.avatar}" class="avatar" />
+        <div class="account-menu">
+          <p>${data.email}</p>
+          <button onclick="logout()">Logout</button>
         </div>
-      `;
-    } catch (err) {
-      console.error("Auth UI error:", err);
-    }
+      </div>
+    `;
   });
 }
