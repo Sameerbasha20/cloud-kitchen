@@ -37,6 +37,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+/* ===============================
+   CONSTANTS
+================================ */
 const DEFAULT_AVATAR =
   "https://firebasestorage.googleapis.com/v0/b/cloud-kitchen-40ed2.appspot.com/o/avatars%2Fdefault.png?alt=media";
 
@@ -86,6 +89,7 @@ if (loginForm) {
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
 
+      // Ensure Firestore doc exists
       if (!snap.exists()) {
         await setDoc(ref, {
           email: user.email,
@@ -116,6 +120,8 @@ const authArea = document.getElementById("authArea");
 
 if (authArea) {
   onAuthStateChanged(auth, async (user) => {
+
+    /* USER LOGGED OUT */
     if (!user) {
       authArea.innerHTML = `
         <a href="login.html" class="auth-link">Login</a>
@@ -124,24 +130,21 @@ if (authArea) {
       return;
     }
 
+    /* USER LOGGED IN */
     const snap = await getDoc(doc(db, "users", user.uid));
     const data = snap.data();
 
     authArea.innerHTML = `
-  <div class="account">
-    <img 
-      src="${data.avatar}" 
-      class="avatar"
-      title="My Profile"
-      style="cursor:pointer"
-      onclick="window.location.href='profile.html'"
-    />
-    <div class="account-menu">
-      <p>${data.email}</p>
-      <button onclick="logout()">Logout</button>
-    </div>
-  </div>
-`;
+      <div class="account">
+        <a href="profile.html" title="My Profile" class="avatar-link">
+          <img src="${data.avatar}" class="avatar" alt="Profile">
+        </a>
 
+        <div class="account-menu">
+          <p class="account-email">${data.email}</p>
+          <button onclick="logout()">Logout</button>
+        </div>
+      </div>
+    `;
   });
 }

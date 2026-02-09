@@ -696,3 +696,12 @@ section {
 .profile-card input[type="file"] {
   margin-bottom: 15px;
 }
+.account-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+}
+
+.account:hover .account-menu {
+  display: block;
+}

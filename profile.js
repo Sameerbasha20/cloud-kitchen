@@ -2,13 +2,18 @@
    FIREBASE IMPORTS
 ================================ */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 import {
   getFirestore,
   doc,
   getDoc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 import {
   getStorage,
   ref,
@@ -39,14 +44,14 @@ const storage = getStorage(app);
 /* ===============================
    DOM ELEMENTS
 ================================ */
-const nameInput = document.getElementById("profileName");
-const emailInput = document.getElementById("profileEmail");
-const avatarInput = document.getElementById("profileAvatar");
 const avatarPreview = document.getElementById("avatarPreview");
+const avatarInput = document.getElementById("profileAvatar");
+const profileName = document.getElementById("profileName");
+const profileEmail = document.getElementById("profileEmail");
 const saveBtn = document.getElementById("saveProfile");
 
 /* ===============================
-   LOAD USER DATA
+   AUTH CHECK + LOAD PROFILE
 ================================ */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -54,15 +59,26 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
+  profileEmail.value = user.email;
+
   const refDoc = doc(db, "users", user.uid);
   const snap = await getDoc(refDoc);
 
   if (snap.exists()) {
     const data = snap.data();
-    nameInput.value = data.name || "";
-    emailInput.value = data.email || user.email;
+    profileName.value = data.name || "";
     avatarPreview.src = data.avatar;
   }
+});
+
+/* ===============================
+   AVATAR PREVIEW
+================================ */
+avatarInput.addEventListener("change", () => {
+  const file = avatarInput.files[0];
+  if (!file) return;
+
+  avatarPreview.src = URL.createObjectURL(file);
 });
 
 /* ===============================
@@ -72,20 +88,19 @@ saveBtn.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) return;
 
-  const refDoc = doc(db, "users", user.uid);
-
   let avatarURL = avatarPreview.src;
 
   // Upload new avatar if selected
   if (avatarInput.files.length > 0) {
     const file = avatarInput.files[0];
-    const avatarRef = ref(storage, `avatars/${user.uid}.png`);
+    const avatarRef = ref(storage, `avatars/${user.uid}`);
+
     await uploadBytes(avatarRef, file);
     avatarURL = await getDownloadURL(avatarRef);
   }
 
-  await updateDoc(refDoc, {
-    name: nameInput.value,
+  await updateDoc(doc(db, "users", user.uid), {
+    name: profileName.value,
     avatar: avatarURL
   });
 
