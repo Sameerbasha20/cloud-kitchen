@@ -128,13 +128,20 @@ if (authArea) {
     const data = snap.data();
 
     authArea.innerHTML = `
-      <div class="account">
-        <img src="${data.avatar}" class="avatar" />
-        <div class="account-menu">
-          <p>${data.email}</p>
-          <button onclick="logout()">Logout</button>
-        </div>
-      </div>
-    `;
+  <div class="account">
+    <img 
+      src="${data.avatar}" 
+      class="avatar"
+      title="My Profile"
+      style="cursor:pointer"
+      onclick="window.location.href='profile.html'"
+    />
+    <div class="account-menu">
+      <p>${data.email}</p>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+`;
+
   });
 }
