@@ -664,3 +664,35 @@ section {
   cursor: pointer;
   margin-top: 5px;
 }
+.profile {
+  margin-top: 40px;
+}
+
+.profile-card {
+  max-width: 400px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile-card input[type="text"],
+.profile-card input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.profile-card input[type="file"] {
+  margin-bottom: 15px;
+}
