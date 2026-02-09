@@ -1,17 +1,25 @@
-// profile.js
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 import {
+  getFirestore,
   doc,
   getDoc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 import {
+  getStorage,
   ref,
   uploadBytes,
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-import { auth, db, storage } from "./firebase.js";
+import { app } from "./firebase.js";
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 const avatarPreview = document.getElementById("avatarPreview");
 const avatarInput = document.getElementById("profileAvatar");
@@ -19,26 +27,30 @@ const nameInput = document.getElementById("profileName");
 const emailInput = document.getElementById("profileEmail");
 const saveBtn = document.getElementById("saveProfile");
 
-let currentUser = null;
 let selectedFile = null;
 
+/* ===============================
+   AUTH STATE
+================================ */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "login.html";
     return;
   }
 
-  currentUser = user;
+  emailInput.value = user.email;
 
   const snap = await getDoc(doc(db, "users", user.uid));
-  const data = snap.data();
-
-  avatarPreview.src = data.avatar;
-  nameInput.value = data.name || "";
-  emailInput.value = data.email;
+  if (snap.exists()) {
+    const data = snap.data();
+    nameInput.value = data.name || "";
+    avatarPreview.src = data.avatar || avatarPreview.src;
+  }
 });
 
-// Preview avatar
+/* ===============================
+   PREVIEW AVATAR
+================================ */
 avatarInput.addEventListener("change", (e) => {
   selectedFile = e.target.files[0];
   if (selectedFile) {
@@ -46,21 +58,29 @@ avatarInput.addEventListener("change", (e) => {
   }
 });
 
-// Save profile
+/* ===============================
+   SAVE PROFILE
+================================ */
 saveBtn.addEventListener("click", async () => {
-  if (!currentUser) return;
+  const user = auth.currentUser;
+  if (!user) return;
 
-  let avatarURL = avatarPreview.src;
+  let avatarURL = null;
 
   if (selectedFile) {
-    const avatarRef = ref(storage, `avatars/${currentUser.uid}.png`);
+    // ✅ CORRECT PATH (matches rules)
+    const avatarRef = ref(
+      storage,
+      `avatars/${user.uid}/${selectedFile.name}`
+    );
+
     await uploadBytes(avatarRef, selectedFile);
     avatarURL = await getDownloadURL(avatarRef);
   }
 
-  await updateDoc(doc(db, "users", currentUser.uid), {
+  await updateDoc(doc(db, "users", user.uid), {
     name: nameInput.value,
-    avatar: avatarURL
+    ...(avatarURL && { avatar: avatarURL })
   });
 
   alert("Profile updated successfully!");
