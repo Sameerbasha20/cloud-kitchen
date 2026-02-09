@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart | CloudKitchen</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="site-header">
+  <div class="container nav">
+    <a href="index.html" class="logo">CloudKitchen</a>
+
+    <ul class="nav-links">
+      <li><a href="menu.html">Menu</a></li>
+    </ul>
+
+    <a href="cart.html" class="cart-link active">
+      🛒 Cart <span id="cart-count">0</span>
+    </a>
+  </div>
+</header>
+
+<!-- ================= CART ================= -->
+<section class="cart">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Your Cart</h2>
+      <p>Review items before placing order</p>
+    </div>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-summary">
+      <h3 id="cart-total">Total: ₹0</h3>
+      <button id="place-order" class="primary-btn">Place Order</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <p>© 2026 CloudKitchen</p>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+<script type="module">
+  import { getCart, saveCart, updateCartCount } from "./cart.js";
+
+  const cartItemsEl = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-total");
+  const placeOrderBtn = document.getElementById("place-order");
+
+  let cart = getCart();
+  updateCartCount();
+
+  function renderCart() {
+    cartItemsEl.innerHTML = "";
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartItemsEl.innerHTML = "<p>Your cart is empty.</p>";
+      totalEl.textContent = "Total: ₹0";
+      placeOrderBtn.disabled = true;
+      return;
+    }
+
+    placeOrderBtn.disabled = false;
+
+    cart.forEach((item, index) => {
+      total += item.price * item.qty;
+
+      const div = document.createElement("div");
+      div.className = "cart-item";
+
+      div.innerHTML = `
+        <img src="${item.imageUrl}" alt="${item.name}">
+        <div class="cart-info">
+          <h4>${item.name}</h4>
+          <p>₹${item.price} × ${item.qty}</p>
+          <div class="cart-actions">
+            <button class="qty-btn" data-action="dec">−</button>
+            <span>${item.qty}</span>
+            <button class="qty-btn" data-action="inc">+</button>
+            <button class="remove-btn">Remove</button>
+          </div>
+        </div>
+      `;
+
+      div.querySelector('[data-action="inc"]').onclick = () => {
+        item.qty++;
+        saveCart(cart);
+        renderCart();
+      };
+
+      div.querySelector('[data-action="dec"]').onclick = () => {
+        item.qty--;
+        if (item.qty <= 0) cart.splice(index, 1);
+        saveCart(cart);
+        renderCart();
+      };
+
+      div.querySelector(".remove-btn").onclick = () => {
+        cart.splice(index, 1);
+        saveCart(cart);
+        renderCart();
+      };
+
+      cartItemsEl.appendChild(div);
+    });
+
+    totalEl.textContent = `Total: ₹${total}`;
+    updateCartCount();
+  }
+
+  placeOrderBtn.onclick = () => {
+    alert("Order placed (next step: Firestore)");
+    localStorage.removeItem("cart");
+    cart = [];
+    renderCart();
+  };
+
+  renderCart();
+</script>
+
+</body>
+</html>
