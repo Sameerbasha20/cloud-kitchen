@@ -1,42 +1,67 @@
 // navbar.js
 import { auth } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getCart, updateCartCount } from "./cart.js";
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-export function initNavbar() {
-  // 🔹 Update cart count when navbar loads
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import { db } from "./firebase.js";
+import { updateCartCount } from "./cart.js";
+
+const authArea = document.getElementById("authArea");
+
+onAuthStateChanged(auth, async (user) => {
+  authArea.innerHTML = "";
+
+  if (!user) {
+    authArea.innerHTML = `
+      <a href="login.html" class="auth-link">Login</a>
+      <a href="signup.html" class="auth-link">Signup</a>
+    `;
+    return;
+  }
+
+  // 🔹 fetch user profile
+  const snap = await getDoc(doc(db, "users", user.uid));
+  const userData = snap.exists() ? snap.data() : {};
+
+  const avatar =
+    userData.avatar ||
+    "https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg";
+
+  authArea.innerHTML = `
+    <a href="cart.html" class="cart-link">
+      🛒 Cart <span id="cart-count">0</span>
+    </a>
+
+    <div class="account">
+      <img id="nav-avatar" src="${avatar}" alt="Profile">
+
+      <div class="account-menu" id="accountMenu">
+        <p>${user.email}</p>
+        <a href="profile.html">My Profile</a>
+        <a href="my-orders.html">My Orders</a>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  `;
+
   updateCartCount();
 
-  // 🔹 Watch auth state
-  onAuthStateChanged(auth, user => {
-    const avatarImg = document.getElementById("nav-avatar");
-    const profileLink = document.querySelector(".profile-link");
+  const avatarBtn = document.getElementById("nav-avatar");
+  const menu = document.getElementById("accountMenu");
 
-    if (user) {
-      // User logged in
-      if (avatarImg && user.photoURL) {
-        avatarImg.src = user.photoURL;
-      }
+  avatarBtn.onclick = () => {
+    menu.classList.toggle("show");
+  };
 
-      if (profileLink) {
-        profileLink.href = "profile.html";
-      }
-    } else {
-      // User not logged in
-      if (avatarImg) {
-        avatarImg.src = "default-avatar.png";
-      }
-
-      if (profileLink) {
-        profileLink.href = "login.html";
-      }
-    }
-  });
-
-  // 🔹 Keep cart count in sync across tabs
-  window.addEventListener("storage", e => {
-    if (e.key === "cart") {
-      updateCartCount();
-    }
-  });
-}
+  document.getElementById("logoutBtn").onclick = async () => {
+    await signOut(auth);
+    window.location.href = "index.html";
+  };
+});

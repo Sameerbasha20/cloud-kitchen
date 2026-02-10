@@ -856,3 +856,6 @@ section {
 .account-menu button:hover {
   background: #1b5e20;
 }
+.menu {
+  padding-top: 50px;
+}
