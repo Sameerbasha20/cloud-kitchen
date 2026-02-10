@@ -557,3 +557,178 @@ body {
     font-size: 40px;
   }
 }
+/* =========================================================
+   INDEX PAGE – BODY LAYOUT FIX (SAFE OVERRIDES ONLY)
+   ========================================================= */
+
+/* ---------- GLOBAL SECTION SPACING ---------- */
+section {
+  padding: 90px 0;
+}
+
+section + section {
+  margin-top: 40px;
+}
+
+/* ---------- HERO SECTION ---------- */
+.hero {
+  padding: 110px 0 100px;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: 56px;
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.hero-text p {
+  font-size: 18px;
+  max-width: 520px;
+  margin-bottom: 40px;
+}
+
+.hero-image img {
+  max-width: 100%;
+  border-radius: 22px;
+}
+
+/* ---------- ABOUT SECTION ---------- */
+.about {
+  padding-top: 120px;
+}
+
+.about-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.about-wrapper img {
+  border-radius: 22px;
+}
+
+.about-wrapper h2 {
+  margin-bottom: 14px;
+}
+
+.about-wrapper p {
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+/* ---------- MENU SECTION ---------- */
+.menu {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.menu-grid {
+  margin-top: 50px;
+  gap: 36px;
+}
+
+.menu-card {
+  padding: 22px;
+}
+
+.menu-card img {
+  height: 190px;
+  margin-bottom: 18px;
+}
+
+.menu-card h4 {
+  margin-bottom: 6px;
+}
+
+.menu-card .price {
+  margin-top: 4px;
+}
+
+.menu-cta {
+  margin-top: 60px;
+}
+
+/* Fix congested button */
+.menu-cta .btn-primary {
+  padding: 16px 44px;
+}
+
+/* ---------- GALLERY SECTION ---------- */
+.home-gallery {
+  padding-top: 120px;
+}
+
+.home-gallery-grid {
+  margin-top: 50px;
+  gap: 28px;
+}
+
+.home-gallery-grid img {
+  height: 240px;
+}
+
+/* ---------- CONTACT SECTION ---------- */
+.contact {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.contact-info {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.contact .btn-primary {
+  padding: 16px 44px;
+}
+
+/* ---------- FOOTER SPACING FIX ---------- */
+.footer {
+  margin-top: 80px;
+}
+
+/* ---------- RESPONSIVE CLEANUP ---------- */
+@media (max-width: 900px) {
+  .hero-content,
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: center;
+  }
+
+  .hero-text p,
+  .about-wrapper p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  section {
+    padding: 70px 0;
+  }
+
+  .hero-text h1 {
+    font-size: 42px;
+  }
+
+  .menu-grid {
+    gap: 26px;
+  }
+
+  .menu-card img {
+    height: 170px;
+  }
+
+  .home-gallery-grid img {
+    height: 200px;
+  }
+}
