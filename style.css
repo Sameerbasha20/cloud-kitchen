@@ -746,3 +746,113 @@ section {
   border-radius: 50%;
   object-fit: cover;
 }
+/* ===============================
+   NAVBAR – FINAL CLEAN VERSION
+================================ */
+
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Login / Signup */
+.auth-link {
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.3s ease;
+}
+
+.auth-link:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Cart */
+.cart-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-link span {
+  background: #ffffff;
+  color: #2E7D32;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* Avatar */
+.account {
+  position: relative;
+}
+
+#nav-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  background: #ffffff;
+}
+
+/* Dropdown */
+.account-menu {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background: #ffffff;
+  color: #2C2C2C;
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.15);
+  min-width: 200px;
+  padding: 14px;
+  display: none;
+  z-index: 999;
+}
+
+.account-menu.show {
+  display: block;
+}
+
+.account-menu p {
+  font-size: 14px;
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+
+.account-menu a,
+.account-menu button {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.account-menu a {
+  background: #E8F5E9;
+  color: #2E7D32;
+  margin-bottom: 10px;
+}
+
+.account-menu button {
+  background: #2E7D32;
+  color: #ffffff;
+}
+
+.account-menu button:hover {
+  background: #1b5e20;
+}

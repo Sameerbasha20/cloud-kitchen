@@ -18,14 +18,13 @@ export function getCart() {
   return JSON.parse(localStorage.getItem("cart")) || [];
 }
 
-
 // Save cart to localStorage
-function saveCart(cart) {
+export function saveCart(cart) {
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
 }
 
-// Update cart count in header
+// Update cart count in navbar
 export function updateCartCount() {
   const cart = getCart();
   const count = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -35,8 +34,9 @@ export function updateCartCount() {
     cartCount.textContent = count;
   }
 }
+
 /* =======================
-   ADD TO CART (USED BY menu.js)
+   ADD TO CART
 ======================= */
 
 export function addToCart(item) {
@@ -64,12 +64,12 @@ export async function placeOrder() {
 
   if (!user) {
     alert("Please login to place an order");
-    return;
+    return false;
   }
 
   if (cart.length === 0) {
     alert("Your cart is empty");
-    return;
+    return false;
   }
 
   // Calculate total
@@ -78,17 +78,16 @@ export async function placeOrder() {
     0
   );
 
-  // 🔹 Fetch user snapshot
+  // Fetch user snapshot
   const userRef = doc(db, "users", user.uid);
   const userSnap = await getDoc(userRef);
   const userData = userSnap.exists() ? userSnap.data() : {};
 
-  // 🔹 Create order in Firestore
+  // Create order
   await addDoc(collection(db, "orders"), {
     userId: user.uid,
     userName: userData.name || "Unknown",
     userEmail: userData.email || user.email || "",
-
     items: cart,
     total,
     status: "pending",
@@ -100,9 +99,7 @@ export async function placeOrder() {
   updateCartCount();
 
   alert("Order placed successfully");
-
-  // Optional redirect
-  window.location.href = "my-orders.html";
+  return true;
 }
 
 /* =======================

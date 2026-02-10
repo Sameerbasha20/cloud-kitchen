@@ -15,34 +15,6 @@
 <body>
 
 <!-- ===============================
-     HEADER / NAVBAR
-================================ -->
-<header id="site-header">
-  <div class="container nav">
-
-    <a href="index.html" class="logo">CloudKitchen</a>
-
-    <ul class="nav-links" id="navLinks">
-      <li><a href="about.html">About</a></li>
-      <li><a href="menu.html">Menu</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <!-- Profile link (shown only when logged in via auth.js) -->
-      <li id="profileLink" style="display:none;">
-        <a href="profile.html">Profile</a>
-      </li>
-    </ul>
-
-    <!-- AUTH AREA (LOGIN / ACCOUNT) -->
-    <div class="auth-area" id="authArea"></div>
-
-    <!-- MOBILE MENU -->
-    <div class="menu-toggle" id="menuToggle">☰</div>
-
-  </div>
-</header>
-
-<!-- ===============================
      HERO SECTION
 ================================ -->
 <section class="hero">
@@ -174,7 +146,21 @@
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
 
-<!-- JS -->
+<!-- ===============================
+     NAVBAR LOADER (NEW)
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar();
+    });
+</script>
+
+<!-- EXISTING JS -->
 <script type="module" src="auth.js"></script>
 <script src="scroll.js"></script>
 

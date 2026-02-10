@@ -7,14 +7,12 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header id="site-header">
-  <div class="container nav">
-    <a href="index.html" class="logo">CloudKitchen</a>
-  </div>
-</header>
-
+<!-- ===============================
+     PROFILE SECTION
+================================ -->
 <section class="profile">
   <div class="container">
 
@@ -49,7 +47,30 @@
   </div>
 </section>
 
-<script type="module" src="firebase.js"></script>
+<!-- ===============================
+     FOOTER
+================================ -->
+<footer class="footer">
+  <p>© 2026 CloudKitchen. All rights reserved.</p>
+</footer>
+
+<!-- ===============================
+     NAVBAR LOADER
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar();
+    });
+</script>
+
+<!-- ===============================
+     PAGE SCRIPTS
+================================ -->
 <script type="module" src="auth.js"></script>
 <script type="module" src="profile.js"></script>
 

@@ -8,21 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- ================= HEADER ================= -->
-<header id="site-header">
-  <div class="container nav">
-    <a href="index.html" class="logo">CloudKitchen</a>
-
-    <ul class="nav-links">
-      <li><a href="menu.html">Menu</a></li>
-      <li><a href="my-orders.html" class="active">My Orders</a></li>
-    </ul>
-  </div>
-</header>
-
-<!-- ================= ORDERS ================= -->
+<!-- ===============================
+     ORDERS SECTION
+================================ -->
 <section class="orders">
   <div class="container">
 
@@ -36,14 +27,31 @@
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- ===============================
+     FOOTER
+================================ -->
 <footer class="footer">
   <p>© 2026 CloudKitchen</p>
 </footer>
 
-<!-- ================= SCRIPT ================= -->
+<!-- ===============================
+     NAVBAR LOADER
+================================ -->
 <script type="module">
-  // Firebase
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar();
+    });
+</script>
+
+<!-- ===============================
+     ORDERS LOGIC
+================================ -->
+<script type="module">
   import { auth, db } from "./firebase.js";
   import {
     collection,
@@ -76,8 +84,8 @@
 
     ordersList.innerHTML = "";
 
-    snapshot.forEach(doc => {
-      const order = doc.data();
+    snapshot.forEach(docSnap => {
+      const order = docSnap.data();
       const date = order.createdAt?.toDate().toLocaleString() || "";
 
       let itemsHtml = "";
@@ -93,7 +101,7 @@
       div.className = "order-card";
 
       div.innerHTML = `
-        <h4>Order ID: ${doc.id}</h4>
+        <h4>Order ID: ${docSnap.id}</h4>
         <p><strong>Date:</strong> ${date}</p>
         <p><strong>Status:</strong> ${order.status}</p>
         <ul>${itemsHtml}</ul>

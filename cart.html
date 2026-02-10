@@ -8,22 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-<!-- ================= HEADER ================= -->
-<header id="site-header">
-  <div class="container nav">
-    <a href="index.html" class="logo">CloudKitchen</a>
-
-    <ul class="nav-links">
-      <li><a href="menu.html">Menu</a></li>
-    </ul>
-
-    <a href="cart.html" class="cart-link active">
-      🛒 Cart <span id="cart-count">0</span>
-    </a>
-  </div>
-</header>
 
 <!-- ================= CART ================= -->
 <section class="cart">
@@ -49,27 +35,28 @@
   <p>© 2026 CloudKitchen</p>
 </footer>
 
-<!-- ================= SCRIPT ================= -->
+<!-- ================= NAVBAR LOADER ================= -->
 <script type="module">
-  // ---------------- CART HELPERS ----------------
-  import { getCart, placeOrder, updateCartCount } from "./cart.js";
-  // ---------------- FIREBASE (FROM YOUR firebase.js) ----------------
-  import { auth, db } from "./firebase.js";
+  import { initNavbar } from "./navbar.js";
 
-  import {
-    collection,
-    addDoc,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar();
+    });
+</script>
+
+<!-- ================= CART LOGIC ================= -->
+<script type="module">
+  import { getCart, saveCart, updateCartCount, placeOrder } from "./cart.js";
 
   const cartItemsEl = document.getElementById("cart-items");
   const totalEl = document.getElementById("cart-total");
   const placeOrderBtn = document.getElementById("place-order");
 
   let cart = getCart();
-  updateCartCount();
-
-  // ---------------- RENDER CART ----------------
+  
   function renderCart() {
     cartItemsEl.innerHTML = "";
     let total = 0;
@@ -125,51 +112,21 @@
     });
 
     totalEl.textContent = `Total: ₹${total}`;
-    updateCartCount();
   }
 
-  // ---------------- PLACE ORDER ----------------
   placeOrderBtn.onclick = async () => {
-    const user = auth.currentUser;
-
-    if (!user) {
-      alert("Please login to place an order");
-      return;
-    }
-
-    if (cart.length === 0) {
-      alert("Cart is empty");
-      return;
-    }
-
-    const total = cart.reduce(
-      (sum, item) => sum + item.price * item.qty,
-      0
-    );
-
-    try {
-      await addDoc(collection(db, "orders"), {
-        userId: user.uid,
-        items: cart,
-        total: total,
-        status: "pending",
-        createdAt: serverTimestamp()
-      });
-
-      // Clear cart only after success
-      localStorage.removeItem("cart");
-      cart = [];
-      renderCart();
-
-      alert("Order placed successfully!");
-    } catch (error) {
-      console.error("Firestore order error:", error);
-      alert("Failed to place order. Check console.");
-    }
+    await placeOrder();
+    cart = getCart();
+    renderCart();
   };
 
+  updateCartCount();
   renderCart();
 </script>
+
+<!-- EXISTING JS -->
+<script type="module" src="auth.js"></script>
+<script src="scroll.js"></script>
 
 </body>
 </html>
