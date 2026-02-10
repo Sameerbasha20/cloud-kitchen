@@ -941,7 +941,3 @@ section {
   background: #1b5e20;
 }
 
-/* SHOW MENU */
-.avatar-wrapper:hover .avatar-menu {
-  display: block;
-}

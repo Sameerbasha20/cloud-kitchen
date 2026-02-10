@@ -1,60 +1,63 @@
 import { auth } from "./firebase.js";
-import { onAuthStateChanged, signOut } from
+import { signOut, onAuthStateChanged } from
   "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import { updateCartCount } from "./cart.js";
 
 export function initNavbar(activePage = "") {
-  const menuToggle = document.getElementById("menuToggle");
-  const navLinks = document.getElementById("navLinks");
-
-  // Mobile menu toggle
-  if (menuToggle && navLinks) {
-    menuToggle.onclick = () => {
-      navLinks.classList.toggle("active");
-    };
-  }
-
-  // Active link highlight
-  if (activePage) {
-    const activeLink = document.querySelector(
-      `.nav-links a[data-page="${activePage}"]`
-    );
-    if (activeLink) activeLink.classList.add("active");
-  }
-
-  // Auth UI
-  const authArea = document.getElementById("authArea");
-
-  onAuthStateChanged(auth, (user) => {
-    if (!authArea) return;
-
-    if (!user) {
-      authArea.innerHTML = `
-        <a href="login.html" class="auth-link">Login</a>
-        <a href="signup.html" class="auth-link">Sign up</a>
-      `;
-    } else {
-      authArea.innerHTML = `
-        <div class="account">
-          <div class="avatar">
-            <img src="images/avatars/default.png" alt="Profile">
-          </div>
-          <div class="account-menu">
-            <p>${user.email}</p>
-            <a href="profile.html" class="auth-link">Profile</a>
-            <a href="my-orders.html" class="auth-link">My Orders</a>
-            <button id="logoutBtn">Logout</button>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("logoutBtn").onclick = async () => {
-        await signOut(auth);
-        window.location.href = "index.html";
-      };
+  /* ------------------------
+     ACTIVE LINK
+  ------------------------- */
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    if (link.dataset.page === activePage) {
+      link.classList.add("active");
     }
+  });
 
-    updateCartCount();
+  /* ------------------------
+     CART COUNT
+  ------------------------- */
+  updateCartCount();
+
+  /* ------------------------
+     PROFILE MENU TOGGLE
+  ------------------------- */
+  const avatar = document.getElementById("navAvatar");
+  const menu = document.getElementById("avatarMenu");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const emailEl = document.getElementById("navUserEmail");
+
+  if (!avatar || !menu) return;
+
+  // Toggle menu on avatar click
+  avatar.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.style.display =
+      menu.style.display === "block" ? "none" : "block";
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", () => {
+    menu.style.display = "none";
+  });
+
+  /* ------------------------
+     AUTH STATE
+  ------------------------- */
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      emailEl.textContent = user.email;
+    } else {
+      // If logged out, redirect safely
+      window.location.href = "login.html";
+    }
+  });
+
+  /* ------------------------
+     LOGOUT
+  ------------------------- */
+  logoutBtn.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "login.html";
   });
 }
