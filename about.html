@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | CloudKitchen</title>
+  <title>About Us | CloudKitchen</title>
 
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,162 +18,136 @@
      NAVBAR LOADER
 ================================ -->
 <script type="module">
-  import { initNavbar } from "./navbar.js";
-
   fetch("navbar.html")
     .then(res => res.text())
     .then(html => {
       document.body.insertAdjacentHTML("afterbegin", html);
-      initNavbar("about"); // active link
+      import("./navbar.js");
     });
 </script>
 
 <!-- ===============================
-     ABOUT SECTION
+     ABOUT PAGE
 ================================ -->
-<section class="about">
-  <div class="container">
+<section class="about-page">
+  <div class="container about-content">
 
-    <div class="section-header">
-      <h2>About Our Cloud Kitchen</h2>
+    <!-- INTRO (TEXT ONLY) -->
+    <h2>About Our Cloud Kitchen</h2>
+
+    <p>
+      Food is not just about filling hunger. It is about comfort, routine, health,
+      and trust. Our cloud kitchen was created with this simple belief — to prepare
+      honest, home-style meals and deliver them fresh to people who may not have the
+      time or energy to cook every day.
+    </p>
+
+    <p>
+      We operate as a cloud kitchen, which means we focus entirely on cooking and
+      delivery. There is no dine-in space, no restaurant seating, and no distractions.
+      This allows us to give our complete attention to what matters most: ingredient
+      quality, cleanliness, consistency, and timely delivery.
+    </p>
+
+    <p>
+      Over time, we have learned that many people are not looking for fancy presentation
+      or complicated dishes. They want food that feels familiar, balanced, and reliable —
+      food that can be eaten every day without feeling heavy or unhealthy.
+    </p>
+
+    <!-- SECTION 1 -->
+    <div class="about-block">
+      <img src="images/about/about-1.jpg" alt="Home style cooking">
+
+      <div>
+        <h3>Why a Cloud Kitchen</h3>
+
+        <p>
+          The idea of a cloud kitchen came from observing daily food habits of working
+          professionals, students, and families. Many people leave home early, return
+          late, or manage long work hours. Cooking every day becomes difficult, and
+          outside food often feels oily, spicy, or inconsistent.
+        </p>
+
+        <p>
+          A cloud kitchen allows us to remove unnecessary overheads like dining space
+          and focus purely on cooking. This helps us maintain reasonable pricing while
+          still using good-quality ingredients.
+        </p>
+
+        <p>
+          By working only with delivery orders, we prepare food in controlled batches,
+          reduce waste, and ensure freshness for every meal sent out.
+        </p>
+      </div>
     </div>
 
-    <div class="about-content">
+    <!-- SECTION 2 -->
+    <div class="about-block reverse">
+      <div>
+        <h3>Our Approach to Food</h3>
 
-      <p>
-        Food is not just about filling hunger. It is about comfort, routine,
-        health, and trust. Our cloud kitchen was created with this simple belief —
-        to prepare honest, home-style meals and deliver them fresh to people who
-        may not have the time or energy to cook every day.
-      </p>
-      <!-- ABOUT IMAGES -->
-<div class="about-images">
-  <img src="images/about/chef.jpg" alt="Home style food preparation">
-  <img src="images/about/vegetables.jpg" alt="Fresh ingredients and cooking">
-  <img src="images/about/hygiene.jpg" alt="Clean cloud kitchen workspace">
-</div>
+        <p>
+          Our food is inspired by everyday South Indian home cooking. The recipes are
+          simple, familiar, and balanced. We avoid excessive oil, artificial colors,
+          and unnecessary additives.
+        </p>
 
-      <p>
-        We operate as a cloud kitchen, which means we focus entirely on cooking
-        and delivery. There is no dine-in space, no restaurant seating, and no
-        distractions. This allows us to give our complete attention to what
-        matters most: ingredient quality, cleanliness, consistency, and timely
-        delivery.
-      </p>
+        <p>
+          We believe food should not feel heavy after eating. It should give energy
+          without discomfort. That is why we focus on:
+        </p>
 
-      <p>
-        Over time, we have learned that many people are not looking for fancy
-        presentation or complicated dishes. They want food that feels familiar,
-        balanced, and reliable — food that can be eaten every day without feeling
-        heavy or unhealthy. Our kitchen exists to meet that need.
-      </p>
+        <ul>
+          <li>Proper cooking methods</li>
+          <li>Balanced use of spices</li>
+          <li>Seasonal vegetables</li>
+          <li>Simple gravies and preparations</li>
+        </ul>
 
-      <hr />
+        <p>
+          Instead of following trends, we follow practices that have worked for
+          generations.
+        </p>
+      </div>
 
-      <h3>Why a Cloud Kitchen</h3>
+      <img src="images/about/about-2.jpg" alt="Balanced meals">
+    </div>
 
-      <p>
-        The idea of a cloud kitchen came from observing daily food habits of
-        working professionals, students, and families. Many people leave home
-        early, return late, or manage long work hours. Cooking every day becomes
-        difficult, and outside food often feels oily, spicy, or inconsistent.
-      </p>
+    <!-- SECTION 3 -->
+    <div class="about-block">
+      <img src="images/about/about-3.jpg" alt="Clean kitchen hygiene">
 
-      <p>
-        A cloud kitchen allows us to remove unnecessary overheads like dining
-        space and focus purely on cooking. This model helps us maintain reasonable
-        pricing while still using good-quality ingredients. It also allows us to
-        manage portions carefully and plan meals that are suitable for regular
-        consumption.
-      </p>
+      <div>
+        <h3>Ingredients and Hygiene</h3>
 
-      <p>
-        By working only with delivery orders, we are able to prepare food in
-        controlled batches, reduce waste, and ensure freshness for every meal
-        sent out.
-      </p>
+        <p>
+          Ingredients play a major role in how food tastes and how the body responds
+          to it. We try to use fresh vegetables, quality rice, lentils, and basic
+          spices commonly used in home kitchens.
+        </p>
 
-      <hr />
+        <p>
+          Cleanliness is one of the most important parts of our kitchen operations.
+          Since our food is meant for daily consumption, hygiene cannot be compromised.
+        </p>
 
-      <h3>Our Approach to Food</h3>
+        <ul>
+          <li>Clean cooking surfaces</li>
+          <li>Proper washing of vegetables</li>
+          <li>Separate handling of veg and non-veg items</li>
+          <li>Clean storage containers</li>
+          <li>Regular cleaning of utensils</li>
+        </ul>
 
-      <p>
-        Our food is inspired by everyday South Indian home cooking. The recipes
-        are simple, familiar, and balanced. We avoid excessive oil, artificial
-        colors, and unnecessary additives. Each meal is prepared keeping
-        digestion, nutrition, and taste in mind.
-      </p>
-
-      <p>
-        We believe food should not feel heavy after eating. It should give energy
-        without discomfort. That is why we focus on:
-      </p>
-
-      <ul>
-        <li>Proper cooking methods</li>
-        <li>Balanced use of spices</li>
-        <li>Seasonal vegetables</li>
-        <li>Simple gravies and preparations</li>
-      </ul>
-
-      <p>
-        Instead of following trends, we follow practices that have worked for
-        generations.
-      </p>
-
-      <hr />
-
-      <h3>Ingredients and Sourcing</h3>
-
-      <p>
-        Ingredients play a major role in how food tastes and how the body
-        responds to it. We try to use fresh vegetables, quality rice, lentils,
-        and basic spices that are commonly used in home kitchens.
-      </p>
-
-      <p>
-        Vegetables are selected based on availability and season. This helps
-        maintain freshness and avoids overuse of preserved items. Spices are
-        used in moderate quantities, mainly for flavor and digestion rather than
-        heat.
-      </p>
-
-      <p>
-        We do not believe in over-complicating food. Our ingredient list remains
-        simple, familiar, and transparent.
-      </p>
-
-      <hr />
-
-      <h3>Hygiene and Kitchen Practices</h3>
-
-      <p>
-        Cleanliness is one of the most important parts of our kitchen operations.
-        Since our food is meant for daily consumption, hygiene cannot be
-        compromised.
-      </p>
-
-      <p>Our kitchen follows basic hygiene practices such as:</p>
-
-      <ul>
-        <li>Clean cooking surfaces</li>
-        <li>Proper washing of vegetables</li>
-        <li>Separate handling of vegetarian and non-vegetarian items</li>
-        <li>Clean storage containers</li>
-        <li>Regular cleaning of utensils and work areas</li>
-      </ul>
-
-      <p>
-        We believe that good food begins with a clean kitchen. Even simple dishes
-        can feel unsafe if hygiene is ignored. That is something we take
-        seriously every day.
-      </p>
-
+        <p>
+          We believe good food begins with a clean kitchen — every single day.
+        </p>
+      </div>
     </div>
 
   </div>
 </section>
-
 
 <!-- ===============================
      FOOTER
@@ -182,7 +156,7 @@
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
 
-<!-- PAGE SCRIPTS -->
+<!-- EXISTING JS -->
 <script type="module" src="auth.js"></script>
 <script src="scroll.js"></script>
 
