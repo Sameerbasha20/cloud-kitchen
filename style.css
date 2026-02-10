@@ -1506,3 +1506,6 @@ section + section {
 .gallery-card:hover .gallery-title {
   background: #e8f5e9;
 }
+html {
+  scroll-behavior: smooth;
+}
