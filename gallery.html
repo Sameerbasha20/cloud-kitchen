@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery | CloudKitchen</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -15,34 +14,111 @@
      NAVBAR LOADER
 ================================ -->
 <script type="module">
-  import { initNavbar } from "./navbar.js";
-
   fetch("navbar.html")
     .then(res => res.text())
     .then(html => {
       document.body.insertAdjacentHTML("afterbegin", html);
-      initNavbar("gallery"); // ✅ highlight Gallery
+      import("./navbar.js");
     });
 </script>
 
 <!-- ===============================
      GALLERY SECTION
 ================================ -->
-<section class="home-gallery">
+<section class="gallery">
   <div class="container">
 
-    <div class="section-header">
-      <h2>Gallery</h2>
-      <p>Our food & kitchen moments</p>
-    </div>
+    <h2>Gallery</h2>
+    <p class="section-sub">Our food & kitchen moments</p>
 
-    <div class="home-gallery-grid">
-      <img src="images/menu/veg/rice.jpg" alt="Rice">
-      <img src="images/menu/veg/sambar.jpg" alt="Sambar">
-      <img src="images/menu/veg/dal.jpg" alt="Dal">
-      <img src="images/menu/veg/curd.jpg" alt="Curd Rice">
-      <img src="images/menu/non-veg/chicken-biryani.jpg" alt="Chicken Biryani">
-      <img src="images/menu/non-veg/chicken-curry.jpg" alt="Chicken Curry">
+    <div class="gallery-grid">
+
+      <!-- White Rice -->
+      <a href="menu.html#white-rice" class="gallery-card">
+        <img src="images/menu/veg/rice.jpg" alt="White Rice">
+        <span class="gallery-title">White Rice</span>
+      </a>
+
+      <!-- Sambar -->
+      <a href="menu.html#sambar" class="gallery-card">
+        <img src="images/menu/veg/sambar.jpg" alt="Sambar">
+        <span class="gallery-title">Sambar</span>
+      </a>
+
+      <!-- Dal -->
+      <a href="menu.html#dal" class="gallery-card">
+        <img src="images/menu/veg/dal.jpg" alt="Dal">
+        <span class="gallery-title">Dal</span>
+      </a>
+
+      <a href="menu.html#chana-masala-curry" class="gallery-card">
+        <img src="images/menu/veg/chana-masala.jpg" alt="Chana Masala Curry">
+        <span class="gallery-title">Chana Masala Curry</span>
+      </a>
+
+      <a href="menu.html#curd" class="gallery-card">
+        <img src="images/menu/veg/curd.jpg" alt="Curd">
+        <span class="gallery-title">Curd</span>
+      </a>
+
+      <a href="menu.html#gutti-vankaya" class="gallery-card">
+        <img src="images/menu/veg/gutti-vankaya.jpg" alt="Gutti Vankaya Curry">
+        <span class="gallery-title">Gutti vankaya Curry</span>
+      </a>
+
+      <a href="menu.html#paneer-curry" class="gallery-card">
+        <img src="images/menu/veg/paneer-curry.jpg" alt="Paneer Curry">
+        <span class="gallery-title">Paneer Curry</span>
+      </a>
+
+      <!-- Curd Rice -->
+      <a href="menu.html#curd-rice" class="gallery-card">
+        <img src="images/menu/veg/curd-rice.jpg" alt="Curd Rice">
+        <span class="gallery-title">Curd Rice</span>
+      </a>
+
+      <!-- Biryani -->
+      <a href="menu.html#biryani" class="gallery-card">
+        <img src="images/menu/non-veg/chicken-biryani.jpg" alt="Chicken Biryani">
+        <span class="gallery-title">Chicken Biryani</span>
+      </a>
+
+      <!-- Chicken Curry -->
+      <a href="menu.html#chicken-curry" class="gallery-card">
+        <img src="images/menu/non-veg/chicken-curry.jpg" alt="Chicken Curry">
+        <span class="gallery-title">Chicken Curry</span>
+      </a>
+      
+      
+      <a href="menu.html#basmati-rice" class="gallery-card">
+        <img src="images/menu/non-veg/basmati-rice.jpg" alt="Basmati Rice">
+        <span class="gallery-title">Basmati Rice</span>
+      </a>
+
+      <a href="menu.html#boiled-egg" class="gallery-card">
+        <img src="images/menu/non-veg/boiled-egg.jpg" alt="Boiled Egg">
+        <span class="gallery-title">Boiled Egg</span>
+        </a>
+
+        <a href="menu.html#butter-naan" class="gallery-card">
+        <img src="images/menu/non-veg/butter-naan.jpg" alt="Butter Naan">
+        <span class="gallery-title">Butter naan</span>
+      </a>
+
+      <a href="menu.html#egg-fried-rice" class="gallery-card">
+        <img src="images/menu/non-veg/egg-fried-rice.jpg" alt="Egg Fried Rice">
+        <span class="gallery-title">Egg Fried Rice</span>
+      </a>
+
+      <a href="menu.html#mutton-biryani" class="gallery-card">
+        <img src="images/menu/non-veg/mutton-biryani.jpg" alt="Mutton Biryani">
+        <span class="gallery-title">Mutton Biryani</span>
+      </a>
+
+      <a href="menu.html#roti" class="gallery-card">
+        <img src="images/menu/non-veg/roti.jpg" alt="Roti">
+        <span class="gallery-title">Roti</span>
+      </a>
     </div>
 
   </div>
@@ -55,9 +131,10 @@
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
 
-<!-- PAGE SCRIPTS -->
+<!-- ===============================
+     PAGE SCRIPTS
+================================ -->
 <script type="module" src="auth.js"></script>
-<script src="scroll.js"></script>
 
 </body>
 </html>
