@@ -1,9 +1,11 @@
 <header id="site-header">
   <div class="container nav">
 
+    <!-- LEFT: LOGO -->
     <a href="index.html" class="logo">CloudKitchen</a>
 
-    <ul class="nav-links" id="navLinks">
+    <!-- CENTER: NAV LINKS -->
+    <ul class="nav-links">
       <li><a href="index.html" data-page="home">Home</a></li>
       <li><a href="menu.html" data-page="menu">Menu</a></li>
       <li><a href="gallery.html" data-page="gallery">Gallery</a></li>
@@ -12,12 +14,32 @@
       <li><a href="my-orders.html" data-page="orders">My Orders</a></li>
     </ul>
 
-    <a href="cart.html" class="cart-link">
-      🛒 Cart <span id="cart-count">0</span>
-    </a>
+    <!-- RIGHT: CART + PROFILE -->
+    <div class="nav-right">
 
-    <div class="auth-area" id="authArea"></div>
+      <a href="cart.html" class="cart-link">
+        🛒 Cart <span id="cart-count">0</span>
+      </a>
 
+      <!-- PROFILE AVATAR -->
+      <div class="avatar-wrapper">
+        <img
+          id="navAvatar"
+          class="avatar"
+          src="images/avatars/default.png"
+          alt="Profile"
+        />
+
+        <div class="avatar-menu" id="avatarMenu">
+          <p id="navUserEmail">user@email.com</p>
+          <button onclick="location.href='profile.html'">Profile</button>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MOBILE MENU -->
     <div class="menu-toggle" id="menuToggle">☰</div>
 
   </div>
