@@ -142,15 +142,16 @@
 
 <!-- ================= NAVBAR LOADER ================= -->
 <script type="module">
-  import { initNavbar } from "./navbar.js";
-
   fetch("navbar.html")
     .then(res => res.text())
     .then(html => {
       document.body.insertAdjacentHTML("afterbegin", html);
-      initNavbar();
+
+      // 🔹 Load navbar logic AFTER HTML is injected
+      import("./navbar.js");
     });
 </script>
+
 
 <!-- ================= PAGE SCRIPTS ================= -->
 <script type="module" src="auth.js"></script>

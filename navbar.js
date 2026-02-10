@@ -16,6 +16,8 @@ import { updateCartCount } from "./cart.js";
 const authArea = document.getElementById("authArea");
 
 onAuthStateChanged(auth, async (user) => {
+  if (!authArea) return;
+
   authArea.innerHTML = "";
 
   if (!user) {
@@ -26,7 +28,6 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // 🔹 fetch user profile
   const snap = await getDoc(doc(db, "users", user.uid));
   const userData = snap.exists() ? snap.data() : {};
 
@@ -40,12 +41,11 @@ onAuthStateChanged(auth, async (user) => {
     </a>
 
     <div class="account">
-      <img id="nav-avatar" src="${avatar}" alt="Profile">
-
+      <img class="avatar" id="navAvatar" src="${avatar}">
       <div class="account-menu" id="accountMenu">
         <p>${user.email}</p>
-        <a href="profile.html">My Profile</a>
-        <a href="my-orders.html">My Orders</a>
+        <a href="profile.html">My Profile</a><br>
+        <a href="my-orders.html">My Orders</a><br><br>
         <button id="logoutBtn">Logout</button>
       </div>
     </div>
@@ -53,15 +53,12 @@ onAuthStateChanged(auth, async (user) => {
 
   updateCartCount();
 
-  const avatarBtn = document.getElementById("nav-avatar");
-  const menu = document.getElementById("accountMenu");
-
-  avatarBtn.onclick = () => {
-    menu.classList.toggle("show");
+  document.getElementById("navAvatar").onclick = () => {
+    document.getElementById("accountMenu").classList.toggle("show");
   };
 
   document.getElementById("logoutBtn").onclick = async () => {
     await signOut(auth);
-    window.location.href = "index.html";
+    location.href = "index.html";
   };
 });

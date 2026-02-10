@@ -37,15 +37,16 @@
 
 <!-- ================= NAVBAR LOADER ================= -->
 <script type="module">
-  import { initNavbar } from "./navbar.js";
-
   fetch("navbar.html")
     .then(res => res.text())
     .then(html => {
       document.body.insertAdjacentHTML("afterbegin", html);
-      initNavbar();
+
+      // 🔹 Load navbar logic AFTER HTML is injected
+      import("./navbar.js");
     });
 </script>
+
 
 <!-- ================= CART LOGIC ================= -->
 <script type="module">
@@ -56,7 +57,7 @@
   const placeOrderBtn = document.getElementById("place-order");
 
   let cart = getCart();
-  
+
   function renderCart() {
     cartItemsEl.innerHTML = "";
     let total = 0;
