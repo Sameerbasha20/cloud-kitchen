@@ -30,10 +30,11 @@ export function updateCartCount() {
   const cart = getCart();
   const count = cart.reduce((sum, item) => sum + item.qty, 0);
 
-  const cartEl = document.getElementById("cart-count");
-  if (cartEl) cartEl.textContent = count;
+  const cartCount = document.getElementById("cart-count");
+  if (cartCount) {
+    cartCount.textContent = count;
+  }
 }
-
 /* =======================
    ADD TO CART (USED BY menu.js)
 ======================= */
