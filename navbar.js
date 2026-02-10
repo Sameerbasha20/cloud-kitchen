@@ -1,18 +1,18 @@
-// navbar.js
-import { updateCartCount } from "./cart.js";
+import { onAuthStateChanged, signOut } from
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-/* ===============================
-   INIT NAVBAR
-================================ */
+import { doc, getDoc } from
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import { auth, db } from "./firebase.js";
+import { updateCartCount } from "./cart.js";
 
 export function initNavbar(activePage = "") {
 
   /* ===============================
      ACTIVE LINK
   ================================ */
-  const links = document.querySelectorAll(".nav-links a");
-
-  links.forEach(link => {
+  document.querySelectorAll(".nav-links a").forEach(link => {
     if (link.dataset.page === activePage) {
       link.classList.add("active");
     }
@@ -24,14 +24,61 @@ export function initNavbar(activePage = "") {
   updateCartCount();
 
   /* ===============================
-     MOBILE MENU (OPTIONAL)
+     AUTH STATE (FIXED)
   ================================ */
-  const toggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
+  const authArea = document.getElementById("authArea");
+  if (!authArea) return;
 
-  if (toggle && navLinks) {
-    toggle.onclick = () => {
-      navLinks.classList.toggle("active");
+  onAuthStateChanged(auth, async (user) => {
+
+    // NOT LOGGED IN
+    if (!user) {
+      authArea.innerHTML = `
+        <a href="login.html" class="auth-link">Login</a>
+        <a href="signup.html" class="auth-link">Sign Up</a>
+      `;
+      return;
+    }
+
+    // LOGGED IN
+    const snap = await getDoc(doc(db, "users", user.uid));
+    const data = snap.exists() ? snap.data() : {};
+
+    authArea.innerHTML = `
+      <div class="avatar-wrapper">
+        <img
+          src="${data.avatar || 'images/avatars/default.png'}"
+          class="avatar"
+          id="avatarBtn"
+        />
+
+        <div class="avatar-menu" id="avatarMenu">
+          <p>${data.email}</p>
+          <a href="profile.html">My Profile</a>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    `;
+
+    // TOGGLE MENU
+    const avatarBtn = document.getElementById("avatarBtn");
+    const avatarMenu = document.getElementById("avatarMenu");
+
+    avatarBtn.onclick = () => {
+      avatarMenu.classList.toggle("show");
     };
-  }
+
+    // LOGOUT
+    document.getElementById("logoutBtn").onclick = async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    };
+
+    // CLOSE ON OUTSIDE CLICK
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".avatar-wrapper")) {
+        avatarMenu.classList.remove("show");
+      }
+    });
+  });
 }

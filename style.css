@@ -8,13 +8,11 @@
 }
 
 :root {
-  /* 🌿 GREEN THEME */
-  --primary: #2E7D32;        /* Leaf Green */
-  --secondary: #E8F5E9;      /* Light Green */
-  --accent: #FFFFFF;        /* White */
-  --text: #2C2C2C;          /* Dark Grey */
-  --muted: #5f6f64;
+  --primary: #2E7D32;
+  --secondary: #E8F5E9;
   --white: #ffffff;
+  --text: #2C2C2C;
+  --muted: #5f6f64;
 
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -41,18 +39,20 @@ body {
 }
 
 /* ===============================
-   HEADER / NAVBAR
+   NAVBAR
 ================================ */
 #site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #2E7D32;
+  background: var(--primary);
+  animation: slideDown 0.4s ease;
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
-#site-header.scrolled {
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .nav {
@@ -63,9 +63,9 @@ body {
 }
 
 .logo {
+  color: #fff;
   font-size: 22px;
   font-weight: 700;
-  color: #FFFFFF;
   text-decoration: none;
 }
 
@@ -73,18 +73,17 @@ body {
 .nav-links {
   display: flex;
   gap: 32px;
-  list-style: none;
   justify-content: center;
+  list-style: none;
 }
 
 .nav-links a {
-  color: #FFFFFF;
+  color: #fff;
   text-decoration: none;
   font-weight: 600;
   position: relative;
 }
 
-/* underline animation */
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -101,12 +100,122 @@ body {
   width: 100%;
 }
 
-/* HAMBURGER */
-.menu-toggle {
-  display: none;
-  font-size: 28px;
+/* RIGHT SIDE */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* CART */
+.cart-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-link span {
+  background: #fff;
+  color: var(--primary);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* AUTH AREA */
+#authArea {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* LOGIN / SIGNUP */
+.auth-link {
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* AVATAR */
+.avatar-wrapper {
+  position: relative;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
   cursor: pointer;
-  color: #FFFFFF;
+  border: 2px solid #fff;
+}
+
+/* AVATAR DROPDOWN */
+.avatar-menu {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  min-width: 200px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.15);
+  display: none;
+  z-index: 9999;
+}
+
+.avatar-menu.show {
+  display: block;
+  animation: fadeDown 0.25s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar-menu p {
+  font-size: 14px;
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+
+.avatar-menu a,
+.avatar-menu button {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.avatar-menu a {
+  background: #E8F5E9;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.avatar-menu button {
+  background: var(--primary);
+  color: #fff;
+}
+
+.avatar-menu button:hover {
+  background: #1b5e20;
 }
 
 /* ===============================
@@ -148,12 +257,11 @@ body {
 ================================ */
 .btn-primary {
   background: var(--primary);
-  color: white;
+  color: #fff;
   padding: 14px 34px;
   border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
-  display: inline-block;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -162,49 +270,13 @@ body {
   box-shadow: 0 12px 28px rgba(46,125,50,0.4);
 }
 
-/* ===============================
-   SECTIONS
-================================ */
-section {
-  padding: 90px 0;
-}
-
-.section-title,
-.section-header h2 {
-  font-size: 34px;
-  text-align: center;
-  color: var(--primary);
-  margin-bottom: 14px;
-}
-
-.section-header p {
-  text-align: center;
-  color: var(--muted);
-  font-size: 16px;
-}
-
-/* ===============================
-   ABOUT
-================================ */
-.about-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.about-wrapper img {
+.btn-primary.full {
   width: 100%;
-  border-radius: var(--radius-lg);
 }
 
 /* ===============================
-   MENU
+   MENU / CARDS
 ================================ */
-.menu {
-  background: #F1F8F4;
-}
-
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -212,22 +284,16 @@ section {
 }
 
 .menu-card {
-  background: var(--white);
+  background: #fff;
   padding: 16px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .menu-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
 }
 
 .menu-card img {
@@ -239,442 +305,52 @@ section {
 }
 
 .menu-card h4 {
-  font-size: 18px;
   margin-bottom: 6px;
 }
 
-.menu-card .desc {
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-.menu-card .price,
 .menu-card span {
-  font-size: 18px;
   font-weight: 600;
   color: var(--primary);
 }
 
-.menu-cta {
-  text-align: center;
-  margin-top: 50px;
-}
-
 /* ===============================
-   GALLERY
+   AUTH PAGES
 ================================ */
-.home-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
-}
-
-.home-gallery-grid img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-/* ===============================
-   CONTACT
-================================ */
-.contact-info {
-  text-align: center;
-  color: var(--muted);
-}
-
-/* ===============================
-   FOOTER
-================================ */
-.footer {
-  text-align: center;
-  padding: 26px;
-  background: var(--primary);
-  color: white;
-  font-size: 14px;
-}
-
-/* ===============================
-   MOBILE
-================================ */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: #2E7D32;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 30px 0;
-    transform: translateY(-120%);
-    transition: transform 0.3s ease;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .nav-links.active {
-    transform: translateY(0);
-  }
-
-  .hero-content,
-  .about-wrapper {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .hero-text h1 {
-    font-size: 40px;
-  }
-
-  .hero-text p {
-    margin: auto;
-  }
-}
-/* ===============================
-   CONTACT FORM STYLING
-================================ */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 14px 16px;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 1.5px solid #C8E6C9;
-  background: #ffffff;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: #8aa596;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
-}
-
-/* MOBILE CONTACT FORM */
-@media (max-width: 768px) {
-  .contact-form {
-    grid-template-columns: 1fr;
-  }
-}
-/* ===============================
-   AUTH AREA
-================================ */
-.auth-area {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.auth-link {
-  color: #fff;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.auth-link:hover {
-  text-decoration: underline;
-}
-
-/* ACCOUNT DROPDOWN */
-.account {
-  position: relative;
-}
-
-.account-btn {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.account-menu {
-  position: absolute;
-  top: 48px;
-  right: 0;
-  background: #fff;
-  color: #333;
-  min-width: 180px;
-  border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-  display: none;
-  overflow: hidden;
-}
-
-.account-menu p,
-.account-menu button {
-  padding: 12px 16px;
-  width: 100%;
-  border: none;
-  background: none;
-  text-align: left;
-  font-size: 14px;
-}
-
-.account-menu button {
-  cursor: pointer;
-  color: #c62828;
-}
-
-.account-menu button:hover {
-  background: #f5f5f5;
-}
-/* ===============================
-   AUTH / ACCOUNT ICON
-================================ */
-.auth-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.auth-link {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.15);
-}
-
-.auth-link:hover {
-  background: rgba(255,255,255,0.25);
-}
-
-.account {
-  position: relative;
-}
-
-.account-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
+.auth {
+  min-height: calc(100vh - 120px);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
-.account-btn img {
-  width: 26px;
-  height: 26px;
-  opacity: 0.9;
-}
-
-.account-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 52px;
+.auth-card {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.15);
-  min-width: 200px;
-  padding: 14px;
-  z-index: 999;
-}
-
-.account-menu p {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 10px;
-  word-break: break-all;
-}
-
-.account-menu button {
+  padding: 40px;
+  border-radius: 14px;
+  max-width: 420px;
   width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 999px;
-  background: #2E7D32;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.account-menu button:hover {
-  background: #256528;
-}
-.upload-btn {
-  display: block;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   text-align: center;
-  padding: 10px;
-  border-radius: 999px;
-  background: #A5D6A7;
-  color: #1b5e20;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 12px;
-}
-/* ===============================
-   AUTH AREA (NAVBAR)
-================================ */
-.auth-area {
-  display: flex;
-  align-items: center;
-  gap: 16px;
 }
 
-/* Login / Signup links */
-.auth-link {
-  color: #ffffff;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  transition: background 0.3s ease;
-}
-
-.auth-link:hover {
-  background: rgba(255,255,255,0.2);
-}
-
-/* Account dropdown */
-.account {
-  position: relative;
-}
-
-.account-btn {
-  color: #ffffff;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.account-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background: #ffffff;
-  color: #2C2C2C;
+.auth-card input {
+  width: 100%;
   padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  min-width: 180px;
-  z-index: 999;
-}
-
-.account-menu p {
-  font-size: 14px;
-  margin-bottom: 10px;
-  word-break: break-all;
-}
-
-.account-menu button {
-  width: 100%;
-  border: none;
-  background: #2E7D32;
-  color: #ffffff;
-  padding: 8px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.account-menu button:hover {
-  background: #1b5e20;
-}
-/* ===============================
-   PROFILE AVATAR
-================================ */
-.avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #2E7D32;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  overflow: hidden;
-}
-
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.avatar-wrapper {
-  position: relative;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid #fff;
-}
-
-.avatar-menu {
-  position: absolute;
-  right: 0;
-  top: 50px;
-  background: #fff;
+  margin-bottom: 14px;
   border-radius: 8px;
-  padding: 10px;
-  display: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  min-width: 180px;
+  border: 1px solid #ddd;
 }
 
-.avatar-menu.show {
-  display: block;
-}
-
-.avatar-menu p {
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-
-.avatar-menu button {
-  width: 100%;
-  background: #2e7d32;
-  color: white;
-  border: none;
-  padding: 6px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-.profile {
-  margin-top: 40px;
-}
-
+/* ===============================
+   PROFILE
+================================ */
 .profile-card {
   max-width: 400px;
   margin: auto;
   background: #fff;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-sm);
   text-align: center;
 }
 
@@ -686,379 +362,26 @@ section {
   margin-bottom: 15px;
 }
 
-.profile-card input[type="text"],
-.profile-card input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-}
-
-.profile-card input[type="file"] {
-  margin-bottom: 15px;
-}
-.account-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-}
-
-.account:hover .account-menu {
-  display: block;
-}
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #2e7d32;
-  padding: 12px 20px;
-  color: white;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-  font-weight: 500;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-}
-
-.cart-link span {
-  background: white;
-  color: #2e7d32;
-  padding: 2px 6px;
-  border-radius: 6px;
-  margin-left: 4px;
-  font-size: 12px;
-}
-
-.nav-right img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-}
 /* ===============================
-   NAVBAR – FINAL CLEAN VERSION
+   FOOTER
 ================================ */
-
-.auth-area {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* Login / Signup */
-.auth-link {
-  color: #ffffff;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.15);
-  transition: background 0.3s ease;
-}
-
-.auth-link:hover {
-  background: rgba(255,255,255,0.25);
-}
-
-/* Cart */
-.cart-link {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.cart-link span {
-  background: #ffffff;
-  color: #2E7D32;
-  padding: 2px 6px;
-  border-radius: 6px;
-  font-size: 12px;
-}
-
-/* Avatar */
-.account {
-  position: relative;
-}
-
-#nav-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  border: 2px solid #ffffff;
-  background: #ffffff;
-}
-
-/* Dropdown */
-.account-menu {
-  position: absolute;
-  right: 0;
-  top: 50px;
-  background: #ffffff;
-  color: #2C2C2C;
-  border-radius: 12px;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.15);
-  min-width: 200px;
-  padding: 14px;
-  display: none;
-  z-index: 999;
-}
-
-.account-menu.show {
-  display: block;
-}
-
-.account-menu p {
-  font-size: 14px;
-  margin-bottom: 12px;
-  word-break: break-all;
-}
-
-.account-menu a,
-.account-menu button {
-  width: 100%;
-  display: block;
-  text-align: center;
-  padding: 10px;
-  border-radius: 999px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.account-menu a {
-  background: #E8F5E9;
-  color: #2E7D32;
-  margin-bottom: 10px;
-}
-
-.account-menu button {
-  background: #2E7D32;
-  color: #ffffff;
-}
-
-.account-menu button:hover {
-  background: #1b5e20;
-}
-.menu {
-  padding-top: 50px;
-}
-/* ===============================
-   NAVBAR RIGHT ALIGN FIX
-================================ */
-
-.nav {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-}
-
-/* RIGHT SIDE (cart + avatar) */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-/* CART */
-.cart-link {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.cart-link span {
-  background: white;
-  color: #2e7d32;
-  padding: 2px 6px;
-  border-radius: 6px;
-  font-size: 12px;
-  margin-left: 4px;
-}
-
-/* AVATAR */
-.avatar-wrapper {
-  position: relative;
-}
-
-.avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  cursor: pointer;
-  object-fit: cover;
-  border: 2px solid #fff;
-}
-
-/* DROPDOWN */
-.avatar-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 48px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  min-width: 180px;
-  z-index: 999;
-}
-
-.avatar-menu p {
-  font-size: 13px;
-  margin-bottom: 10px;
-  word-break: break-all;
-}
-
-.avatar-menu button {
-  width: 100%;
-  background: #2e7d32;
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-top: 6px;
-}
-
-.avatar-menu button:hover {
-  background: #1b5e20;
-}
-
-/* ================= AUTH PAGES ================= */
-
-.auth {
-  min-height: calc(100vh - 120px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f4faf4;
-}
-
-.auth-card {
-  background: #fff;
-  padding: 40px;
-  border-radius: 14px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+.footer {
+  background: var(--primary);
+  color: #fff;
+  padding: 26px;
   text-align: center;
 }
 
-.auth-card h2 {
-  margin-bottom: 6px;
-}
-
-.auth-sub {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 24px;
-}
-
-.auth-card input {
-  width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 14px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-}
-
-.btn-primary.full {
-  width: 100%;
-  margin-top: 10px;
-}
-
-.auth-link {
-  margin-top: 18px;
-  font-size: 14px;
-}
-
-.auth-link a {
-  color: #2e7d32;
-  font-weight: 600;
-}
-/* ===== NAVBAR ANIMATION ===== */
-
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  animation: slideDown 0.4s ease;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  .nav-links {
+    display: none;
   }
-}
-
-/* ===== DROPDOWN ===== */
-
-.profile-wrapper {
-  position: relative;
-}
-
-.nav-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.profile-dropdown {
-  position: absolute;
-  right: 0;
-  top: 46px;
-  background: white;
-  border-radius: 8px;
-  width: 160px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
-  transition: all 0.25s ease;
-}
-
-.profile-dropdown.show {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.profile-dropdown a,
-.profile-dropdown button {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  border: none;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-}
-
-.profile-dropdown a:hover,
-.profile-dropdown button:hover {
-  background: #f4f4f4;
 }
