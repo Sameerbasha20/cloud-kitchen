@@ -1,7 +1,8 @@
 // menu.js
-import { addToCart } from "./cart.js";
+import { addToCart, updateCartCount } from "./cart.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ✅ now it exists
   updateCartCount();
 
   const buttons = document.querySelectorAll(".add-to-cart");
