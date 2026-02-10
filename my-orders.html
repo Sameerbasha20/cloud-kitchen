@@ -12,6 +12,20 @@
 <body>
 
 <!-- ===============================
+     NAVBAR LOADER
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar("orders"); // ✅ highlight My Orders
+    });
+</script>
+
+<!-- ===============================
      ORDERS SECTION
 ================================ -->
 <section class="orders">
@@ -33,21 +47,6 @@
 <footer class="footer">
   <p>© 2026 CloudKitchen</p>
 </footer>
-
-<!-- ===============================
-     NAVBAR LOADER
-================================ -->
-<script type="module">
-  fetch("navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("afterbegin", html);
-
-      // 🔹 Load navbar logic AFTER HTML is injected
-      import("./navbar.js");
-    });
-</script>
-
 
 <!-- ===============================
      ORDERS LOGIC
@@ -113,6 +112,10 @@
     });
   });
 </script>
+
+<!-- EXISTING JS -->
+<script type="module" src="auth.js"></script>
+<script src="scroll.js"></script>
 
 </body>
 </html>

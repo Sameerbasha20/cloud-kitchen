@@ -78,32 +78,40 @@ export async function placeOrder() {
     0
   );
 
-  // Fetch user snapshot
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
-  const userData = userSnap.exists() ? userSnap.data() : {};
+  try {
+    // Fetch user snapshot
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const userData = userSnap.exists() ? userSnap.data() : {};
 
-  // Create order
-  await addDoc(collection(db, "orders"), {
-    userId: user.uid,
-    userName: userData.name || "Unknown",
-    userEmail: userData.email || user.email || "",
-    items: cart,
-    total,
-    status: "pending",
-    createdAt: serverTimestamp()
-  });
+    // Create order in Firestore
+    await addDoc(collection(db, "orders"), {
+      userId: user.uid,
+      userName: userData.name || "Unknown",
+      userEmail: userData.email || user.email || "",
+      items: cart,
+      total,
+      status: "pending",
+      createdAt: serverTimestamp()
+    });
 
-  // Clear cart
-  localStorage.removeItem("cart");
-  updateCartCount();
+    // Clear cart
+    localStorage.removeItem("cart");
+    updateCartCount();
 
-  alert("Order placed successfully");
-  return true;
+    alert("Order placed successfully");
+    return true;
+
+  } catch (error) {
+    console.error("Order placement failed:", error);
+    alert("Failed to place order. Please try again.");
+    return false;
+  }
 }
 
 /* =======================
    INIT
 ======================= */
 
+// Ensure cart count is correct on page load
 updateCartCount();

@@ -1,64 +1,97 @@
-// navbar.js
+import { getAuth, onAuthStateChanged, signOut } from
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 import { auth } from "./firebase.js";
-import {
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-import {
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-import { db } from "./firebase.js";
 import { updateCartCount } from "./cart.js";
 
-const authArea = document.getElementById("authArea");
+/* ===============================
+   INIT NAVBAR
+================================ */
+export function initNavbar(activePage = "") {
+  highlightActiveLink(activePage);
+  setupMobileMenu();
+  setupAuthUI();
+  updateCartCount();
+}
 
-onAuthStateChanged(auth, async (user) => {
+/* ===============================
+   ACTIVE LINK
+================================ */
+function highlightActiveLink(activePage) {
+  if (!activePage) return;
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    if (link.dataset.page === activePage) {
+      link.classList.add("active");
+    }
+  });
+}
+
+/* ===============================
+   MOBILE MENU
+================================ */
+function setupMobileMenu() {
+  const toggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  if (!toggle || !navLinks) return;
+
+  toggle.onclick = () => {
+    navLinks.classList.toggle("active");
+  };
+}
+
+/* ===============================
+   AUTH / PROFILE UI
+================================ */
+function setupAuthUI() {
+  const authArea = document.getElementById("authArea");
   if (!authArea) return;
 
-  authArea.innerHTML = "";
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      authArea.innerHTML = `
+        <a href="login.html" class="auth-link">Login</a>
+        <a href="signup.html" class="auth-link">Sign Up</a>
+      `;
+      return;
+    }
 
-  if (!user) {
+    const avatar =
+      user.photoURL ||
+      "images/avatars/default.png";
+
     authArea.innerHTML = `
-      <a href="login.html" class="auth-link">Login</a>
-      <a href="signup.html" class="auth-link">Signup</a>
-    `;
-    return;
-  }
-
-  const snap = await getDoc(doc(db, "users", user.uid));
-  const userData = snap.exists() ? snap.data() : {};
-
-  const avatar =
-    userData.avatar ||
-    "https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg";
-
-  authArea.innerHTML = `
-    <a href="cart.html" class="cart-link">
-      🛒 Cart <span id="cart-count">0</span>
-    </a>
-
-    <div class="account">
-      <img class="avatar" id="navAvatar" src="${avatar}">
-      <div class="account-menu" id="accountMenu">
-        <p>${user.email}</p>
-        <a href="profile.html">My Profile</a><br>
-        <a href="my-orders.html">My Orders</a><br><br>
-        <button id="logoutBtn">Logout</button>
+      <div class="avatar-wrapper">
+        <img src="${avatar}" class="avatar" id="avatarBtn">
+        <div class="avatar-menu" id="avatarMenu">
+          <p>${user.email}</p>
+          <button id="profileBtn">Profile</button>
+          <button id="logoutBtn">Logout</button>
+        </div>
       </div>
-    </div>
-  `;
+    `;
 
-  updateCartCount();
+    const avatarBtn = document.getElementById("avatarBtn");
+    const avatarMenu = document.getElementById("avatarMenu");
 
-  document.getElementById("navAvatar").onclick = () => {
-    document.getElementById("accountMenu").classList.toggle("show");
-  };
+    avatarBtn.onclick = () => {
+      avatarMenu.classList.toggle("show");
+    };
 
-  document.getElementById("logoutBtn").onclick = async () => {
-    await signOut(auth);
-    location.href = "index.html";
-  };
-});
+    document.getElementById("profileBtn").onclick = () => {
+      window.location.href = "profile.html";
+    };
+
+    document.getElementById("logoutBtn").onclick = async () => {
+      await signOut(auth);
+      window.location.href = "index.html";
+    };
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".avatar-wrapper")) {
+        avatarMenu.classList.remove("show");
+      }
+    });
+  });
+}

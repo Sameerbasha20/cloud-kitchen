@@ -12,6 +12,20 @@
 <body>
 
 <!-- ===============================
+     NAVBAR LOADER
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar("admin"); // ✅ admin page
+    });
+</script>
+
+<!-- ===============================
      ADMIN ORDERS SECTION
 ================================ -->
 <section class="orders">
@@ -33,20 +47,6 @@
 <footer class="footer">
   <p>© 2026 CloudKitchen</p>
 </footer>
-
-<!-- ===============================
-     NAVBAR LOADER
-================================ -->
-<script type="module">
-  fetch("navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("afterbegin", html);
-
-      // 🔹 Load navbar logic AFTER HTML is injected
-      import("./navbar.js");
-    });
-</script>
 
 <!-- ===============================
      ADMIN LOGIC
@@ -88,9 +88,7 @@
 
       let itemsHtml = "";
       order.items.forEach(item => {
-        itemsHtml += `
-          <li>${item.name} × ${item.qty}</li>
-        `;
+        itemsHtml += `<li>${item.name} × ${item.qty}</li>`;
       });
 
       const div = document.createElement("div");

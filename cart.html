@@ -11,7 +11,23 @@
 
 <body>
 
-<!-- ================= CART ================= -->
+<!-- ===============================
+     NAVBAR LOADER
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar("cart");
+    });
+</script>
+
+<!-- ===============================
+     CART
+================================ -->
 <section class="cart">
   <div class="container">
 
@@ -24,39 +40,35 @@
 
     <div class="cart-summary">
       <h3 id="cart-total">Total: ₹0</h3>
-      <button id="place-order" class="primary-btn">Place Order</button>
+      <button id="place-order" class="btn-primary">Place Order</button>
     </div>
 
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- ===============================
+     FOOTER
+================================ -->
 <footer class="footer">
   <p>© 2026 CloudKitchen</p>
 </footer>
 
-<!-- ================= NAVBAR LOADER ================= -->
+<!-- ===============================
+     CART LOGIC
+================================ -->
 <script type="module">
-  fetch("navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("afterbegin", html);
-
-      // 🔹 Load navbar logic AFTER HTML is injected
-      import("./navbar.js");
-    });
-</script>
-
-
-<!-- ================= CART LOGIC ================= -->
-<script type="module">
-  import { getCart, saveCart, updateCartCount, placeOrder } from "./cart.js";
+  import { getCart, updateCartCount, placeOrder } from "./cart.js";
 
   const cartItemsEl = document.getElementById("cart-items");
   const totalEl = document.getElementById("cart-total");
   const placeOrderBtn = document.getElementById("place-order");
 
   let cart = getCart();
+
+  function persistCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+  }
 
   function renderCart() {
     cartItemsEl.innerHTML = "";
@@ -92,20 +104,20 @@
 
       div.querySelector(".inc").onclick = () => {
         item.qty++;
-        saveCart(cart);
+        persistCart();
         renderCart();
       };
 
       div.querySelector(".dec").onclick = () => {
         item.qty--;
         if (item.qty <= 0) cart.splice(index, 1);
-        saveCart(cart);
+        persistCart();
         renderCart();
       };
 
       div.querySelector(".remove-btn").onclick = () => {
         cart.splice(index, 1);
-        saveCart(cart);
+        persistCart();
         renderCart();
       };
 

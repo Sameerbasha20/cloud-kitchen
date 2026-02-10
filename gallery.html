@@ -12,6 +12,20 @@
 <body>
 
 <!-- ===============================
+     NAVBAR LOADER
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar("gallery"); // ✅ highlight Gallery
+    });
+</script>
+
+<!-- ===============================
      GALLERY SECTION
 ================================ -->
 <section class="home-gallery">
@@ -41,21 +55,7 @@
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
 
-<!-- ===============================
-     NAVBAR LOADER
-================================ -->
-<script type="module">
-  import { initNavbar } from "./navbar.js";
-
-  fetch("navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("afterbegin", html);
-      initNavbar();
-    });
-</script>
-
-<!-- EXISTING JS -->
+<!-- PAGE SCRIPTS -->
 <script type="module" src="auth.js"></script>
 <script src="scroll.js"></script>
 

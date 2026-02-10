@@ -11,6 +11,20 @@
 <body>
 
 <!-- ===============================
+     NAVBAR LOADER
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar("profile"); // ✅ highlight Profile
+    });
+</script>
+
+<!-- ===============================
      PROFILE SECTION
 ================================ -->
 <section class="profile">
@@ -53,21 +67,6 @@
 <footer class="footer">
   <p>© 2026 CloudKitchen. All rights reserved.</p>
 </footer>
-
-<!-- ===============================
-     NAVBAR LOADER
-================================ -->
-<script type="module">
-  fetch("navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("afterbegin", html);
-
-      // 🔹 Load navbar logic AFTER HTML is injected
-      import("./navbar.js");
-    });
-</script>
-
 
 <!-- ===============================
      PAGE SCRIPTS
