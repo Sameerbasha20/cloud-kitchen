@@ -941,3 +941,56 @@ section {
   background: #1b5e20;
 }
 
+/* ================= AUTH PAGES ================= */
+
+.auth {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4faf4;
+}
+
+.auth-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 6px;
+}
+
+.auth-sub {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.btn-primary.full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.auth-link {
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.auth-link a {
+  color: #2e7d32;
+  font-weight: 600;
+}
