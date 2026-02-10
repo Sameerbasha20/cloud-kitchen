@@ -1,97 +1,60 @@
-import { getAuth, onAuthStateChanged, signOut } from
+import { auth } from "./firebase.js";
+import { onAuthStateChanged, signOut } from
   "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import { auth } from "./firebase.js";
 import { updateCartCount } from "./cart.js";
 
-/* ===============================
-   INIT NAVBAR
-================================ */
 export function initNavbar(activePage = "") {
-  highlightActiveLink(activePage);
-  setupMobileMenu();
-  setupAuthUI();
-  updateCartCount();
-}
-
-/* ===============================
-   ACTIVE LINK
-================================ */
-function highlightActiveLink(activePage) {
-  if (!activePage) return;
-
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    if (link.dataset.page === activePage) {
-      link.classList.add("active");
-    }
-  });
-}
-
-/* ===============================
-   MOBILE MENU
-================================ */
-function setupMobileMenu() {
-  const toggle = document.getElementById("menuToggle");
+  const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
 
-  if (!toggle || !navLinks) return;
+  // Mobile menu toggle
+  if (menuToggle && navLinks) {
+    menuToggle.onclick = () => {
+      navLinks.classList.toggle("active");
+    };
+  }
 
-  toggle.onclick = () => {
-    navLinks.classList.toggle("active");
-  };
-}
+  // Active link highlight
+  if (activePage) {
+    const activeLink = document.querySelector(
+      `.nav-links a[data-page="${activePage}"]`
+    );
+    if (activeLink) activeLink.classList.add("active");
+  }
 
-/* ===============================
-   AUTH / PROFILE UI
-================================ */
-function setupAuthUI() {
+  // Auth UI
   const authArea = document.getElementById("authArea");
-  if (!authArea) return;
 
   onAuthStateChanged(auth, (user) => {
+    if (!authArea) return;
+
     if (!user) {
       authArea.innerHTML = `
         <a href="login.html" class="auth-link">Login</a>
-        <a href="signup.html" class="auth-link">Sign Up</a>
+        <a href="signup.html" class="auth-link">Sign up</a>
       `;
-      return;
+    } else {
+      authArea.innerHTML = `
+        <div class="account">
+          <div class="avatar">
+            <img src="images/avatars/default.png" alt="Profile">
+          </div>
+          <div class="account-menu">
+            <p>${user.email}</p>
+            <a href="profile.html" class="auth-link">Profile</a>
+            <a href="my-orders.html" class="auth-link">My Orders</a>
+            <button id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("logoutBtn").onclick = async () => {
+        await signOut(auth);
+        window.location.href = "index.html";
+      };
     }
 
-    const avatar =
-      user.photoURL ||
-      "images/avatars/default.png";
-
-    authArea.innerHTML = `
-      <div class="avatar-wrapper">
-        <img src="${avatar}" class="avatar" id="avatarBtn">
-        <div class="avatar-menu" id="avatarMenu">
-          <p>${user.email}</p>
-          <button id="profileBtn">Profile</button>
-          <button id="logoutBtn">Logout</button>
-        </div>
-      </div>
-    `;
-
-    const avatarBtn = document.getElementById("avatarBtn");
-    const avatarMenu = document.getElementById("avatarMenu");
-
-    avatarBtn.onclick = () => {
-      avatarMenu.classList.toggle("show");
-    };
-
-    document.getElementById("profileBtn").onclick = () => {
-      window.location.href = "profile.html";
-    };
-
-    document.getElementById("logoutBtn").onclick = async () => {
-      await signOut(auth);
-      window.location.href = "index.html";
-    };
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".avatar-wrapper")) {
-        avatarMenu.classList.remove("show");
-      }
-    });
+    updateCartCount();
   });
 }

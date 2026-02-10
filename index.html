@@ -15,6 +15,20 @@
 <body>
 
 <!-- ===============================
+     NAVBAR LOADER
+================================ -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar("home");
+    });
+</script>
+
+<!-- ===============================
      HERO SECTION
 ================================ -->
 <section class="hero">
@@ -124,4 +138,33 @@
 
     <div class="section-header">
       <h2>Contact Us</h2>
-      <p>We’d love to hear from yo
+      <p>We’d love to hear from you</p>
+    </div>
+
+    <div class="contact-info">
+      <p><strong>Email:</strong> cloudkitchen@email.com</p>
+      <p><strong>Location:</strong> Hyderabad, India</p>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="contact.html" class="btn-primary">Get in Touch</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===============================
+     FOOTER
+================================ -->
+<footer class="footer">
+  <p>© 2026 CloudKitchen. All rights reserved.</p>
+</footer>
+
+<!-- ===============================
+     PAGE SCRIPTS
+================================ -->
+<script type="module" src="auth.js"></script>
+<script src="scroll.js"></script>
+
+</body>
+</html>
