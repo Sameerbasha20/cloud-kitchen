@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weight Loss Program | CloudKitchen</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<script type="module">
+  import { initNavbar } from "./navbar.js";
+
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML("afterbegin", html);
+      initNavbar("weightloss");
+    });
+</script>
+
+<!-- ================= HERO BANNER ================= -->
+<section class="weight-hero">
+  <div class="container">
+    <h1>21-Day Healthy Weight Loss Program</h1>
+    <p>
+      Clean, balanced, home-style meals designed to support fat loss,
+      improve digestion and boost energy levels naturally.
+    </p>
+    <a href="#program-menu" class="btn-primary">View Program Meals</a>
+  </div>
+</section>
+
+<!-- ================= WHY SECTION ================= -->
+<section class="weight-about">
+  <div class="container">
+    <h2 class="section-title">Why Choose Our Weight Loss Plan?</h2>
+    <p>
+      Our meals are designed for sustainable weight loss — not crash dieting.
+      We focus on portion control, fiber-rich foods, high protein intake,
+      and natural ingredients to help your body burn fat safely.
+    </p>
+  </div>
+</section>
+
+<!-- ================= MENU ================= -->
+<section id="program-menu" class="menu">
+  <div class="container">
+
+    <h2 class="section-title">Weight Loss Specials</h2>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <h4>Sprouts Salad</h4>
+        <p class="desc">High protein, rich in fiber, boosts metabolism.</p>
+      </div>
+
+      <div class="menu-card">
+        <h4>Boiled Egg Whites + Spinach Salad</h4>
+        <p class="desc">Low fat, high protein, iron rich.</p>
+      </div>
+
+      <div class="menu-card">
+        <h4>Mixed Vegetable Salad</h4>
+        <p class="desc">Low calorie, supports immunity and digestion.</p>
+      </div>
+
+      <div class="menu-card">
+        <h4>Vegetable Soup + Cucumber Salad</h4>
+        <p class="desc">Light, hydrating, supports detox.</p>
+      </div>
+
+      <div class="menu-card">
+        <h4>Oats Porridge (No Sugar)</h4>
+        <p class="desc">High fiber, controls blood sugar.</p>
+      </div>
+
+      <div class="menu-card">
+        <h4>Green Detox Blast</h4>
+        <p class="desc">Low calorie detox drink with herbs.</p>
+      </div>
+
+    </div>
+
+    <!-- TIFFINS -->
+    <h2 class="section-title" style="margin-top:60px;">Healthy Tiffins</h2>
+
+    <div class="menu-grid">
+
+      <div class="menu-card"><h4>Millet Idly</h4></div>
+      <div class="menu-card"><h4>Ragi Idly</h4></div>
+      <div class="menu-card"><h4>Sprouts Dosa</h4></div>
+      <div class="menu-card"><h4>Millet Dosa</h4></div>
+      <div class="menu-card"><h4>Multi Grain Dosa</h4></div>
+      <div class="menu-card"><h4>Vegetable Oats</h4></div>
+
+    </div>
+
+    <!-- BLACK RICE -->
+    <h2 class="section-title" style="margin-top:60px;">Black Rice Specials</h2>
+
+    <div class="menu-grid">
+
+      <div class="menu-card"><h4>Kavuni Arisi</h4></div>
+      <div class="menu-card"><h4>Steamed Black Rice</h4></div>
+      <div class="menu-card"><h4>Black Rice & Bean Salad</h4></div>
+      <div class="menu-card"><h4>Karuppu Kavuni Kanji</h4></div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="weight-cta">
+  <div class="container">
+    <h2>Start Your Healthy Journey Today</h2>
+    <p>Join our structured meal program and transform your lifestyle.</p>
+    <a href="contact.html" class="btn-primary">Join Now</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2026 CloudKitchen</p>
+</footer>
+
+<script type="module" src="auth.js"></script>
+<script src="scroll.js"></script>
+
+</body>
+</html>

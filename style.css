@@ -1558,3 +1558,34 @@ html {
     padding: 14px;
   }
 }
+/* ================= WEIGHT LOSS PAGE ================= */
+
+.weight-hero {
+  background: linear-gradient(135deg, #2E7D32, #1b5e20);
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.weight-hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.weight-hero p {
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.weight-about {
+  background: #f4faf4;
+  text-align: center;
+}
+
+.weight-cta {
+  background: #E8F5E9;
+  text-align: center;
+  padding: 80px 0;
+}
