@@ -1,4 +1,7 @@
-// auth.js
+// ===============================
+// IMPORTS
+// ===============================
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -15,16 +18,18 @@ import {
 
 import { auth, db } from "./firebase.js";
 
-/* ===============================
-   CONSTANTS
-================================ */
+
+// ===============================
+// CONSTANTS
+// ===============================
 
 const DEFAULT_AVATAR =
   "https://firebasestorage.googleapis.com/v0/b/cloud-kitchen-40ed2.firebasestorage.app/o/default.png?alt=media";
 
-/* ===============================
-   SIGN UP
-================================ */
+
+// ===============================
+// SIGN UP
+// ===============================
 
 const signupForm = document.getElementById("signupForm");
 
@@ -46,11 +51,10 @@ if (signupForm) {
         email: user.email,
         name: "",
         avatar: DEFAULT_AVATAR,
-        role: "user", // 🔐 default role
+        role: "user",
         createdAt: serverTimestamp()
       });
 
-      // 🔐 redirect after signup
       window.location.href = "index.html";
 
     } catch (err) {
@@ -59,9 +63,10 @@ if (signupForm) {
   });
 }
 
-/* ===============================
-   LOGIN
-================================ */
+
+// ===============================
+// LOGIN
+// ===============================
 
 const loginForm = document.getElementById("loginForm");
 
@@ -74,47 +79,48 @@ if (loginForm) {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
-      // 🔐 redirect after login
       window.location.href = "index.html";
-
     } catch (err) {
       alert(err.message);
     }
   });
 }
 
-/* ===============================
-   LOGOUT (GLOBAL)
-================================ */
+
+// ===============================
+// LOGOUT (GLOBAL)
+// ===============================
 
 window.logout = async () => {
   await signOut(auth);
   window.location.href = "login.html";
 };
 
-/* ===============================
-   AUTH STATE (NAVBAR + ROUTES)
-================================ */
+
+// ===============================
+// AUTH STATE HANDLER
+// ===============================
 
 const authArea = document.getElementById("authArea");
+const ordersNavItem = document.getElementById("ordersNavItem");
 
 onAuthStateChanged(auth, async (user) => {
 
-  const isAuthPage =
-    location.pathname.includes("login") ||
-    location.pathname.includes("signup");
+  const currentPage = location.pathname;
 
-  /* 🔐 BLOCK AUTH PAGES IF LOGGED IN */
+  const isAuthPage =
+    currentPage.includes("login") ||
+    currentPage.includes("signup");
+
+  const protectedPages = ["profile", "my-orders", "cart", "admin"];
+
+  // 🔐 BLOCK AUTH PAGES IF LOGGED IN
   if (user && isAuthPage) {
     window.location.href = "index.html";
     return;
   }
 
-  /* 🔐 PROTECT PROFILE / ORDERS / CART */
-  const protectedPages = ["profile", "my-orders", "cart", "admin"];
-  const currentPage = location.pathname;
-
+  // 🔐 PROTECT PAGES IF NOT LOGGED IN
   if (
     !user &&
     protectedPages.some(page => currentPage.includes(page))
@@ -123,18 +129,33 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  /* ===============================
-     NAVBAR UI
-  ================================ */
+  // ===============================
+  // NAVBAR UI LOGIC
+  // ===============================
 
   if (!authArea) return;
 
+  // 🔓 IF NOT LOGGED IN
   if (!user) {
+
+    // Hide My Orders
+    if (ordersNavItem) {
+      ordersNavItem.style.display = "none";
+    }
+
     authArea.innerHTML = `
       <a href="login.html" class="auth-link">Login</a>
       <a href="signup.html" class="auth-link">Sign Up</a>
     `;
+
     return;
+  }
+
+  // 🔐 IF LOGGED IN
+
+  // Show My Orders
+  if (ordersNavItem) {
+    ordersNavItem.style.display = "block";
   }
 
   const snap = await getDoc(doc(db, "users", user.uid));
@@ -167,9 +188,9 @@ onAuthStateChanged(auth, async (user) => {
     </div>
   `;
 
-  /* ===============================
-     DROPDOWN TOGGLE
-  ================================ */
+  // ===============================
+  // DROPDOWN TOGGLE
+  // ===============================
 
   const avatar = document.getElementById("navAvatar");
   const menu = document.getElementById("accountMenu");
@@ -183,4 +204,5 @@ onAuthStateChanged(auth, async (user) => {
       menu.classList.remove("show");
     }
   });
+
 });

@@ -1738,3 +1738,65 @@ html {
     grid-template-columns: 1fr;
   }
 }
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.weightloss-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.new-badge {
+  background: #ff4d4d;
+  color: white;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.whatsapp-float {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  background: #25D366;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: 0.3s ease;
+  z-index: 999;
+}
+
+.whatsapp-float img {
+  width: 22px;
+  height: 22px;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px);
+}
+
+.whatsapp-text {
+  font-weight: 600;
+  font-size: 14px;
+}
