@@ -1589,3 +1589,30 @@ html {
   text-align: center;
   padding: 80px 0;
 }
+/* ===== Weight Loss Navbar Highlight ===== */
+
+.weightloss-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.new-badge {
+  font-size: 10px;
+  background: #FF5252;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  animation: pulseNew 1.5s infinite;
+}
+
+/* subtle pulse animation */
+@keyframes pulseNew {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
