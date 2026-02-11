@@ -1616,3 +1616,28 @@ html {
   50% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
+/* ===== Weight Loss CTA Section ===== */
+
+.weight-cta {
+  padding: 120px 20px;        /* more vertical space */
+  text-align: center;
+  background: #eef5ef;        /* soft green background */
+}
+
+.weight-cta h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.weight-cta p {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.weight-cta .btn-primary {
+  padding: 16px 48px;
+  font-size: 18px;
+}
