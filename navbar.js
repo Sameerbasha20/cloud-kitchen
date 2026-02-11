@@ -67,6 +67,27 @@ export function initNavbar(activePage = "") {
     avatarBtn.onclick = () => {
       avatarMenu.classList.toggle("show");
     };
+    
+    // Mobile Toggle
+const toggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+}
+
+// Scroll Shadow
+window.addEventListener("scroll", () => {
+  const header = document.getElementById("site-header");
+  if (window.scrollY > 50) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
+
 
     // LOGOUT
     document.getElementById("logoutBtn").onclick = async () => {
