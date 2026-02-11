@@ -24,14 +24,39 @@ export function initNavbar(activePage = "") {
   updateCartCount();
 
   /* ===============================
-     AUTH STATE (FIXED)
+     MOBILE HAMBURGER (FIXED)
+  ================================ */
+  const toggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  if (toggle && navLinks) {
+    toggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  }
+
+  /* ===============================
+     STICKY SHADOW EFFECT
+  ================================ */
+  const header = document.getElementById("site-header");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+
+  /* ===============================
+     AUTH STATE
   ================================ */
   const authArea = document.getElementById("authArea");
   if (!authArea) return;
 
   onAuthStateChanged(auth, async (user) => {
 
-    // NOT LOGGED IN
+    // 🔹 NOT LOGGED IN
     if (!user) {
       authArea.innerHTML = `
         <a href="login.html" class="auth-link">Login</a>
@@ -40,7 +65,7 @@ export function initNavbar(activePage = "") {
       return;
     }
 
-    // LOGGED IN
+    // 🔹 LOGGED IN
     const snap = await getDoc(doc(db, "users", user.uid));
     const data = snap.exists() ? snap.data() : {};
 
@@ -50,56 +75,38 @@ export function initNavbar(activePage = "") {
           src="${data.avatar || 'images/avatars/default.png'}"
           class="avatar"
           id="avatarBtn"
+          alt="Profile"
         />
 
         <div class="avatar-menu" id="avatarMenu">
           <p>${data.email}</p>
           <a href="profile.html">My Profile</a>
+          ${data.role === "admin" ? `<a href="admin.html">Admin</a>` : ""}
           <button id="logoutBtn">Logout</button>
         </div>
       </div>
     `;
 
-    // TOGGLE MENU
     const avatarBtn = document.getElementById("avatarBtn");
     const avatarMenu = document.getElementById("avatarMenu");
 
-    avatarBtn.onclick = () => {
+    // Toggle dropdown
+    avatarBtn.addEventListener("click", () => {
       avatarMenu.classList.toggle("show");
-    };
-    
-    // Mobile Toggle
-const toggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+    });
 
-if (toggle) {
-  toggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-  });
-}
-
-// Scroll Shadow
-window.addEventListener("scroll", () => {
-  const header = document.getElementById("site-header");
-  if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-});
-
-
-    // LOGOUT
-    document.getElementById("logoutBtn").onclick = async () => {
-      await signOut(auth);
-      window.location.href = "login.html";
-    };
-
-    // CLOSE ON OUTSIDE CLICK
+    // Close on outside click
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".avatar-wrapper")) {
         avatarMenu.classList.remove("show");
       }
     });
+
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+
   });
 }
