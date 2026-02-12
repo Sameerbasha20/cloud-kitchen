@@ -2068,27 +2068,6 @@ html {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
-/* ===============================
-   JUICES SECTION
-================================ */
-
-.menu-section {
-  padding: 60px 0;
-}
-
-.menu-section .section-title {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-/* Grid Layout */
-.menu-section .menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-}
 
 /* Juice Card */
 .menu-section .menu-card {
