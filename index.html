@@ -13,189 +13,206 @@
 </head>
 
 <body>
+  <!-- Visually hidden main heading for accessibility -->
+  <h1 class="visually-hidden">CloudKitchen – Home</h1>
 
-<!-- ===============================
-     NAVBAR LOADER
-================================ -->
-<script type="module">
-  import { initNavbar } from "./navbar.js";
+  <!-- ===============================
+       NAVBAR LOADER
+  ================================== -->
+  <script type="module">
+    import { initNavbar } from "./navbar.js";
 
-  fetch("navbar.html")
-    .then(res => res.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("afterbegin", html);
-      initNavbar("home");
-    });
-</script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(html => {
+        document.body.insertAdjacentHTML("afterbegin", html);
+        initNavbar("home");
+      });
+  </script>
 
-<!-- ===============================
-     HERO SECTION
-================================ -->
-<section class="hero">
-  <div class="container hero-content">
+  <!-- ===============================
+       HERO SECTION
+  ================================== -->
+  <section class="hero">
+    <div class="container hero-content">
 
-    <div class="hero-text">
-      <h1>Fresh Food.<br>Fast Delivery.</h1>
-      <p>
-        Healthy, homely meals prepared fresh and delivered hot
-        to your doorstep.
-      </p>
-      <a href="menu.html" class="btn-primary">View Full Menu</a>
-    </div>
-
-    <div class="hero-image">
-      <img src="images/menu/veg/rice.jpg" alt="Fresh Food">
-    </div>
-
-  </div>
-</section>
-
-<!-- ===============================
-     WEIGHT LOSS SECTION
-================================ -->
-<section class="home-weight">
-  <div class="container weight-grid">
-
-    <div class="weight-content">
-      <h2>🌿 Healthy Weight Loss Meals</h2>
-      <p>
-        Follow a structured meal plan designed to help you lose weight 
-        naturally without starving. Balanced nutrition, portion control, 
-        and clean ingredients — delivered fresh daily.
-      </p>
-
-      <ul class="weight-features">
-        <li>✔ High-protein meals</li>
-        <li>✔ Low-calorie options</li>
-        <li>✔ Detox drinks & salads</li>
-        <li>✔ Weekly structured plan</li>
-      </ul>
-
-      <a href="weight-loss.html" class="btn-primary">
-        Explore Weight Loss Program
-      </a>
-    </div>
-
-    <div class="weight-image">
-      <img src="images/weight-loss/juices.jpg" alt="Healthy weight loss meals">
-    </div>
-
-  </div>
-</section>
-
-<!-- ===============================
-     ABOUT SECTION
-================================ -->
-<section class="about">
-  <div class="container about-wrapper">
-
-    <div>
-      <img src="images/about/chef.jpg" alt="About CloudKitchen">
-    </div>
-
-    <div>
-      <h2>About Us</h2>
-      <p>
-        Food is not just about filling hunger. It is about comfort, routine, health, and trust.
-      </p>
-      <a href="about.html" class="btn-primary">Read More</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===============================
-     MENU PREVIEW
-================================ -->
-<section class="menu">
-  <div class="container">
-
-    <h2 class="section-title">Our Menu</h2>
-
-    <div class="menu-grid">
-
-      <div class="menu-card">
-        <img src="images/menu/veg/rice.jpg" alt="White Rice">
-        <h4>White Rice</h4>
-        <span class="price">₹60</span>
+      <div class="hero-text">
+        <h2>Fresh Food.<br>Fast Delivery.</h2>
+        <p>
+          Healthy, homely meals prepared fresh and delivered hot
+          to your doorstep.
+        </p>
+        <a href="menu.html" class="btn-primary">View Full Menu</a>
       </div>
 
-      <div class="menu-card">
-        <img src="images/menu/veg/sambar.jpg" alt="Sambar">
-        <h4>Sambar</h4>
-        <span class="price">₹40</span>
-      </div>
-
-      <div class="menu-card">
-        <img src="images/menu/veg/dal.jpg" alt="Dal">
-        <h4>Dal</h4>
-        <span class="price">₹50</span>
+      <div class="hero-image">
+        <img src="images/menu/veg/rice.jpg" alt="Fresh South Indian meal with rice" />
       </div>
 
     </div>
+  </section>
 
-    <div class="menu-cta">
-      <a href="menu.html" class="btn-primary">View Full Menu</a>
+  <!-- ===============================
+       WEIGHT LOSS SECTION
+  ================================== -->
+  <section class="home-weight">
+    <div class="container weight-grid">
+
+      <div class="weight-content">
+        <h2>🌿 Healthy Weight Loss Meals</h2>
+        <p>
+          Follow a structured meal plan designed to help you lose weight
+          naturally without starving. Balanced nutrition, portion control,
+          and clean ingredients — delivered fresh daily.
+        </p>
+
+        <ul class="weight-features">
+          <li>✔ High-protein meals</li>
+          <li>✔ Low-calorie options</li>
+          <li>✔ Detox drinks &amp; salads</li>
+          <li>✔ Weekly structured plan</li>
+        </ul>
+
+        <a href="weight-loss.html" class="btn-primary">
+          Explore Weight Loss Program
+        </a>
+      </div>
+
+      <div class="weight-image">
+        <img src="images/weight-loss/juices.jpg" alt="Assorted healthy juices and weight loss meals" />
+      </div>
+
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- ===============================
+       ABOUT SECTION
+  ================================== -->
+  <section class="about">
+    <div class="container about-wrapper">
 
-<!-- ===============================
-     GALLERY PREVIEW
-================================ -->
-<section class="home-gallery">
-  <div class="container">
+      <div>
+        <img src="images/about/chef.jpg" alt="Chef preparing food at CloudKitchen" />
+      </div>
 
-    <h2 class="section-title">Gallery</h2>
+      <div>
+        <h2>About Us</h2>
+        <p>
+          Food is not just about filling hunger. It is about comfort, routine, health, and trust.
+        </p>
+        <a href="about.html" class="btn-primary">Read More</a>
+      </div>
 
-    <div class="home-gallery-grid">
-      <img src="images/menu/veg/rice.jpg" alt="Rice">
-      <img src="images/menu/veg/sambar.jpg" alt="Sambar">
-      <img src="images/menu/veg/dal.jpg" alt="Dal">
-      <img src="images/menu/veg/curd.jpg" alt="Curd">
-      <img src="images/menu/veg/paneer-curry.jpg" alt="Paneer">
-      <img src="images/menu/veg/gutti-vankaya.jpg" alt="Gutti Vankaya">
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- ===============================
+       MENU PREVIEW
+  ================================== -->
+  <section class="menu">
+    <div class="container">
 
-<!-- ===============================
-     CONTACT CTA
-================================ -->
-<section class="contact">
-  <div class="container">
+      <h2 class="section-title">Our Menu</h2>
 
-    <div class="section-header">
-      <h2>Contact Us</h2>
-      <p>We’d love to hear from you</p>
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <img src="images/menu/veg/rice.jpg" alt="White Rice" />
+          <h4>White Rice</h4>
+          <span class="price">₹60</span>
+        </div>
+
+        <div class="menu-card">
+          <img src="images/menu/veg/sambar.jpg" alt="Sambar" />
+          <h4>Sambar</h4>
+          <span class="price">₹40</span>
+        </div>
+
+        <div class="menu-card">
+          <img src="images/menu/veg/dal.jpg" alt="Dal" />
+          <h4>Dal</h4>
+          <span class="price">₹50</span>
+        </div>
+
+      </div>
+
+      <div class="menu-cta">
+        <a href="menu.html" class="btn-primary">View Full Menu</a>
+      </div>
+
     </div>
+  </section>
 
-    <div class="contact-info">
-      <p><strong>Email:</strong> cloudkitchen@email.com</p>
-      <p><strong>Location:</strong> Hyderabad, India</p>
+  <!-- ===============================
+       GALLERY SECTION
+  ================================== -->
+  <section class="home-gallery">
+    <div class="container">
+      <h2>Gallery</h2>
+
+      <div class="gallery-grid">
+        <a href="#" class="gallery-card">
+          <img src="images/gallery/rice.jpg" alt="Steamed rice served in a bowl" />
+          <span class="gallery-title">Steamed Rice</span>
+        </a>
+
+        <a href="#" class="gallery-card">
+          <img src="images/gallery/dal.jpg" alt="Dal curry in a kadai" />
+          <span class="gallery-title">Dal Curry</span>
+        </a>
+
+        <a href="#" class="gallery-card">
+          <img src="images/gallery/curd.jpg" alt="Curd served in a clay pot" />
+          <span class="gallery-title">Curd</span>
+        </a>
+
+        <a href="#" class="gallery-card">
+          <img src="images/gallery/chicken.jpg" alt="Chicken curry with naan" />
+          <span class="gallery-title">Chicken Curry</span>
+        </a>
+
+        <a href="#" class="gallery-card">
+          <img src="images/gallery/brinjal.jpg" alt="Gutti Vankaya curry" />
+          <span class="gallery-title">Gutti Vankaya</span>
+        </a>
+      </div>
     </div>
+  </section>
 
-    <div style="text-align:center; margin-top:30px;">
-      <a href="contact.html" class="btn-primary">Get in Touch</a>
+  <!-- ===============================
+       CONTACT CTA
+  ================================== -->
+  <section class="contact">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you</p>
+      </div>
+
+      <div class="contact-info">
+        <p><strong>Email:</strong> cloudkitchen@email.com</p>
+        <p><strong>Location:</strong> Hyderabad, India</p>
+      </div>
+
+      <div style="text-align:center; margin-top:30px;">
+        <a href="contact.html" class="btn-primary">Get in Touch</a>
+      </div>
+
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- ===============================
+       FOOTER
+  ================================== -->
+  <footer class="footer">
+    <p>© 2026 CloudKitchen. All rights reserved.</p>
+  </footer>
 
-<!-- ===============================
-     FOOTER
-================================ -->
-<footer class="footer">
-  <p>© 2026 CloudKitchen. All rights reserved.</p>
-</footer>
-
-<!-- ===============================
-     PAGE SCRIPTS
-================================ -->
-<script type="module" src="auth.js"></script>
-<script src="scroll.js"></script>
-
+  <!-- ===============================
+       PAGE SCRIPTS
+  ================================== -->
+  <script type="module" src="auth.js"></script>
+  <script src="scroll.js"></script>
 </body>
 </html>
