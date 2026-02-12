@@ -1,24 +1,64 @@
-// menu.js
-import { addToCart, updateCartCount } from "./cart.js";
-
 document.addEventListener("DOMContentLoaded", () => {
-  // ✅ now it exists
-  updateCartCount();
 
-  const buttons = document.querySelectorAll(".add-to-cart");
+  document.querySelectorAll(".menu-card").forEach(card => {
 
-  buttons.forEach(button => {
-    button.addEventListener("click", () => {
-      const card = button.closest(".menu-card");
+    const plus = card.querySelector(".plus");
+    const minus = card.querySelector(".minus");
+    const qtyDisplay = card.querySelector(".qty");
+    const addBtn = card.querySelector(".add-to-cart");
 
-      const item = {
-        id: card.dataset.id,
-        name: card.dataset.name,
-        price: Number(card.dataset.price),
-        imageUrl: card.dataset.image
-      };
+    let quantity = 1;
 
-      addToCart(item);
-    });
+    if (plus && minus) {
+
+      plus.addEventListener("click", () => {
+        quantity++;
+        qtyDisplay.textContent = quantity;
+      });
+
+      minus.addEventListener("click", () => {
+        if (quantity > 1) {
+          quantity--;
+          qtyDisplay.textContent = quantity;
+        }
+      });
+    }
+
+    if (addBtn) {
+      addBtn.addEventListener("click", () => {
+
+        const item = {
+          id: card.dataset.id,
+          name: card.dataset.name,
+          price: parseInt(card.dataset.price),
+          image: card.dataset.image,
+          quantity: quantity
+        };
+
+        addToCart(item);
+
+        quantity = 1;
+        if (qtyDisplay) qtyDisplay.textContent = 1;
+      });
+    }
+
   });
+
 });
+
+
+function addToCart(item) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const existing = cart.find(i => i.id === item.id);
+
+  if (existing) {
+    existing.quantity += item.quantity;
+  } else {
+    cart.push(item);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  alert(item.name + " added to cart!");
+}
