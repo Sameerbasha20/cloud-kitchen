@@ -2068,39 +2068,126 @@ html {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
-/* Quantity Controls */
+/* ===============================
+   JUICES SECTION
+================================ */
 
-.quantity-controls {
+.menu-section {
+  padding: 60px 0;
+}
+
+.menu-section .section-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Grid Layout */
+.menu-section .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+/* Juice Card */
+.menu-section .menu-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  padding: 18px;
+  text-align: center;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-section .menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+/* Image */
+.menu-section .menu-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* Title */
+.menu-section .menu-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Price */
+.menu-section .price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 12px;
+}
+
+/* Quantity Controls */
+.menu-section .quantity-control {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin: 10px 0;
+  gap: 15px;
+  margin-bottom: 12px;
 }
 
-.qty-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+.menu-section .qty-btn {
+  width: 32px;
+  height: 32px;
   border: none;
   background: #2e7d32;
   color: white;
-  font-size: 18px;
+  border-radius: 50%;
   cursor: pointer;
+  font-size: 18px;
   transition: 0.2s ease;
 }
 
-.qty-btn:hover {
-  background: #1b5e20;
+.menu-section .qty-btn:hover {
+  background: #256628;
 }
 
-.qty {
+.menu-section .quantity-value {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
 }
 
-.menu-card .add-to-cart {
-  margin-top: 8px;
-  padding: 8px 14px;
-  border-radius: 20px;
+/* Add to Cart Button */
+.menu-section .add-to-cart {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.menu-section .add-to-cart:hover {
+  background: #256628;
+}
+
+/* ===============================
+   MOBILE FIX
+================================ */
+@media (max-width: 768px) {
+  .menu-section {
+    padding: 40px 0;
+  }
+
+  .menu-section .menu-card img {
+    height: 150px;
+  }
 }
