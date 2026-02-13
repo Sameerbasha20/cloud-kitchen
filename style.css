@@ -23,7 +23,7 @@
 }
 
 /* ===============================
-   BASE
+  BASE
 ================================ */
 html {
   scroll-behavior: smooth;
@@ -1192,7 +1192,11 @@ section + section {
 
 .weight-text {
   max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;   /* 👈 automatic spacing */
 }
+
 
 .weight-image {
   display: flex;
