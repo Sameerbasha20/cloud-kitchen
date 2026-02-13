@@ -27,7 +27,12 @@ export function saveCart(cart) {
 // Update cart count in navbar
 export function updateCartCount() {
   const cart = getCart();
-  const count = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  // support both qty and quantity (old data)
+  const count = cart.reduce((sum, item) => {
+    const q = item.qty ?? item.quantity ?? 0;
+    return sum + q;
+  }, 0);
 
   const cartCount = document.getElementById("cart-count");
   if (cartCount) {
@@ -45,8 +50,16 @@ export function addToCart(item) {
   const existing = cart.find(i => i.id === item.id);
 
   if (existing) {
-    existing.qty += 1;
+    // prefer qty, fallback to quantity
+    if (typeof existing.qty === "number") {
+      existing.qty += 1;
+    } else if (typeof existing.quantity === "number") {
+      existing.quantity += 1;
+    } else {
+      existing.qty = 2; // previously had 1
+    }
   } else {
+    // store with qty so everything is consistent going forward
     cart.push({ ...item, qty: 1 });
   }
 
@@ -72,9 +85,18 @@ export async function placeOrder() {
     return false;
   }
 
-  // Calculate total
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
+  // Normalize items and calculate total
+  const normalizedItems = cart.map(item => {
+    const qty = item.qty ?? item.quantity ?? 1;
+    return {
+      ...item,
+      qty,
+      quantity: undefined // optional: drop old field
+    };
+  });
+
+  const total = normalizedItems.reduce(
+    (sum, item) => sum + (item.price || 0) * item.qty,
     0
   );
 
@@ -89,7 +111,7 @@ export async function placeOrder() {
       userId: user.uid,
       userName: userData.name || "Unknown",
       userEmail: userData.email || user.email || "",
-      items: cart,
+      items: normalizedItems,
       total,
       status: "pending",
       createdAt: serverTimestamp()
@@ -101,7 +123,6 @@ export async function placeOrder() {
 
     alert("Order placed successfully");
     return true;
-
   } catch (error) {
     console.error("Order placement failed:", error);
     alert("Failed to place order. Please try again.");

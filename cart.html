@@ -67,15 +67,18 @@
   let cart = getCart() || [];
 
   // Normalize shape coming from menu.js (quantity + image)
-  cart = cart.map(item => ({
-    ...item,
-    // prefer existing qty if present, else quantity from menu.js, else 1
-    qty: item.qty && item.qty > 0
-      ? item.qty
-      : (item.quantity && item.quantity > 0 ? item.quantity : 1),
-    // prefer imageUrl if present, else image from menu.js, else empty string
-    imageUrl: item.imageUrl || item.image || ""
-  }));
+  const normalizeCart = (items) =>
+    (items || []).map(item => ({
+      ...item,
+      // prefer existing qty if present, else quantity from menu.js, else 1
+      qty: item.qty && item.qty > 0
+        ? item.qty
+        : (item.quantity && item.quantity > 0 ? item.quantity : 1),
+      // prefer imageUrl if present, else image from menu.js, else empty string
+      imageUrl: item.imageUrl || item.image || ""
+    }));
+
+  cart = normalizeCart(cart);
 
   function persistCart() {
     // Save a clean, consistent shape
@@ -105,9 +108,10 @@
 
     cart.forEach((item, index) => {
       const qty = item.qty && item.qty > 0 ? item.qty : 1;
+      const price = Number(item.price) || 0;
       const imageSrc = item.imageUrl || "images/placeholder.jpg";
 
-      total += item.price * qty;
+      total += price * qty;
 
       const div = document.createElement("div");
       div.className = "cart-item";
@@ -116,7 +120,7 @@
         <img src="${imageSrc}" alt="${item.name}">
         <div class="cart-info">
           <h4>${item.name}</h4>
-          <p>₹${item.price} × ${qty}</p>
+          <p>₹${price} × ${qty}</p>
           <div class="cart-actions">
             <button class="qty-btn inc">+</button>
             <button class="qty-btn dec">−</button>
@@ -156,16 +160,11 @@
   }
 
   placeOrderBtn.onclick = async () => {
-    await placeOrder();
+    const ok = await placeOrder();
+    if (!ok) return; // if order failed, keep current cart
+
     cart = getCart() || [];
-    // Re‑normalize in case placeOrder changed storage
-    cart = cart.map(item => ({
-      ...item,
-      qty: item.qty && item.qty > 0
-        ? item.qty
-        : (item.quantity && item.quantity > 0 ? item.quantity : 1),
-      imageUrl: item.imageUrl || item.image || ""
-    }));
+    cart = normalizeCart(cart);
     renderCart();
   };
 
