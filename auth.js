@@ -95,10 +95,13 @@ window.logout = async () => {
 // AUTH STATE HANDLER
 // ===============================
 
-const authArea = document.getElementById("authArea");
-const ordersNavItem = document.getElementById("ordersNavItem");
-
 onAuthStateChanged(auth, async (user) => {
+
+  // Because navbar is dynamically injected,
+  // we grab elements INSIDE this callback
+  const authArea = document.getElementById("authArea");
+  const ordersNavItem = document.getElementById("ordersNavItem");
+
   const currentPage = location.pathname;
 
   const isAuthPage =
@@ -107,13 +110,19 @@ onAuthStateChanged(auth, async (user) => {
 
   const protectedPages = ["profile", "my-orders", "cart", "admin"];
 
-  // 🔐 BLOCK AUTH PAGES IF LOGGED IN
+  // ===============================
+  // BLOCK AUTH PAGES IF LOGGED IN
+  // ===============================
+
   if (user && isAuthPage) {
     window.location.href = "index.html";
     return;
   }
 
-  // 🔐 PROTECT PAGES IF NOT LOGGED IN
+  // ===============================
+  // PROTECT PAGES IF NOT LOGGED IN
+  // ===============================
+
   if (
     !user &&
     protectedPages.some(page => currentPage.includes(page))
@@ -122,16 +131,15 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // If navbar is not on this page, nothing more to do
+  // If navbar not on this page, stop here
   if (!authArea) return;
 
   // ===============================
-  // NAVBAR UI LOGIC
+  // IF NOT LOGGED IN
   // ===============================
 
-  // 🔓 IF NOT LOGGED IN
   if (!user) {
-    // Hide My Orders
+
     if (ordersNavItem) {
       ordersNavItem.style.display = "none";
     }
@@ -144,18 +152,20 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // 🔐 IF LOGGED IN
+  // ===============================
+  // IF LOGGED IN
+  // ===============================
 
-  // Show My Orders (use list-item so it behaves like other <li>)
   if (ordersNavItem) {
     ordersNavItem.style.display = "list-item";
   }
 
   let data = {};
+
   try {
     const snap = await getDoc(doc(db, "users", user.uid));
     data = snap.exists() ? snap.data() : {};
-  } catch (e) {
+  } catch (err) {
     data = {};
   }
 
@@ -188,6 +198,7 @@ onAuthStateChanged(auth, async (user) => {
   const menu = document.getElementById("accountMenu");
 
   if (avatar && menu) {
+
     avatar.onclick = () => {
       menu.classList.toggle("show");
     };
@@ -198,4 +209,5 @@ onAuthStateChanged(auth, async (user) => {
       }
     });
   }
+
 });
