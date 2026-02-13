@@ -1197,6 +1197,9 @@ section + section {
   gap: 20px;   /* 👈 automatic spacing */
 }
 
+.weight-text .btn-primary {
+  margin-top: 30px;   /* 👈 pushes button down */
+}
 
 .weight-image {
   display: flex;
