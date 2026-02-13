@@ -18,14 +18,12 @@ import {
 
 import { auth, db } from "./firebase.js";
 
-
 // ===============================
 // CONSTANTS
 // ===============================
 
 const DEFAULT_AVATAR =
   "https://firebasestorage.googleapis.com/v0/b/cloud-kitchen-40ed2.firebasestorage.app/o/default.png?alt=media";
-
 
 // ===============================
 // SIGN UP
@@ -56,13 +54,11 @@ if (signupForm) {
       });
 
       window.location.href = "index.html";
-
     } catch (err) {
       alert(err.message);
     }
   });
 }
-
 
 // ===============================
 // LOGIN
@@ -86,7 +82,6 @@ if (loginForm) {
   });
 }
 
-
 // ===============================
 // LOGOUT (GLOBAL)
 // ===============================
@@ -96,7 +91,6 @@ window.logout = async () => {
   window.location.href = "login.html";
 };
 
-
 // ===============================
 // AUTH STATE HANDLER
 // ===============================
@@ -105,7 +99,6 @@ const authArea = document.getElementById("authArea");
 const ordersNavItem = document.getElementById("ordersNavItem");
 
 onAuthStateChanged(auth, async (user) => {
-
   const currentPage = location.pathname;
 
   const isAuthPage =
@@ -129,15 +122,15 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
+  // If navbar is not on this page, nothing more to do
+  if (!authArea) return;
+
   // ===============================
   // NAVBAR UI LOGIC
   // ===============================
 
-  if (!authArea) return;
-
   // 🔓 IF NOT LOGGED IN
   if (!user) {
-
     // Hide My Orders
     if (ordersNavItem) {
       ordersNavItem.style.display = "none";
@@ -153,38 +146,37 @@ onAuthStateChanged(auth, async (user) => {
 
   // 🔐 IF LOGGED IN
 
-  // Show My Orders
+  // Show My Orders (use list-item so it behaves like other <li>)
   if (ordersNavItem) {
-    ordersNavItem.style.display = "block";
+    ordersNavItem.style.display = "list-item";
   }
 
-  const snap = await getDoc(doc(db, "users", user.uid));
-  const data = snap.exists() ? snap.data() : {};
+  let data = {};
+  try {
+    const snap = await getDoc(doc(db, "users", user.uid));
+    data = snap.exists() ? snap.data() : {};
+  } catch (e) {
+    data = {};
+  }
 
   authArea.innerHTML = `
     <div class="account">
-
       <img
         src="${data.avatar || DEFAULT_AVATAR}"
         class="avatar"
         id="navAvatar"
         alt="Profile"
       />
-
       <div class="account-menu" id="accountMenu">
-        <p class="account-email">${data.email}</p>
-
+        <p class="account-email">${data.email || user.email}</p>
         <a href="profile.html">My Profile</a>
-
         ${
           data.role === "admin"
             ? `<a href="admin.html">Admin Dashboard</a>`
             : ""
         }
-
-        <button onclick="logout()">Logout</button>
+        <button type="button" onclick="logout()">Logout</button>
       </div>
-
     </div>
   `;
 
@@ -195,14 +187,15 @@ onAuthStateChanged(auth, async (user) => {
   const avatar = document.getElementById("navAvatar");
   const menu = document.getElementById("accountMenu");
 
-  avatar.onclick = () => {
-    menu.classList.toggle("show");
-  };
+  if (avatar && menu) {
+    avatar.onclick = () => {
+      menu.classList.toggle("show");
+    };
 
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".account")) {
-      menu.classList.remove("show");
-    }
-  });
-
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".account")) {
+        menu.classList.remove("show");
+      }
+    });
+  }
 });
