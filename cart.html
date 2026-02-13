@@ -63,10 +63,30 @@
   const totalEl = document.getElementById("cart-total");
   const placeOrderBtn = document.getElementById("place-order");
 
-  let cart = getCart();
+  // Get cart from storage
+  let cart = getCart() || [];
+
+  // Normalize shape coming from menu.js (quantity + image)
+  cart = cart.map(item => ({
+    ...item,
+    // prefer existing qty if present, else quantity from menu.js, else 1
+    qty: item.qty && item.qty > 0
+      ? item.qty
+      : (item.quantity && item.quantity > 0 ? item.quantity : 1),
+    // prefer imageUrl if present, else image from menu.js, else empty string
+    imageUrl: item.imageUrl || item.image || ""
+  }));
 
   function persistCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    // Save a clean, consistent shape
+    const normalized = cart.map(item => ({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      qty: item.qty,
+      imageUrl: item.imageUrl
+    }));
+    localStorage.setItem("cart", JSON.stringify(normalized));
     updateCartCount();
   }
 
@@ -84,16 +104,19 @@
     placeOrderBtn.disabled = false;
 
     cart.forEach((item, index) => {
-      total += item.price * item.qty;
+      const qty = item.qty && item.qty > 0 ? item.qty : 1;
+      const imageSrc = item.imageUrl || "images/placeholder.jpg";
+
+      total += item.price * qty;
 
       const div = document.createElement("div");
       div.className = "cart-item";
 
       div.innerHTML = `
-        <img src="${item.imageUrl}" alt="${item.name}">
+        <img src="${imageSrc}" alt="${item.name}">
         <div class="cart-info">
           <h4>${item.name}</h4>
-          <p>₹${item.price} × ${item.qty}</p>
+          <p>₹${item.price} × ${qty}</p>
           <div class="cart-actions">
             <button class="qty-btn inc">+</button>
             <button class="qty-btn dec">−</button>
@@ -102,19 +125,24 @@
         </div>
       `;
 
+      // Increase quantity
       div.querySelector(".inc").onclick = () => {
-        item.qty++;
+        item.qty = (item.qty || 1) + 1;
         persistCart();
         renderCart();
       };
 
+      // Decrease quantity
       div.querySelector(".dec").onclick = () => {
-        item.qty--;
-        if (item.qty <= 0) cart.splice(index, 1);
+        item.qty = (item.qty || 1) - 1;
+        if (item.qty <= 0) {
+          cart.splice(index, 1);
+        }
         persistCart();
         renderCart();
       };
 
+      // Remove item
       div.querySelector(".remove-btn").onclick = () => {
         cart.splice(index, 1);
         persistCart();
@@ -129,7 +157,15 @@
 
   placeOrderBtn.onclick = async () => {
     await placeOrder();
-    cart = getCart();
+    cart = getCart() || [];
+    // Re‑normalize in case placeOrder changed storage
+    cart = cart.map(item => ({
+      ...item,
+      qty: item.qty && item.qty > 0
+        ? item.qty
+        : (item.quantity && item.quantity > 0 ? item.quantity : 1),
+      imageUrl: item.imageUrl || item.image || ""
+    }));
     renderCart();
   };
 
