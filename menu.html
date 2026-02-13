@@ -10,12 +10,10 @@
 </head>
 
 <body>
-  <!-- Visually hidden main heading for accessibility -->
+
   <h1 class="visually-hidden">CloudKitchen Menu</h1>
 
-  <!-- ===============================
-       NAVBAR LOADER
-  ================================== -->
+  <!-- NAVBAR -->
   <script type="module">
     import { initNavbar } from "./navbar.js";
 
@@ -28,21 +26,38 @@
   </script>
 
   <main>
+
     <!-- ================= MENU SECTION ================= -->
     <section class="menu">
       <div class="container">
 
         <div class="section-header">
           <h2>Our Menu</h2>
-          <p>Healthy, homely &amp; balanced meals</p>
+          <p>Healthy, homely & balanced meals</p>
         </div>
 
-        <!-- ================= VEG ================= -->
-        <h3>Veg South Indian Meals</h3>
+        <!-- ================= FILTER + SEARCH ================= -->
+        <div class="menu-controls">
 
+          <div class="menu-tabs">
+            <button class="tab-btn active" data-category="all">All</button>
+            <button class="tab-btn" data-category="veg">Veg</button>
+            <button class="tab-btn" data-category="non-veg">Non-Veg</button>
+            <button class="tab-btn" data-category="juice">Juices</button>
+          </div>
+
+          <div class="menu-search">
+            <input type="text" id="searchInput" placeholder="Search meals...">
+          </div>
+
+        </div>
+
+        <!-- ================= ALL MENU ITEMS IN ONE GRID ================= -->
         <div class="menu-grid">
 
-          <div class="menu-card"
+          <!-- ================= VEG ================= -->
+
+          <div class="menu-card" data-category="veg"
                data-id="rice"
                data-name="Steamed White Rice"
                data-price="60"
@@ -57,37 +72,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
-               data-id="sambar"
-               data-name="Sambar"
-               data-price="60"
-               data-image="images/menu/veg/sambar.jpg">
-            <img src="images/menu/veg/sambar.jpg" alt="Sambar">
-            <div class="card-body">
-              <h4>Sambar</h4>
-              <span class="price">₹60</span>
-            </div>
-            <div class="card-actions">
-              <button class="add-to-cart" type="button">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="menu-card"
-               data-id="dal"
-               data-name="Dal Curry"
-               data-price="80"
-               data-image="images/menu/veg/dal.jpg">
-            <img src="images/menu/veg/dal.jpg" alt="Dal Curry">
-            <div class="card-body">
-              <h4>Dal Curry</h4>
-              <span class="price">₹80</span>
-            </div>
-            <div class="card-actions">
-              <button class="add-to-cart" type="button">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="menu-card"
+          <div class="menu-card" data-category="veg"
                data-id="paneer-curry"
                data-name="Paneer Curry"
                data-price="180"
@@ -102,7 +87,37 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="veg"
+               data-id="sambar"
+               data-name="Sambar"
+               data-price="60"
+               data-image="images/menu/veg/sambar.jpg">
+            <img src="images/menu/veg/sambar.jpg" alt="Sambar">
+            <div class="card-body">
+              <h4>Sambar</h4>
+              <span class="price">₹60</span>
+            </div>
+            <div class="card-actions">
+              <button class="add-to-cart" type="button">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="veg"
+               data-id="dal"
+               data-name="Dal Curry"
+               data-price="80"
+               data-image="images/menu/veg/dal.jpg">
+            <img src="images/menu/veg/dal.jpg" alt="Dal Curry">
+            <div class="card-body">
+              <h4>Dal Curry</h4>
+              <span class="price">₹80</span>
+            </div>
+            <div class="card-actions">
+              <button class="add-to-cart" type="button">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="veg"
                data-id="chana-masala"
                data-name="Chana Masala Curry"
                data-price="160"
@@ -117,7 +132,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="veg"
                data-id="gutti-vankaya"
                data-name="Gutti Vankaya Curry"
                data-price="180"
@@ -132,7 +147,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="veg"
                data-id="curd-rice"
                data-name="Curd Rice"
                data-price="50"
@@ -147,14 +162,9 @@
             </div>
           </div>
 
-        </div>
+          <!-- ================= NON VEG ================= -->
 
-        <!-- ================= NON VEG ================= -->
-        <h3 style="margin-top:60px;">Non-Veg Meals</h3>
-
-        <div class="menu-grid">
-
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
                data-id="chicken-biryani"
                data-name="Chicken Biryani"
                data-price="280"
@@ -169,7 +179,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
                data-id="mutton-biryani"
                data-name="Mutton Biryani"
                data-price="350"
@@ -184,7 +194,22 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
+               data-id="fish-fry"
+               data-name="Fish Fry"
+               data-price="230"
+               data-image="images/menu/non-veg/fish-fry.jpg">
+            <img src="images/menu/non-veg/fish-fry.jpg" alt="Fish Fry">
+            <div class="card-body">
+              <h4>Fish Fry</h4>
+              <span class="price">₹230</span>
+            </div>
+            <div class="card-actions">
+              <button class="add-to-cart" type="button">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="non-veg"
                data-id="chicken-curry"
                data-name="Chicken Curry"
                data-price="180"
@@ -199,7 +224,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
                data-id="boiled-egg"
                data-name="Boiled Egg"
                data-price="20"
@@ -214,7 +239,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
                data-id="egg-fried-rice"
                data-name="Egg Fried Rice"
                data-price="150"
@@ -229,7 +254,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
                data-id="butter-naan"
                data-name="Butter Naan"
                data-price="25"
@@ -244,7 +269,7 @@
             </div>
           </div>
 
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
                data-id="basmati-rice"
                data-name="Basmati Rice"
                data-price="180"
@@ -259,130 +284,105 @@
             </div>
           </div>
 
-          <div class="menu-card"
-               data-id="fish-curry"
-               data-name="Fish Curry"
-               data-price="200"
-               data-image="images/menu/non-veg/fish-curry.jpg">
-            <img src="images/menu/non-veg/fish-curry.jpg" alt="Fish Curry">
+          <div class="menu-card" data-category="non-veg"
+               data-id="fish-biryani"
+               data-name="Fish Biryani"
+               data-price="260"
+               data-image="images/menu/non-veg/fish-biryani.jpg">
+            <img src="images/menu/non-veg/fish-biryani.jpg" alt="Fish Biryani">
             <div class="card-body">
-              <h4>Fish Curry</h4>
-              <span class="price">₹200</span>
+              <h4>Fish Biryani</h4>
+              <span class="price">₹260</span>
             </div>
             <div class="card-actions">
               <button class="add-to-cart" type="button">Add to Cart</button>
             </div>
           </div>
 
-           <div class="menu-card"
-           data-id="fish-biryani"
-           data-name="Fish Biryani"
-           data-price="260"
-           data-image="images/menu/non-veg/fish-biryani.jpg">
-        <img src="images/menu/non-veg/fish-biryani.jpg" alt="Fish Biryani">
-        <div class="card-body">
-          <h4>Fish Biryani</h4>
-          <span class="price">₹260</span>
-        </div>
-        <div class="card-actions">
-          <button class="add-to-cart" type="button">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="menu-card"
-           data-id="fish-fry"
-           data-name="Fish Fry"
-           data-price="230"
-           data-image="images/menu/non-veg/fish-fry.jpg">
-        <img src="images/menu/non-veg/fish-fry.jpg" alt="Fish Fry">
-        <div class="card-body">
-          <h4>Fish Fry</h4>
-          <span class="price">₹230</span>
-        </div>
-        <div class="card-actions">
-          <button class="add-to-cart" type="button">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="menu-card"
-           data-id="grilled-fish"
-           data-name="Grilled Fish"
-           data-price="240"
-           data-image="images/menu/non-veg/grilled-fish.jpg">
-        <img src="images/menu/non-veg/grilled-fish.jpg" alt="Grilled Fish">
-        <div class="card-body">
-          <h4>Grilled Fish</h4>
-          <span class="price">₹240</span>
-        </div>
-        <div class="card-actions">
-          <button class="add-to-cart" type="button">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="menu-card"
-           data-id="fish-65"
-           data-name="Fish 65"
-           data-price="220"
-           data-image="images/menu/non-veg/fish-65.jpg">
-        <img src="images/menu/non-veg/fish-65.jpg" alt="Fish 65">
-        <div class="card-body">
-          <h4>Fish 65</h4>
-          <span class="price">₹220</span>
-        </div>
-        <div class="card-actions">
-          <button class="add-to-cart" type="button">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="menu-card"
-           data-id="fish-tikka"
-           data-name="Fish Tikka"
-           data-price="240"
-           data-image="images/menu/non-veg/fish-tikka.jpg">
-        <img src="images/menu/non-veg/fish-tikka.jpg" alt="Fish Tikka">
-        <div class="card-body">
-          <h4>Fish Tikka</h4>
-          <span class="price">₹240</span>
-        </div>
-        <div class="card-actions">
-          <button class="add-to-cart" type="button">Add to Cart</button>
-        </div>
-      </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= JUICES SECTION ================= -->
-    <section class="menu-section">
-      <div class="container">
-        <h2 class="section-title">Fresh Juices &amp; Healthy Drinks</h2>
-
-        <div class="menu-grid">
-
-          <!-- 1 -->
-          <div class="menu-card"
-               data-id="muskmelon-juice"
-               data-name="Muskmelon Juice"
-               data-price="80"
-               data-image="images/menu/juices/muskmelon-juice.jpg">
-            <img src="images/menu/juices/muskmelon-juice.jpg" alt="Muskmelon Juice">
+          <!-- second Fish Fry variant given a unique id -->
+          <div class="menu-card" data-category="non-veg"
+               data-id="fish-fry-special"
+               data-name="Fish Fry"
+               data-price="230"
+               data-image="images/menu/non-veg/fish-fry.jpg">
+            <img src="images/menu/non-veg/fish-fry.jpg" alt="Fish Fry">
             <div class="card-body">
-              <h4>Muskmelon Juice</h4>
-              <span class="price">₹80</span>
+              <h4>Fish Fry</h4>
+              <span class="price">₹230</span>
             </div>
             <div class="card-actions">
-              <div class="quantity-controls" aria-label="Quantity" aria-live="polite">
-                <button class="qty-btn minus" type="button">−</button>
-                <span class="qty">1</span>
-                <button class="qty-btn plus" type="button">+</button>
-              </div>
               <button class="add-to-cart" type="button">Add to Cart</button>
             </div>
           </div>
 
-          <!-- 2 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="non-veg"
+               data-id="grilled-fish"
+               data-name="Grilled Fish"
+               data-price="240"
+               data-image="images/menu/non-veg/grilled-fish.jpg">
+            <img src="images/menu/non-veg/grilled-fish.jpg" alt="Grilled Fish">
+            <div class="card-body">
+              <h4>Grilled Fish</h4>
+              <span class="price">₹240</span>
+            </div>
+            <div class="card-actions">
+              <button class="add-to-cart" type="button">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="non-veg"
+               data-id="fish-65"
+               data-name="Fish 65"
+               data-price="220"
+               data-image="images/menu/non-veg/fish-65.jpg">
+            <img src="images/menu/non-veg/fish-65.jpg" alt="Fish 65">
+            <div class="card-body">
+              <h4>Fish 65</h4>
+              <span class="price">₹220</span>
+            </div>
+            <div class="card-actions">
+              <button class="add-to-cart" type="button">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="non-veg"
+               data-id="fish-tikka"
+               data-name="Fish Tikka"
+               data-price="240"
+               data-image="images/menu/non-veg/fish-tikka.jpg">
+            <img src="images/menu/non-veg/fish-tikka.jpg" alt="Fish Tikka">
+            <div class="card-body">
+              <h4>Fish Tikka</h4>
+              <span class="price">₹240</span>
+            </div>
+            <div class="card-actions">
+              <button class="add-to-cart" type="button">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- ================= JUICES ================= -->
+
+          <div class="menu-card" data-category="juice"
+     data-id="muskmelon-juice"
+     data-name="Muskmelon Juice"
+     data-price="80"
+     data-image="images/menu/juices/muskmelon-juice.jpg">
+  <img src="images/menu/juices/muskmelon-juice.jpg" alt="Muskmelon Juice">
+  <div class="card-body">
+    <h4>Muskmelon Juice</h4>
+    <span class="price">₹80</span>
+  </div>
+  <div class="card-actions">
+    <div class="quantity-controls" aria-label="Quantity" aria-live="polite">
+      <button class="qty-btn minus" type="button">−</button>
+      <span class="qty">1</span>
+      <button class="qty-btn plus" type="button">+</button>
+    </div>
+    <button class="add-to-cart" type="button">Add to Cart</button>
+  </div>
+</div>
+
+          <div class="menu-card" data-category="juice"
                data-id="watermelon-juice"
                data-name="Watermelon Juice"
                data-price="70"
@@ -403,7 +403,7 @@
           </div>
 
           <!-- 3 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="watermelon-mint-juice"
                data-name="Watermelon Mint Juice"
                data-price="80"
@@ -424,7 +424,7 @@
           </div>
 
           <!-- 4 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="honey-lemon-ginger-water"
                data-name="Honey Lemon Ginger Water"
                data-price="70"
@@ -445,7 +445,7 @@
           </div>
 
           <!-- 5 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="beetroot-juice"
                data-name="Beetroot Juice"
                data-price="70"
@@ -466,12 +466,12 @@
           </div>
 
           <!-- 6 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="berry-beet-juice"
                data-name="Berry Beet Juice"
                data-price="120"
                data-image="images/menu/juices/berry-beet-juice.jpg">
-            <img src="images/menu/juices/berry-beat-juice.jpg" alt="Berry Beet Juice">
+            <img src="images/menu/juices/berry-beet-juice.jpg" alt="Berry Beet Juice">
             <div class="card-body">
               <h4>Berry Beet Juice</h4>
               <span class="price">₹120</span>
@@ -487,7 +487,7 @@
           </div>
 
           <!-- 7 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="kale-apple-juice"
                data-name="Kale Apple Juice"
                data-price="100"
@@ -508,7 +508,7 @@
           </div>
 
           <!-- 8 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="green-detox-blast"
                data-name="Green Detox Blast"
                data-price="120"
@@ -529,7 +529,7 @@
           </div>
 
           <!-- 9 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="sugarcane-juice"
                data-name="Sugarcane Juice"
                data-price="60"
@@ -550,7 +550,7 @@
           </div>
 
           <!-- 10 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="lemon-ginger-sugarcane-juice"
                data-name="Lemon Ginger Sugarcane Juice"
                data-price="80"
@@ -571,7 +571,7 @@
           </div>
 
           <!-- 11 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="mango-juice"
                data-name="Mango Juice"
                data-price="80"
@@ -592,7 +592,7 @@
           </div>
 
           <!-- 12 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="pineapple-juice"
                data-name="Pineapple Juice"
                data-price="80"
@@ -613,7 +613,7 @@
           </div>
 
           <!-- 13 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="orange-juice"
                data-name="Orange Juice"
                data-price="70"
@@ -634,7 +634,7 @@
           </div>
 
           <!-- 14 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="lemonade"
                data-name="Lemonade (Nimbu Paani)"
                data-price="70"
@@ -655,7 +655,7 @@
           </div>
 
           <!-- 15 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="kiwi-strawberry-juice"
                data-name="Strawberry Kiwi Juice"
                data-price="120"
@@ -676,7 +676,7 @@
           </div>
 
           <!-- 16 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="mixedberry-juice"
                data-name="Mixed Berry Juice"
                data-price="120"
@@ -697,7 +697,7 @@
           </div>
 
           <!-- 17 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="strawberry-lemonade-juice"
                data-name="Strawberry Lemonade"
                data-price="80"
@@ -718,7 +718,7 @@
           </div>
 
           <!-- 18 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="cucumber-mintcooler-juice"
                data-name="Cucumber Mint Cooler"
                data-price="70"
@@ -739,7 +739,7 @@
           </div>
 
           <!-- 19 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="cucumber-lime-juice"
                data-name="Cucumber Lime Juice"
                data-price="70"
@@ -760,7 +760,7 @@
           </div>
 
           <!-- 20 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="cucumber-apple-juice"
                data-name="Apple Cucumber Juice"
                data-price="80"
@@ -781,7 +781,7 @@
           </div>
 
           <!-- 21 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="abc-juice"
                data-name="ABC Juice"
                data-price="100"
@@ -802,7 +802,7 @@
           </div>
 
           <!-- 22 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="papaya-juice"
                data-name="Papaya Juice"
                data-price="80"
@@ -823,7 +823,7 @@
           </div>
 
           <!-- 23 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="pomegranate-juice"
                data-name="Pomegranate Juice"
                data-price="80"
@@ -844,7 +844,7 @@
           </div>
 
           <!-- 24 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="chia-seed-water"
                data-name="Chia Seed Water"
                data-price="70"
@@ -865,7 +865,7 @@
           </div>
 
           <!-- 25 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="jeera-water"
                data-name="Jeera Water"
                data-price="60"
@@ -886,7 +886,7 @@
           </div>
 
           <!-- 26 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="coconut-water"
                data-name="Coconut Water"
                data-price="70"
@@ -907,7 +907,7 @@
           </div>
 
           <!-- 27 -->
-          <div class="menu-card"
+          <div class="menu-card" data-category="juice"
                data-id="buttermilk"
                data-name="Buttermilk"
                data-price="60"
@@ -927,40 +927,37 @@
             </div>
           </div>
 
-          <!-- 28 -->
-          <div class="menu-card"
-               data-id="green-tea"
-               data-name="Green Tea"
-               data-price="70"
-               data-image="images/menu/juices/green-tea.jpg">
-            <img src="images/menu/juices/green-tea.jpg" alt="Green Tea">
-            <div class="card-body">
-              <h4>Green Tea</h4>
-              <span class="price">₹70</span>
-            </div>
-            <div class="card-actions">
-              <div class="quantity-controls" aria-label="Quantity" aria-live="polite">
-                <button class="qty-btn minus" type="button">−</button>
-                <span class="qty">1</span>
-                <button class="qty-btn plus" type="button">+</button>
-              </div>
-              <button class="add-to-cart" type="button">Add to Cart</button>
-            </div>
-          </div>
+          <div class="menu-card" data-category="juice"
+     data-id="green-tea"
+     data-name="Green Tea"
+     data-price="70"
+     data-image="images/menu/juices/green-tea.jpg">
+  <img src="images/menu/juices/green-tea.jpg" alt="Green Tea">
+  <div class="card-body">
+    <h4>Green Tea</h4>
+    <span class="price">₹70</span>
+  </div>
+  <div class="card-actions">
+    <div class="quantity-controls" aria-label="Quantity" aria-live="polite">
+      <button class="qty-btn minus" type="button">−</button>
+      <span class="qty">1</span>
+      <button class="qty-btn plus" type="button">+</button>
+    </div>
+    <button class="add-to-cart" type="button">Add to Cart</button>
+  </div>
+</div>
 
         </div>
+
       </div>
     </section>
   </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
+<footer class="footer">
     <p>© 2026 CloudKitchen</p>
   </footer>
+<script type="module" src="auth.js"></script>
+<script src="scroll.js"></script>
+<script type="module" src="menu.js"></script>
 
-  <!-- ================= PAGE SCRIPTS ================= -->
-  <script type="module" src="auth.js"></script>
-  <script src="scroll.js"></script>
-  <script type="module" src="menu.js"></script>
 </body>
 </html>
