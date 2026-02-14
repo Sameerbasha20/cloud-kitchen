@@ -4,51 +4,107 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab-btn");
   const searchInput = document.getElementById("searchInput");
 
+  const comboSubTabs = document.getElementById("comboSubTabs");
+  const subTabs = document.querySelectorAll(".subtab-btn");
+
   let currentCategory = "all";
+  let currentSubCategory = "all";
 
   /* ===============================
      FILTER + SEARCH FUNCTION
   =============================== */
 
   function filterItems() {
+
     const searchValue = searchInput
       ? searchInput.value.toLowerCase()
       : "";
 
     cards.forEach(card => {
-      const category = card.dataset.category || "all";
+
+      const category = card.dataset.category || "";
+      const subcategory = card.dataset.subcategory || "";
       const name = (card.dataset.name || "").toLowerCase();
 
-      const matchCategory =
-        currentCategory === "all" || category === currentCategory;
+      let matchCategory = false;
+
+      // ALL tab
+      if (currentCategory === "all") {
+        matchCategory = true;
+      }
+
+      // COMBO tab logic
+      else if (currentCategory === "combo") {
+
+        if (currentSubCategory === "all") {
+          matchCategory = category === "combo";
+        } else {
+          matchCategory =
+            category === "combo" &&
+            subcategory === currentSubCategory;
+        }
+      }
+
+      // VEG / NON-VEG
+      else {
+        matchCategory = category === currentCategory;
+      }
 
       const matchSearch = name.includes(searchValue);
 
       if (matchCategory && matchSearch) {
-        // let CSS control layout (flex/grid)
         card.style.display = "";
       } else {
         card.style.display = "none";
       }
+
     });
   }
 
   /* ===============================
-     TAB CLICK EVENTS
+     MAIN TAB CLICK EVENTS
   =============================== */
 
-  if (tabs.length > 0) {
-    tabs.forEach(tab => {
-      tab.addEventListener("click", function () {
+  tabs.forEach(tab => {
+    tab.addEventListener("click", function () {
 
-        tabs.forEach(btn => btn.classList.remove("active"));
-        this.classList.add("active");
+      tabs.forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
 
-        currentCategory = this.dataset.category;
-        filterItems();
-      });
+      currentCategory = this.dataset.category;
+      currentSubCategory = "all";
+
+      // Show combo subtabs only when combo selected
+      if (currentCategory === "combo") {
+        if (comboSubTabs) comboSubTabs.style.display = "flex";
+      } else {
+        if (comboSubTabs) comboSubTabs.style.display = "none";
+      }
+
+      // Reset subtab active state
+      subTabs.forEach(btn => btn.classList.remove("active"));
+      const firstSub = document.querySelector(".subtab-btn[data-sub='all']");
+      if (firstSub) firstSub.classList.add("active");
+
+      filterItems();
     });
-  }
+  });
+
+  /* ===============================
+     SUB TAB CLICK EVENTS
+  =============================== */
+
+  subTabs.forEach(tab => {
+    tab.addEventListener("click", function () {
+
+      subTabs.forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
+
+      currentSubCategory = this.dataset.sub;
+
+      filterItems();
+    });
+  });
 
   /* ===============================
      SEARCH EVENT
@@ -71,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let quantity = 1;
 
-    // Quantity controls (juices have it)
     if (plus && minus && qtyDisplay) {
 
       plus.addEventListener("click", () => {
@@ -87,7 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Add to cart
     if (addBtn) {
       addBtn.addEventListener("click", () => {
 
@@ -101,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         addToCart(item);
 
-        // Reset quantity
         quantity = 1;
         if (qtyDisplay) qtyDisplay.textContent = 1;
       });

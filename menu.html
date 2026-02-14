@@ -47,6 +47,14 @@
             <button class="tab-btn" data-category="combo">Combos</button>
           </div>
 
+          <div class="combo-subtabs" id="comboSubTabs" style="display:none;">
+  <button class="subtab-btn active" data-sub="all">All Combos</button>
+  <button class="subtab-btn" data-sub="veg">Veg Combos</button>
+  <button class="subtab-btn" data-sub="non-veg">Non-Veg Combos</button>
+  <button class="subtab-btn" data-sub="fruit">Fruit Bowls</button>
+  <button class="subtab-btn" data-sub="juice">Juice Combos</button>
+</div>
+
           <div class="menu-search">
             <input type="text" id="searchInput" placeholder="Search meals...">
           </div>
@@ -951,7 +959,9 @@
     <!-- ================= COMBOS SECTION ================= -->
 
 <!-- VEG COMBOS -->
-<div class="menu-card" data-category="combo" data-id="mushroom-combo"
+<div class="menu-card" data-category="combo"
+data-subcategory="veg"
+ data-id="mushroom-combo"
      data-name="Mushroom Biryani Full + Double Ka Meetha + 3 Combo Rice Meal"
      data-price="299"
      data-image="images/combos/mushroom-combo.jpg">
@@ -967,6 +977,7 @@
 </div>
 
 <div class="menu-card" data-category="combo"
+data-subcategory="veg"
      data-id="veg-biryani-gulab"
      data-name="Veg Biryani + Gulab Jamun + Rabdi + Pepsi"
      data-price="349"
@@ -984,6 +995,7 @@
 
 <!-- NON VEG COMBOS -->
 <div class="menu-card" data-category="combo"
+data-subcategory="non-veg"
      data-id="chicken-dum-combo"
      data-name="Chicken Dum Biryani 2 Pieces with Pepsi"
      data-price="329"
@@ -1000,6 +1012,7 @@
 </div>
 
 <div class="menu-card" data-category="combo"
+data-subcategory="non-veg"
      data-id="mutton-combo"
      data-name="Mutton Biryani + Chicken Majestic + Double Ka Meetha + Soft Drink"
      data-price="449"
@@ -1017,6 +1030,7 @@
 
 <!-- VEG TIFFIN COMBOS -->
 <div class="menu-card" data-category="combo"
+data-subcategory="veg"
      data-id="idly-vada-dosa"
      data-name="2 Idly + 1 Vada + Masala Dosa + Sambar"
      data-price="199"
@@ -1033,6 +1047,7 @@
 
 <!-- FRUIT COMBOS -->
 <div class="menu-card" data-category="combo"
+data-subcategory="fruit"
      data-id="fruit-bowl-1"
      data-name="Apple Kiwi Pomegranate Bowl"
      data-price="149"
@@ -1048,6 +1063,7 @@
 </div>
 
 <div class="menu-card" data-category="combo"
+data-subcategory="fruit"
      data-id="berry-yogurt"
      data-name="Mixed Berries with Greek Yogurt"
      data-price="179"
@@ -1064,6 +1080,7 @@
 
 <!-- JUICE COMBOS -->
 <div class="menu-card" data-category="combo"
+data-subcategory="juice"
      data-id="abc-juice-combo"
      data-name="Carrot Beetroot Apple ABC Juice"
      data-price="120"
@@ -1079,6 +1096,7 @@
 </div>
 
 <div class="menu-card" data-category="combo"
+    data-subcategory="juice"
      data-id="cucumber-mint"
      data-name="Cucumber Mint Lemon Juice"
      data-price="100"

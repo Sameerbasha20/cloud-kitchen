@@ -1523,3 +1523,23 @@ section + section {
 .menu-card[data-category="combo"] {
   border: 2px solid #E8F5E9;
 }
+.combo-subtabs {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.subtab-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #C8E6C9;
+  background: white;
+  cursor: pointer;
+}
+
+.subtab-btn.active {
+  background: #2E7D32;
+  color: white;
+}
+
