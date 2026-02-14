@@ -1520,3 +1520,6 @@ section + section {
 .menu-card[style*="display: none"] {
   opacity: 0;
 }
+.menu-card[data-category="combo"] {
+  border: 2px solid #E8F5E9;
+}
