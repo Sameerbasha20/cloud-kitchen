@@ -1120,6 +1120,15 @@ data-subcategory="juice"
 <script type="module" src="auth.js"></script>
 <script src="scroll.js"></script>
 <script type="module" src="menu.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.menu-card');
+  cards.forEach(card => {
+    card.style.display = 'flex';
+    card.style.opacity = '1';
+  });
+});
+</script>
 
 </body>
 </html>
