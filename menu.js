@@ -11,17 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSubCategory = "all";
 
   /* ===============================
-     FILTER + SEARCH FUNCTION
+      FILTER + SEARCH FUNCTION
   =============================== */
-
   function filterItems() {
-
     const searchValue = searchInput
       ? searchInput.value.toLowerCase()
       : "";
 
     cards.forEach(card => {
-
       const category = card.dataset.category || "";
       const subcategory = card.dataset.subcategory || "";
       const name = (card.dataset.name || "").toLowerCase();
@@ -35,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // COMBO tab logic
       else if (currentCategory === "combo") {
-
         if (currentSubCategory === "all") {
           matchCategory = category === "combo";
         } else {
@@ -45,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // VEG / NON-VEG
+      // VEG / NON-VEG / JUICE, etc.
       else {
         matchCategory = category === currentCategory;
       }
@@ -57,14 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         card.style.display = "none";
       }
-
     });
   }
 
   /* ===============================
-     MAIN TAB CLICK EVENTS
+      MAIN TAB CLICK EVENTS
   =============================== */
-
   tabs.forEach(tab => {
     tab.addEventListener("click", function () {
 
@@ -91,9 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===============================
-     SUB TAB CLICK EVENTS
+      SUB TAB CLICK EVENTS
   =============================== */
-
   subTabs.forEach(tab => {
     tab.addEventListener("click", function () {
 
@@ -107,17 +100,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===============================
-     SEARCH EVENT
+      SEARCH EVENT
   =============================== */
-
   if (searchInput) {
     searchInput.addEventListener("input", filterItems);
   }
 
   /* ===============================
-     CART + QUANTITY SYSTEM
+      CART + QUANTITY SYSTEM
   =============================== */
-
   cards.forEach(card => {
 
     const plus = card.querySelector(".plus");
@@ -162,13 +153,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
+  // 🔹 INITIAL RENDER – show items when page loads
+  filterItems();
 });
 
 
 /* ===============================
-   ADD TO CART FUNCTION
+    ADD TO CART FUNCTION
 ================================ */
-
 function addToCart(item) {
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -188,9 +180,8 @@ function addToCart(item) {
 
 
 /* ===============================
-   MODERN TOAST NOTIFICATION
+    MODERN TOAST NOTIFICATION
 ================================ */
-
 function showToast(message) {
 
   const toast = document.createElement("div");
