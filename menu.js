@@ -14,24 +14,27 @@ document.addEventListener("DOMContentLoaded", () => {
       FILTER + SEARCH FUNCTION
   =============================== */
   function filterItems() {
+
     const searchValue = searchInput
-      ? searchInput.value.toLowerCase()
+      ? searchInput.value.toLowerCase().trim()
       : "";
 
     cards.forEach(card => {
-      const category = card.dataset.category || "";
-      const subcategory = card.dataset.subcategory || "";
+
+      const category = (card.dataset.category || "").toLowerCase();
+      const subcategory = (card.dataset.subcategory || "").toLowerCase();
       const name = (card.dataset.name || "").toLowerCase();
 
       let matchCategory = false;
 
-      // ALL tab
+      // ✅ ALL
       if (currentCategory === "all") {
         matchCategory = true;
       }
 
-      // COMBO tab logic
+      // ✅ COMBO
       else if (currentCategory === "combo") {
+
         if (currentSubCategory === "all") {
           matchCategory = category === "combo";
         } else {
@@ -41,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // VEG / NON-VEG / JUICE, etc.
+      // ✅ OTHER CATEGORIES
       else {
         matchCategory = category === currentCategory;
       }
@@ -53,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         card.style.display = "none";
       }
+
     });
   }
 
@@ -65,10 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
       tabs.forEach(btn => btn.classList.remove("active"));
       this.classList.add("active");
 
-      currentCategory = this.dataset.category;
+      currentCategory = (this.dataset.category || "all").toLowerCase();
       currentSubCategory = "all";
 
-      // Show combo subtabs only when combo selected
+      // Show combo subtabs only if combo selected
       if (currentCategory === "combo") {
         if (comboSubTabs) comboSubTabs.style.display = "flex";
       } else {
@@ -93,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       subTabs.forEach(btn => btn.classList.remove("active"));
       this.classList.add("active");
 
-      currentSubCategory = this.dataset.sub;
+      currentSubCategory = (this.dataset.sub || "all").toLowerCase();
 
       filterItems();
     });
@@ -118,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let quantity = 1;
 
+    // Quantity controls
     if (plus && minus && qtyDisplay) {
 
       plus.addEventListener("click", () => {
@@ -133,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
+    // Add to cart
     if (addBtn) {
       addBtn.addEventListener("click", () => {
 
@@ -153,8 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
-  // 🔹 INITIAL RENDER – show items when page loads
+  // ✅ INITIAL LOAD FIX
   filterItems();
+
 });
 
 
