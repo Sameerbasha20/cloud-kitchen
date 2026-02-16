@@ -88,15 +88,18 @@ export async function placeOrder() {
   // Normalize items and calculate total
   const normalizedItems = cart.map(item => {
     const qty = item.qty ?? item.quantity ?? 1;
+
     return {
-      ...item,
-      qty,
-      quantity: undefined // optional: drop old field
+      id: item.id || "",
+      name: item.name || "",
+      price: Number(item.price) || 0,
+      image: item.image || "",
+      qty
     };
   });
 
   const total = normalizedItems.reduce(
-    (sum, item) => sum + (item.price || 0) * item.qty,
+    (sum, item) => sum + item.price * item.qty,
     0
   );
 
