@@ -14,11 +14,13 @@
      NAVBAR LOADER
 ================================ -->
 <script type="module">
+  import { initNavbar } from "./navbar.js";
+
   fetch("navbar.html")
     .then(res => res.text())
     .then(html => {
       document.body.insertAdjacentHTML("afterbegin", html);
-      import("./navbar.js");
+      initNavbar("gallery");
     });
 </script>
 
@@ -88,8 +90,7 @@
         <img src="images/gallery/chicken-curry.jpg" alt="Chicken Curry">
         <span class="gallery-title">Chicken Curry</span>
       </a>
-      
-      
+
       <a href="menu.html#basmati-rice" class="gallery-card">
         <img src="images/gallery/basmati-rice.jpg" alt="Basmati Rice">
         <span class="gallery-title">Basmati Rice</span>
@@ -98,9 +99,9 @@
       <a href="menu.html#boiled-egg" class="gallery-card">
         <img src="images/gallery/boiled-egg.jpg" alt="Boiled Egg">
         <span class="gallery-title">Boiled Egg</span>
-        </a>
+      </a>
 
-        <a href="menu.html#butter-naan" class="gallery-card">
+      <a href="menu.html#butter-naan" class="gallery-card">
         <img src="images/gallery/butter-naan.jpg" alt="Butter Naan">
         <span class="gallery-title">Butter naan</span>
       </a>
@@ -129,6 +130,7 @@
         <img src="images/gallery/roti.jpg" alt="Roti">
         <span class="gallery-title">Roti</span>
       </a>
+
     </div>
 
   </div>
@@ -145,6 +147,6 @@
      PAGE SCRIPTS
 ================================ -->
 <script type="module" src="auth.js"></script>
-<script src="navbar.js"></script>
+<!-- removed plain navbar.js include -->
 </body>
 </html>
