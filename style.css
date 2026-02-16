@@ -1612,3 +1612,40 @@ flex-wrap: wrap;
 .combo-subtabs {
   transform: translateY(-8px);
 }
+.combo-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.combo-toggle {
+  position: relative;
+  z-index: 2;
+}
+
+.combo-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 180px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  padding: 8px 0;
+  display: none;
+  z-index: 10;
+}
+
+.combo-item {
+  width: 100%;
+  text-align: left;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #2c2c2c;
+}
+
+.combo-item:hover {
+  background: #E8F5E9;
+}

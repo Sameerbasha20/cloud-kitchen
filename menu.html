@@ -37,12 +37,26 @@
         <div class="menu-controls">
 
           <div class="menu-tabs">
-            <button class="tab-btn active" data-category="all">All</button>
-            <button class="tab-btn" data-category="veg">Veg</button>
-            <button class="tab-btn" data-category="non-veg">Non-Veg</button>
-            <button class="tab-btn" data-category="juice">Juices</button>
-            <button class="tab-btn" data-category="combo">Combos</button>
-      </div>
+  <button class="tab-btn active" data-category="all">All</button>
+  <button class="tab-btn" data-category="veg">Veg</button>
+  <button class="tab-btn" data-category="non-veg">Non-Veg</button>
+  <button class="tab-btn" data-category="juice">Juices</button>
+
+  <!-- Combos dropdown -->
+  <div class="combo-dropdown">
+    <button class="tab-btn combo-toggle" data-category="combo">
+      Combos ▾
+    </button>
+    <div class="combo-menu">
+      <button class="combo-item" data-sub="all">All Combos</button>
+      <button class="combo-item" data-sub="veg">Veg Combos</button>
+      <button class="combo-item" data-sub="non-veg">Non-Veg Combos</button>
+      <button class="combo-item" data-sub="fruit">Fruit Bowls</button>
+      <button class="combo-item" data-sub="juice">Juice Combos</button>
+    </div>
+  </div>
+</div>
+
           <div class="menu-search">
             <input type="text" id="searchInput" placeholder="Search meals...">
           </div>

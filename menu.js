@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const cards = document.querySelectorAll(".menu-card");
   const tabs = document.querySelectorAll(".tab-btn");
   const searchInput = document.getElementById("searchInput");
 
-  const comboSubTabs = document.getElementById("comboSubTabs");
-  const subTabs = document.querySelectorAll(".subtab-btn");
+  // NEW: dropdown elements
+  const comboDropdown = document.querySelector(".combo-dropdown");
+  const comboToggle = document.querySelector(".combo-toggle");
+  const comboMenu = document.querySelector(".combo-menu");
+  const comboItems = document.querySelectorAll(".combo-item");
 
   let currentCategory = "all";
   let currentSubCategory = "all";
@@ -14,27 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
       FILTER + SEARCH FUNCTION
   =============================== */
   function filterItems() {
-
     const searchValue = searchInput
       ? searchInput.value.toLowerCase().trim()
       : "";
 
     cards.forEach(card => {
-
       const category = (card.dataset.category || "").toLowerCase();
       const subcategory = (card.dataset.subcategory || "").toLowerCase();
       const name = (card.dataset.name || "").toLowerCase();
 
       let matchCategory = false;
 
-      // ✅ ALL
+      // ALL
       if (currentCategory === "all") {
         matchCategory = true;
       }
 
-      // ✅ COMBO
+      // COMBO
       else if (currentCategory === "combo") {
-
         if (currentSubCategory === "all") {
           matchCategory = category === "combo";
         } else {
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // ✅ OTHER CATEGORIES
+      // OTHER CATEGORIES
       else {
         matchCategory = category === currentCategory;
       }
@@ -56,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         card.style.display = "none";
       }
-
     });
   }
 
@@ -65,42 +63,57 @@ document.addEventListener("DOMContentLoaded", () => {
   =============================== */
   tabs.forEach(tab => {
     tab.addEventListener("click", function () {
+      const isComboToggle = this.classList.contains("combo-toggle");
 
+      // If user clicked Combos main button, just toggle dropdown, do not reset category here
+      if (isComboToggle) {
+        if (comboMenu) {
+          const open = comboMenu.style.display === "block";
+          comboMenu.style.display = open ? "none" : "block";
+        }
+        return;
+      }
+
+      // Normal tabs (All, Veg, Non‑Veg, Juices)
       tabs.forEach(btn => btn.classList.remove("active"));
       this.classList.add("active");
 
       currentCategory = (this.dataset.category || "all").toLowerCase();
       currentSubCategory = "all";
 
-      // Show combo subtabs only if combo selected
-      if (currentCategory === "combo") {
-        if (comboSubTabs) comboSubTabs.style.display = "flex";
-      } else {
-        if (comboSubTabs) comboSubTabs.style.display = "none";
-      }
-
-      // Reset subtab active state
-      subTabs.forEach(btn => btn.classList.remove("active"));
-      const firstSub = document.querySelector(".subtab-btn[data-sub='all']");
-      if (firstSub) firstSub.classList.add("active");
+      // Close dropdown if open
+      if (comboMenu) comboMenu.style.display = "none";
 
       filterItems();
     });
   });
 
   /* ===============================
-      SUB TAB CLICK EVENTS
+      COMBO DROPDOWN EVENTS
   =============================== */
-  subTabs.forEach(tab => {
-    tab.addEventListener("click", function () {
 
-      subTabs.forEach(btn => btn.classList.remove("active"));
-      this.classList.add("active");
+  // Choose specific combo subcategory
+  comboItems.forEach(item => {
+    item.addEventListener("click", () => {
+      currentCategory = "combo";
+      currentSubCategory = (item.dataset.sub || "all").toLowerCase();
 
-      currentSubCategory = (this.dataset.sub || "all").toLowerCase();
+      // Active state on main tabs
+      tabs.forEach(btn => btn.classList.remove("active"));
+      if (comboToggle) comboToggle.classList.add("active");
+
+      // Close dropdown
+      if (comboMenu) comboMenu.style.display = "none";
 
       filterItems();
     });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", e => {
+    if (comboDropdown && !comboDropdown.contains(e.target)) {
+      if (comboMenu) comboMenu.style.display = "none";
+    }
   });
 
   /* ===============================
@@ -114,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
       CART + QUANTITY SYSTEM
   =============================== */
   cards.forEach(card => {
-
     const plus = card.querySelector(".plus");
     const minus = card.querySelector(".minus");
     const qtyDisplay = card.querySelector(".qty");
@@ -122,9 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let quantity = 1;
 
-    // Quantity controls
     if (plus && minus && qtyDisplay) {
-
       plus.addEventListener("click", () => {
         quantity++;
         qtyDisplay.textContent = quantity;
@@ -138,10 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Add to cart
     if (addBtn) {
       addBtn.addEventListener("click", () => {
-
         const item = {
           id: card.dataset.id,
           name: card.dataset.name,
@@ -156,20 +164,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (qtyDisplay) qtyDisplay.textContent = 1;
       });
     }
-
   });
 
-  // ✅ INITIAL LOAD FIX
+  // Initial render
   filterItems();
-
 });
-
 
 /* ===============================
     ADD TO CART FUNCTION
 ================================ */
 function addToCart(item) {
-
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const existing = cart.find(i => i.id === item.id);
@@ -185,12 +189,10 @@ function addToCart(item) {
   showToast(item.name + " added to cart!");
 }
 
-
 /* ===============================
     MODERN TOAST NOTIFICATION
 ================================ */
 function showToast(message) {
-
   const toast = document.createElement("div");
   toast.textContent = message;
   toast.setAttribute("role", "status");
