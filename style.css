@@ -1274,6 +1274,27 @@ section + section {
   font-weight: 600;
 }
 
+/* Make main content fill viewport so footer stays at bottom */
+.weight-page-main {
+  min-height: calc(100vh - 80px); /* adjust if footer/nav heights change */
+  display: flex;
+  flex-direction: column;
+}
+
+.weight-page-main .weight-section {
+  flex: 1;
+}
+
+.weight-page-main {
+  min-height: calc(100vh - 80px); /* tweak 80px to your footer height */
+  display: flex;
+  flex-direction: column;
+}
+
+.weight-page-main > section:last-of-type {
+  margin-bottom: 0;
+}
+
 /* ===============================
    FOOTER
 ================================ */
